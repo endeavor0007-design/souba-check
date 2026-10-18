@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>相場チェック（開発中）｜古物商・せどりの買取額の目安</title>
+<meta name="description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマなどの売り切れ・落札の検索をまとめて開き、手数料と送料を引いた買取額の上限を計算します。古物商・せどり向けの無料ツール（開発中）。">
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1b;--sub:#5d5b55;--line:#dedbd2;--accent:#1f6f5c;--accent-ink:#fff;--warn:#8a5a00}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--card:#1f1f1c;--ink:#ecebe6;--sub:#a9a69d;--line:#3a3934;--accent:#5cbfa3;--accent-ink:#0d1f1a;--warn:#e0b45c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;line-height:1.7}
+main{max-width:720px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.6rem;line-height:1.4;margin:.2em 0 .4em}
+h2{font-size:1.15rem;margin:2em 0 .6em}
+.badge{display:inline-block;font-size:.8rem;border:1px solid var(--warn);color:var(--warn);border-radius:4px;padding:0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
+label{display:block;font-size:.9rem;color:var(--sub);margin:.6em 0 .2em}
+input{width:100%;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.links a{display:block;text-align:center;padding:10px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--bg)}
+.links a:hover{border-color:var(--accent)}
+.result{font-size:1.3rem;font-weight:700;color:var(--accent)}
+.small{font-size:.85rem;color:var(--sub)}
+ul{padding-left:1.2em}
+</style>
+</head>
+<body>
+<main>
+<span class="badge">開発中・無料のお試し</span>
+<h1>型番を1回入れるだけで、売れた値段の検索と買取額の上限の計算ができる</h1>
+<p>店頭や出張買取の「いくらで買っていいか」を、その場で決めるための道具です。メルカリ・ヤフオク・ラクマなどの売り切れ・落札の検索をまとめて開き、手数料と送料を引いた買取額の上限を計算します。</p>
+
+<p><a class="btn" href="demo.html" style="font-size:1.1rem;padding:14px 18px">完成形のイメージを触ってみる（お試し用の架空データ）</a></p>
+<p class="small">開発は主にAIが担当しています。まだ開発中のため、画面や機能は変わることがあります。お試し画面の相場や要望の数字はすべて架空です（相場データの提供元とはまだ契約していません）。</p>
+
+<h2>1. 売れた値段をまとめて調べる</h2>
+<div class="card">
+  <label for="q">型番・商品名・JAN（バーコードの数字）</label>
+  <input id="q" placeholder="例：WH-1000XM4 / 4548736112230">
+  <div style="margin-top:10px"><button id="go" type="button">検索リンクを作る</button></div>
+  <div class="links" id="links"></div>
+  <p class="small">「売れた値段」は、実際に売れた・落札された価格の検索です。「出品中の値段（参考）」は、まだ売れていない出品の価格で、相場より高く出やすいので買取額の根拠にはしないでください。各サイトの検索結果は、あなたのブラウザで直接開きます（このページは価格を集めたり保存したりしません）。</p>
+</div>
+
+<h2>2. 買取額の上限を計算する</h2>
+<div class="card">
+  <div class="row">
+    <div><label for="sell">売れそうな価格（円）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
+    <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
+    <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
+    <div><label for="margin">残したい利益（売値の何%か）</label><input id="margin" type="text" inputmode="decimal" value="20"></div>
+  </div>
+  <p>買取額の上限：<span class="result" id="out">―</span></p>
+  <p class="small" id="msg" role="status"></p>
+  <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確認してから決めてください。</p>
+  <p class="small">例：売値18,000円・利益20%なら、3,600円を利益として残した額が上限です。計算：売値 −（売値×手数料）− 送料 −（売値×ほしい利益）。手数料の目安はメルカリ10%・ラクマ10%前後・ヤフオク8.8〜10%（各社の最新の料金をご確認ください）。</p>
+</div>
+
+<h2>正式版でできるようにすること（予定）</h2>
+<ul>
+  <li>バーコードをスマホのカメラで読み取って、そのまま検索</li>
+  <li>自分の買取・販売の記録から「この商品はいつも◯円で売れている」を表示</li>
+  <li>古物台帳に必要な項目をまとめて記録</li>
+</ul>
+<p class="small">ご要望を聞きながら直していきます。</p>
+
+<h2>要望を出す・投票する</h2>
+<p>「こんな機能がほしい」「ここが使いにくい」は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSfK_EgdrjXKSaXom9wMGItKNPF0rSKMBELKG2rRaCUbPbLYGQ/viewform" target="_blank" rel="noopener">問い合わせフォーム</a>の「機能の要望」「不具合・誤りの報告」から送ってください。いただいた要望とその扱い（検討中・採用・公開済み・見送りと理由）は、<a href="requests.html">要望一覧</a>に載せます。</p>
+<p class="small">正式版では、ほかの人の要望に投票できるようにする予定です。上の「完成形のイメージ」の「要望」タブで、その画面を試せます（お試し用なので、送信・保存はされません）。</p>
+
+<h2>先着30名の共同開発メンバー（登録無料）</h2>
+<div class="card">
+  <p><b>まとめ：有料化の日から6か月は無料、そのあとも有料プランを続ける間はずっと半額（定価は未定）。</b></p>
+  <ul>
+    <li>有料化の日から6か月間は、有料機能も無料で使えます。7か月目以降は、有料プランを続けている間ずっと、正式版の月額（定価・税込）から50%引です（割引率は固定。定価はまだ決まっていません）。定価は有料化の60日前までにお知らせし、有料プランに進むかどうかは、そのときにお選びいただけます。</li>
+    <li>このページの「1. 売れた値段をまとめて調べる」と「2. 買取額の上限を計算する」は、有料化後も登録の有無にかかわらず、どなたでも無料で使えます。</li>
+    <li>有料化は、有料化の日の60日前までに、登録のメールアドレスあてと画面でお知らせします。ご自身で有料プランに申し込み、お支払い情報を入力されるまで、課金はしません。</li>
+    <li>古物台帳などの記録機能を提供するときは、記録したデータをいつでもCSV形式でダウンロードできるようにします（この機能はまだありません）。</li>
+  </ul>
+  <p class="small">30名に達した時点でメンバーの受付を終了します（登録順）。31人目以降は、通常の事前登録（割引なし）として受け付けます。</p>
+  <p class="small">料金：正式版は月額制の予定です。金額は未定で、決まりしだい、有料化の60日前までにお知らせします。</p>
+  <p>メールアドレスだけで登録できます（送信先は Google フォームです）。</p>
+  <a class="btn" id="signup" href="#" rel="noopener">共同開発メンバーに事前登録する（1分）</a>
+  <p class="small">登録いただいたメールアドレスは、このツールのお知らせにだけ使います。<a href="privacy.html">プライバシーポリシー</a></p>
+  <p class="small">メルカリ・ヤフオク・ラクマ等の名前は検索先の案内のために書いています。各社との提携・公認はありません。古物台帳の項目は記録の補助で、法的な助言ではありません（必要な項目は警察署・専門家の案内をご確認ください）。</p>
+</div>
+</main>
+<script>
+// 事前登録フォーム（Google フォーム・2026-10-18 公開）
+var SIGNUP_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdkFdGsd_A0wdew6VAlqMexyC9GHXl2XsjuUPhIiahRhTiR4Q/viewform";
+// 登録フォームの「どこで知りましたか」欄の番号（例 "entry.123456"）。流入元を自動で入れるのに使う
+var SIGNUP_FROM_ENTRY = "entry.197161335";
+var SITES = [
+  // [表示名, URL, 種類] 種類 sold＝売れた値段 / list＝出品中の値段（参考）
+  ["メルカリ（売り切れ）", function(q){return "https://jp.mercari.com/search?keyword="+q+"&status=sold_out"}, "sold"],
+  ["ヤフオク（落札相場）", function(q){return "https://auctions.yahoo.co.jp/closedsearch/closedsearch?p="+q}, "sold"],
+  ["ラクマ（売り切れ）", function(q){return "https://fril.jp/s?query="+q+"&transaction=soldout"}, "sold"],
+  ["Yahoo!ショッピング（中古）", function(q){return "https://shopping.yahoo.co.jp/search?p="+q+"&used=1"}, "list"],
+  ["楽天市場", function(q){return "https://search.rakuten.co.jp/search/mall/"+q+"/"}, "list"],
+  ["セカンドストリート", function(q){return "https://www.2ndstreet.jp/search?keyword="+q}, "list"],
+  ["Amazon", function(q){return "https://www.amazon.co.jp/s?k="+q}, "list"]
+];
+function makeLinks(){
+  var raw = document.getElementById("q").value.trim();
+  var box = document.getElementById("links");
+  box.innerHTML = "";
+  if(!raw) return;
+  var q = encodeURIComponent(raw);
+  [["sold","売れた値段"],["list","出品中の値段（参考）"]].forEach(function(g){
+    var h = document.createElement("p");
+    h.className = "small"; h.style.gridColumn = "1 / -1"; h.style.margin = "8px 0 0"; h.textContent = g[1];
+    box.appendChild(h);
+    SITES.forEach(function(s){
+      if(s[2] !== g[0]) return;
+      var a = document.createElement("a");
+      a.href = s[1](q); a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = s[0];
+      box.appendChild(a);
+    });
+  });
+}
+// 全角数字・カンマも受け付ける。空欄や数字でないときは NaN
+function num(id){
+  var v = document.getElementById(id).value.normalize("NFKC").replace(/[,，\s円%]/g, "");
+  return v === "" || isNaN(Number(v)) ? NaN : Number(v);
+}
+function calc(){
+  var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin");
+  var out = document.getElementById("out"), msg = document.getElementById("msg");
+  out.textContent = "―"; msg.textContent = "";
+  if(document.getElementById("sell").value.trim() === "") return;
+  if([sell, fee, ship, margin].some(isNaN)){ msg.textContent = "4つの欄すべてに数字を入れてください（手数料・送料がなければ 0）。"; return; }
+  if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
+  if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
+  if(ship < 0){ msg.textContent = "送料は 0円以上で入れてください。"; return; }
+  var max = sell - sell*fee/100 - ship - sell*margin/100;
+  out.textContent = max > 0 ? Math.floor(max).toLocaleString("ja-JP")+" 円まで" : "利益が出ません";
+}
+document.getElementById("go").addEventListener("click", makeLinks);
+document.getElementById("q").addEventListener("keydown", function(e){ if(e.key === "Enter") makeLinks(); });
+["sell","fee","ship","margin"].forEach(function(id){ document.getElementById(id).addEventListener("input", calc); });
+var su = document.getElementById("signup");
+// URLの ?from= の値（流入元）を事前登録のリンクに引き継ぐ
+var FROM = "";
+try{ FROM = (new URLSearchParams(location.search).get("from") || "").slice(0,40).replace(/[^A-Za-z0-9_\-]/g, ""); }catch(e){}
+if(SIGNUP_URL){
+  var href = SIGNUP_URL;
+  if(FROM && SIGNUP_FROM_ENTRY){ href += (href.indexOf("?") < 0 ? "?" : "&") + "usp=pp_url&" + SIGNUP_FROM_ENTRY + "=" + encodeURIComponent(FROM); }
+  su.href = href; su.target = "_blank";
+}
+else { su.addEventListener("click", function(e){ e.preventDefault(); alert("準備中です（公開前のお試し）"); }); }
+</script>
+<script data-goatcounter="https://security-madoguchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
