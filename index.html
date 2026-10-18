@@ -3,8 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>相場チェック（開発中）｜古物商・せどりの買取額の目安</title>
-<meta name="description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマなどの売り切れ・落札の検索をまとめて開き、手数料と送料を引いた買取額の上限を計算します。古物商・せどり向けの無料ツール（開発中）。">
+<title>売れた値段の検索と買取額の計算｜相場チェック（古物商・せどり向け）</title>
+<meta name="description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（価格データはこのページでは持たず、各サイトの検索を開きます）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。">
+<link rel="canonical" href="https://endeavor0007-design.github.io/souba-check/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="相場チェック">
+<meta property="og:title" content="売れた値段の検索と買取額の計算｜相場チェック">
+<meta property="og:description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（価格データはこのページでは持たず、各サイトの検索を開きます）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。">
+<meta property="og:url" content="https://endeavor0007-design.github.io/souba-check/">
+<meta name="twitter:card" content="summary">
 <style>
 :root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1b;--sub:#5d5b55;--line:#dedbd2;--accent:#1f6f5c;--accent-ink:#fff;--warn:#8a5a00}
 @media (prefers-color-scheme:dark){:root{--bg:#161614;--card:#1f1f1c;--ink:#ecebe6;--sub:#a9a69d;--line:#3a3934;--accent:#5cbfa3;--accent-ink:#0d1f1a;--warn:#e0b45c}}
@@ -26,6 +34,7 @@ button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:
 .small{font-size:.85rem;color:var(--sub)}
 ul{padding-left:1.2em}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "相場チェック", "url": "https://endeavor0007-design.github.io/souba-check/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "description": "型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（価格データはこのページでは持たず、各サイトの検索を開きます）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "publisher": {"@type": "Organization", "name": "相場チェック運営事務局"}}</script>
 </head>
 <body>
 <main>
@@ -57,6 +66,18 @@ ul{padding-left:1.2em}
   <p class="small" id="msg" role="status"></p>
   <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確認してから決めてください。</p>
   <p class="small">例：売値18,000円・利益20%なら、3,600円を利益として残した額が上限です。計算：売値 −（売値×手数料）− 送料 −（売値×ほしい利益）。手数料の目安はメルカリ10%・ラクマ10%前後・ヤフオク8.8〜10%（各社の最新の料金をご確認ください）。</p>
+</div>
+
+<h2>よくある質問</h2>
+<div class="card">
+  <h3 style="font-size:1rem;margin:0 0 4px">買取額はどうやって決めればいいですか？</h3>
+  <p style="margin:0 0 12px">まず、その商品が実際にいくらで売れているか（メルカリ・ラクマの売り切れ、ヤフオクの落札）を調べます。そこから販売手数料・送料・梱包代と、残したい利益を引いた額が、買ってよい上限の目安です。このページの「1」と「2」で、その手順をまとめて行えます。</p>
+  <h3 style="font-size:1rem;margin:0 0 4px">出品中の価格を相場にしてはいけないのですか？</h3>
+  <p style="margin:0 0 12px">出品中の価格は「売りたい値段」で、まだ売れていません。実際に売れた価格より高く出やすいので、買取額の根拠には売れた価格を使うのが安全です。</p>
+  <h3 style="font-size:1rem;margin:0 0 4px">計算式を教えてください。</h3>
+  <p style="margin:0 0 12px">買取額の上限 ＝ 売れそうな価格 −（売れそうな価格 × 販売手数料）− 送料・梱包 −（売れそうな価格 × 残したい利益）。例：18,000円で売れそうなら、手数料10%・送料750円・利益20%で、上限は11,850円です。</p>
+  <h3 style="font-size:1rem;margin:0 0 4px">お金はかかりますか？</h3>
+  <p style="margin:0">「1. 売れた値段をまとめて調べる」と「2. 買取額の上限を計算する」は無料で、登録もいりません。正式版で足す機能は月額制の予定です（金額は未定）。</p>
 </div>
 
 <h2>正式版でできるようにすること（予定）</h2>
