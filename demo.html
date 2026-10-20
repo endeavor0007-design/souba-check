@@ -203,7 +203,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 </head>
 <body>
 <div class="band">完成形のイメージ（お試し用の架空データ）・開発中　※数字・出品者はすべて架空です</div>
-<header><h1>相場チェック<br><small>調べる → 相場 → 買取額 → 台帳 を1か所で</small></h1><div class="hmob"><button id="hscene" data-go="s16"><b>相場チェック</b><small>場面を選ぶ</small></button><button class="themebtn" id="lgbtn2" aria-pressed="false" aria-label="文字を大きくする">文字 大</button><button class="themebtn" id="hmenu" aria-expanded="false" aria-controls="hbtns">≡ メニュー</button></div><div class="hbtns" id="hbtns"><button class="themebtn" id="scbtn" data-go="s16" style="font-weight:700">場面を選ぶ</button><button class="themebtn pri" id="authbtn" data-go="s9" style="font-weight:700">ログイン／登録</button><button class="themebtn" data-go="s7">料金（いまは無料）</button><button class="themebtn" data-go="s8">友だちに紹介</button><button class="themebtn" id="themebtn">明るさ切替</button><button class="themebtn" id="lgbtn" aria-pressed="false">文字を大きく</button></div></header>
+<header><h1>相場チェック<br><small>調べる → 相場 → 買取額 → 台帳 を1か所で</small></h1><div class="hmob"><button id="hscene" data-go="s16"><b>相場チェック</b><small>場面を選ぶ</small></button><button class="themebtn" id="lgbtn2" aria-pressed="false" aria-label="文字を大きくする">文字 大</button><button class="themebtn" id="hmenu" data-go="s17">≡ メニュー</button></div><div class="hbtns" id="hbtns"><button class="themebtn" id="hmenu2" data-go="s17" style="font-weight:700">≡ メニュー</button><button class="themebtn" id="scbtn" data-go="s16" style="font-weight:700">場面を選ぶ</button><button class="themebtn pri" id="authbtn" data-go="s9" style="font-weight:700">ログイン／登録</button><button class="themebtn" data-go="s7">料金（いまは無料）</button><button class="themebtn" data-go="s8">友だちに紹介</button><button class="themebtn" id="themebtn">明るさ切替</button><button class="themebtn" id="lgbtn" aria-pressed="false">文字を大きく</button></div></header>
 <div class="wrap"><div class="infopc"><p class="offl">電波なしでも台帳と買取額の計算は使える予定（相場は前回分）。この試作では電波なしの動作は未確認です。</p>
 <p class="note" style="margin:0 0 6px;font-size:12px">ログインなしでも、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p></div>
 <details class="infosp"><summary>ⓘ 電波なし・ログインなしでも使える範囲</summary><p class="offl">電波なしでも台帳と買取額の計算は使える予定（相場は前回分）。この試作では電波なしの動作は未確認です。</p>
@@ -254,6 +254,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <button data-s="s13"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8"/></svg>窓口</button>
 <button data-s="s14"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9H3zM9 20v-6h6v6"/></svg>出張</button>
 <button data-s="s15"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 10h16M4 15h16M4 20h10"/></svg>売値入力</button>
+<button data-s="s17" id="t17"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>メニュー</button>
 </nav>
 <div class="lockstrip" id="lockstrip" data-go="s1" hidden>先に①で品物を確認してください（ここを押すと①へ）</div>
 
@@ -486,27 +487,19 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="stats rs"><div class="stat"><div class="k">対応済み</div><div class="v">5件</div></div><div class="stat"><div class="k">対応中</div><div class="v">2件</div></div><div class="stat"><div class="k">検討中</div><div class="v">3件</div></div></div>
 <div class="row" style="margin-top:8px"><button data-go="s7">料金を見る（いまは無料）</button><button data-go="s8">紹介コード</button></div>
 <p class="note" style="margin:8px 0 0">初期の参加者は「共同開発メンバー（先着30名）」とお呼びします。中身は先着の割引特典で、要望を出すなどの条件や義務はありません（要望は任意で歓迎します）。※ポイントで受けられる特典（有料1か月無料・バッジ等）は別の制度で、点数などの条件があります（検討中）。上の半額特典には影響しません。</p></div>
-<div class="card"><h3>実際に出た要望10件（開発中・実在）</h3>
-<p class="note" style="margin:0 0 6px">これは利用者の声ではなく、運営・テストから出たものです。2026-10-18 時点。</p>
+<div class="card"><h3>要望の対応履歴（開発中に出た要望10件・実在）</h3>
+<p class="note" style="margin:0 0 6px">これは利用者の声ではなく、運営・テスト・相談相手から出たものです。各行に「対応した版（日数.回数）と日付」を書いています。システム全体の改修履歴は「メニュー」にあります。<button data-go="s17" style="min-height:40px">メニューを開く</button></p>
 <div id="realreq">
-<div class="vrow"><b>型番の照合を完全一致にしてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1（部分一致は候補として出し、買う前に型番を目で確認する形に）</span></div>
-<div class="vrow"><b>全角の型番も通してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1</span></div>
-<div class="vrow"><b>スマホで「文字を大きく」を見つけやすく</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1（ヘッダーの「文字 大」）</span></div>
-<div class="vrow"><b>用語（簡易確認・ロット・按分・回転）を説明してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1（「?」をタップ）</span></div>
-<div class="vrow"><b>送料・梱包費も余裕をもって計算してほしい</b><br><span class="note">出どころ：2026-10-16 古物商の方（開発の相談相手）／状態：対応済み／版：1.8</span></div>
-<div class="vrow"><b>電波なしの動作を実機で確かめてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応中／表示は正直にした版：3.1。実機確認はこれから</span></div>
-<div class="vrow"><b>要望の初期表示は実在のものだけにしてほしい</b><br><span class="note">出どころ：2026-10-17 古物商の方（開発の相談相手）／状態：対応中／版：3.1（この画面）</span></div>
-<div class="vrow"><b>客向け表示の切り替えを分かりやすく</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：検討中</span></div>
-<div class="vrow"><b>せりで上限超えのとき、1タップで記録できないように</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：検討中</span></div>
-<div class="vrow"><b>相場の量（10年分）をそろえてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17。せどりの方を想定した指摘）／状態：検討中（データ提供元と相談中）</span></div></div></div>
-<div class="card"><h3>改善履歴（1日1行）</h3>
-<p class="note" style="margin:0 0 6px">番号は「更新した日の数.その日の何回目」です（例：1日目の1回目＝1.1、2回目＝1.2。更新のない日は数えません）。新しい順。</p>
-<ul class="log" style="margin:0;padding-left:18px">
-<li>5.1〜5.5（10/20）説明ページから店頭の買取へ直行・見出しの言い換え・値札判定の誤判定を修正／共同開発メンバーは先着の割引特典だけと明記／せりで出品番号と上限を入れる欄・落札の取り消し／全画面に安値・平均・高値（上限は安値基準）・どの画面から買っても台帳に届く・台帳の訂正・押し間違えの戻し方／まだ作れていない機能を「検討中」に</li>
-<li>4.1（10/19）せりの状態ボタン・一覧にない品の案内・お試し専用の色分け</li>
-<li>3.1〜3.2（10/18）型番は完全一致のみ判定・電波なしの表示を正直に・「文字 大」・用語の注釈・この画面／言い換え・JANコード13桁・候補0件の案内・せりの上限を手数料込みに</li>
-<li>2.1（10/17）スマホのヘッダーを1行に・判定結果を上に・注意書きを「ⓘ」に</li>
-<li>1.1〜1.8（10/16）検索と相場の一覧・要望と投票・料金と紹介・用語の言い換え・早い査定とまとめ査定・本人確認・利用場面の選択（値札判定・せり・窓口・出張）・送料と梱包費の余裕つき計算</li></ul></div>
+<div class="vrow"><b>型番の照合を完全一致にしてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／対応した版：3.1（10/18）（部分一致は候補として出し、買う前に型番を目で確認する形に）</span></div>
+<div class="vrow"><b>全角の型番も通してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／対応した版：3.1（10/18）</span></div>
+<div class="vrow"><b>スマホで「文字を大きく」を見つけやすく</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／対応した版：3.1（10/18）（ヘッダーの「文字 大」）</span></div>
+<div class="vrow"><b>用語（簡易確認・ロット・按分・回転）を説明してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／対応した版：3.1（10/18）（「?」をタップ）</span></div>
+<div class="vrow"><b>送料・梱包費も余裕をもって計算してほしい</b><br><span class="note">出どころ：2026-10-16 古物商の方（開発の相談相手）／状態：対応済み／対応した版：1.8（10/16）</span></div>
+<div class="vrow"><b>電波なしの動作を実機で確かめてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応中／対応した版：3.1（10/18）で表示を正直にしました。実機確認はこれから</span></div>
+<div class="vrow"><b>要望の初期表示は実在のものだけにしてほしい</b><br><span class="note">出どころ：2026-10-17 古物商の方（開発の相談相手）／状態：対応中／対応した版：3.1（10/18）（この画面）</span></div>
+<div class="vrow"><b>客向け表示の切り替えを分かりやすく</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：検討中／対応した版：まだありません</span></div>
+<div class="vrow"><b>せりで上限超えのとき、1タップで記録できないように</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：検討中／対応した版：まだありません</span></div>
+<div class="vrow"><b>相場の量（10年分）をそろえてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17。せどりの方を想定した指摘）／状態：検討中（データ提供元と相談中）／対応した版：まだありません</span></div></div></div>
 <div class="card"><p class="note" style="margin-bottom:0">要望は毎週まとめて判断し、すべてに状態と理由をお返しします。見送りでも、同じ要望が増えたら再検討します。</p></div>
 <div class="card"><h3>要望を送る</h3>
 <label style="margin-top:0">題名</label><input id="rt" placeholder="例：まとめ買いの一括査定" maxlength="60" autocomplete="off">
@@ -538,7 +531,6 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="hl"><i style="width:72px">11月</i><span>まとめ買いの一括査定</span></div>
 <div class="hl"><i style="width:72px">検討中</i><span>ブランド品のシリアル確認欄／メール通知／免許証の読み取り</span></div>
 <p class="note" style="margin:6px 0 0">予定は票数や状況で変わることがあります。</p></div>
-<div class="card"><h3>改善履歴</h3><div id="rh"></div></div>
 <h3 style="margin-top:22px;font-size:14px;color:var(--sub)">はじめにお聞きしたいこと</h3>
 <div class="small">
 <p class="note">このお試し版を見て、率直な感想をお聞かせください。ボタンは見た目だけで、送信されません。</p>
@@ -661,6 +653,35 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <p class="note" id="mpdmsg"></p></div>
 </div>
 <p class="note" style="font-size:12px">ログインしなくても、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p>
+</section>
+
+<!-- 17 メニュー -->
+<section class="screen" id="s17"><span class="tag">§14</span>
+<h2>メニュー</h2>
+<div class="card"><h3>お知らせ</h3>
+<ul class="log" style="margin:0;padding-left:18px">
+<li><b>10/20</b>　相場の幅（安値・平均・高値）を全画面に表示し、上限の初期値を安値基準にしました</li>
+<li><b>10/20</b>　どの画面で買っても台帳に届くようにし、台帳は消さずに訂正できるようにしました</li>
+<li><b>10/18</b>　説明ページを公開しました</li></ul></div>
+<div class="card"><h3>設定</h3>
+<label style="margin-top:0">文字の大きさ</label><button id="lgbtn3" aria-pressed="false" style="width:100%;min-height:48px">文字を大きく</button>
+<label>利用場面</label><button id="mnscene" data-go="s16" style="width:100%;min-height:48px">場面を選び直す</button>
+<label>上限の基準</label><div class="row" style="align-items:center;gap:8px"><span class="seg" style="width:auto"><button data-lb="mid">真ん中</button><button data-lb="low">安値</button></span></div>
+<p class="note" style="margin:4px 0">はじめは安値基準です。「真ん中」にすると上限が上がります。</p>
+<label>市場の手数料（%）</label><input id="auf2" type="number" inputmode="decimal" value="5" aria-label="市場の手数料（%）">
+<p class="note" style="margin:4px 0">せりの計算に使います。5%はお試しの仮の数字で、市場の規約に合わせて設定します。</p>
+<label>明るさ</label><button id="mntheme" style="width:100%;min-height:48px">明るさ切替</button></div>
+<div class="card"><h3>システムの改修履歴（1日1行）</h3>
+<ul class="log" style="margin:0;padding-left:18px">
+<li>5.1〜5.6（10/20）説明ページから店頭の買取へ直行・見出しの言い換え・値札判定の誤判定を修正／共同開発メンバーは先着の割引特典だけと明記／せりで出品番号と上限を入れる欄・落札の取り消し／全画面に安値・平均・高値（上限は安値基準）・どの画面から買っても台帳に届く・台帳の訂正・押し間違えの戻し方／まだ作れていない機能を「検討中」に／メニュー（お知らせ・設定・改修履歴）を新設・要望の対応履歴を分けた</li>
+<li>4.1（10/19）せりの状態ボタン・一覧にない品の案内・お試し専用の色分け</li>
+<li>3.1〜3.2（10/18）型番は完全一致のみ判定・電波なしの表示を正直に・「文字 大」・用語の注釈・この画面／言い換え・JANコード13桁・候補0件の案内・せりの上限を手数料込みに</li>
+<li>2.1（10/17）スマホのヘッダーを1行に・判定結果を上に・注意書きを「ⓘ」に</li>
+<li>1.1〜1.8（10/16）検索と相場の一覧・要望と投票・料金と紹介・用語の言い換え・早い査定とまとめ査定・本人確認・利用場面の選択（値札判定・せり・窓口・出張）・送料と梱包費の余裕つき計算</li></ul></div>
+<div class="card"><h3>要望</h3><div class="row"><button class="pri" data-go="s6">要望を出す・要望の対応履歴を見る</button></div></div>
+<div class="card"><h3>料金・紹介・ログイン</h3><div class="row"><button data-go="s7">料金（いまは無料）</button><button data-go="s8">友だちに紹介</button><button data-go="s9">ログイン／登録</button><button data-go="s10">マイページ</button></div></div>
+<div class="card"><h3>電波なし・ログインなしで使える範囲</h3><p class="offl">電波なしでも台帳と買取額の計算は使える予定（相場は前回分）。この試作では電波なしの動作は未確認です。</p>
+<p class="note" style="margin:0 0 6px;font-size:12px">ログインなしでも、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p></div>
 </section>
 
 <!-- 16 場面の選択 -->
@@ -876,7 +897,7 @@ function show(s){$$('#tabs button').forEach(x=>x.classList.toggle('on',x.dataset
 $('#tabs').onclick=e=>{const b=e.target.closest('button');if(b)show(b.dataset.s);};
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){show(b.dataset.go);if(b.dataset.up){const t=document.getElementById('upsv');if(t)setTimeout(()=>t.scrollIntoView({block:'start'}),0);}}});
 function setLock(){['s2','s3'].forEach(s=>$('#'+s).classList.toggle('locked',!confirmed));['t2','t3'].forEach(s=>$('#'+s).classList.toggle('lockd',!confirmed));$('#unconf').disabled=!confirmed;updStrip();}
-function updStrip(){$('#lockstrip').hidden=confirmed||!!document.querySelector('#s0.on,#s1.on,#s11.on,#s12.on,#s13.on,#s14.on,#s15.on,#s16.on');}
+function updStrip(){$('#lockstrip').hidden=confirmed||!!document.querySelector('#s0.on,#s1.on,#s11.on,#s12.on,#s13.on,#s14.on,#s15.on,#s16.on,#s17.on');}
 function setEmpty(){$('#s2').classList.toggle('empty',empty);$('#emptyb').textContent=empty?'【お試し】データがあるときの画面に戻す':'【お試し】データがないときの画面を見る';}
 $('#themebtn').onclick=()=>{const r=document.documentElement;const d=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=d?'light':'dark';};
 $('#unconf').onclick=()=>{confirmed=false;$$('.ck').forEach(c=>c.checked=false);$('#rankSel').value='';upd();setLock();renderAll();};
@@ -1132,7 +1153,6 @@ const RQ=[
 {t:'台帳をCSVで出すとき列の順を変えたい',b:'CSVの列の順を、手持ちの帳簿に合わせて変えたい。',sc:'月末に帳簿へ貼り付けるとき',v:9,s:'公開済み',ai:'公開しました（10/10）。',d:'10/01',id:7,n:'せどり花子'},
 {t:'リサイクル店の店頭在庫を相場から分けたい',b:'店頭在庫の価格は売り切れではないので、別に集計してほしい。',sc:'相場の真ん中の価格が店頭の値付けに引っ張られるとき',v:6,s:'受付',ai:'受け付けました。次の週次判断で返答します。',d:'10/15',id:8,n:'匿名'},
 {t:'出品者の写真を一覧に並べて表示したい',b:'売り切れ一覧に、出品ページの写真も出してほしい。',sc:'状態ランクを写真で確かめたいとき',v:7,s:'見送り',ai:'他人の出品画像の転載にあたるため、見送りました（リンクで元ページへ飛べます）。',d:'10/03',id:9,n:'user_c90'}];
-const RH=[['10/14','同じ出品者の除外を初期で有効に',34,'提案：リユース山田さん ほか33名'],['10/10','台帳CSVの列の順を変更できるように',9,'提案：せどり花子さん ほか8名'],['10/07','相場一覧の「元ページ」リンクを大きく',8,'提案：古物商Kさん ほか7名'],['09/30','飛び抜けた価格の幅の初期値を±40%に',15,'提案：user_t55さん ほか14名'],['09/24','状態ランクの説明文を写真つきに',12,'提案：匿名さん ほか11名']];
 const mine=new Set();let rqn=100;
 const stc=s=>s==='公開済み'?'s-pub':s==='開発中'?'s-dev':s==='採用'?'s-adopt':(s==='検討中'||s==='再検討中'||s==='受付')?'s-wait':'';
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;};
@@ -1207,7 +1227,6 @@ $('#rsample').textContent=RS;
 const cp=(t,m)=>{(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(()=>{}).finally(()=>{$('#rcmsg').textContent=m+'（例です）';});};
 $('#rcopy').onclick=()=>cp($('#rcode').textContent,'コードをコピーしました');
 $('#rcopy2').onclick=()=>cp(RS,'紹介の文をコピーしました');
-$('#rh').innerHTML=RH.map(h=>'<div class="hl"><i>'+h[0]+'</i><span>'+h[1]+'<br><small class="note">'+h[3]+'</small></span><em>'+h[2]+'票</em></div>').join('');
 renderReq();
 
 /* 見分け方メモ（P2-5）：選んだ商品ごと */
@@ -1289,11 +1308,11 @@ $('#bled').onclick=()=>{const n=BL.length;if(!n)return;const list=BL.map(([i,r])
  BL.length=0;renderBatch();sendPend(list,'まとめて'+n+'件を台帳に届けました。1点ずつ「入力する」を押し、相手方と本人確認を確かめて保存してください（例です。保存されません）。');};
 $('#qmode').onclick=e=>{const b=e.target.closest('button');if(!b)return;qmode=b.dataset.m;$$('#qmode button').forEach(x=>x.classList.toggle('on',x===b));$('#qone').hidden=qmode!=='one';$('#qmany').hidden=qmode!=='many';};
 /* 大きな文字・開発用表示 */
-const lgToggle=()=>{const on=document.body.classList.toggle('lg');$('#lgbtn').textContent=on?'文字を戻す':'文字を大きく';$('#lgbtn2').textContent=on?'文字 戻す':'文字 大';[$('#lgbtn'),$('#lgbtn2')].forEach(b=>b.setAttribute('aria-pressed',on));setTimeout(renderAll,50);};
+const lgToggle=()=>{const on=document.body.classList.toggle('lg');$('#lgbtn').textContent=on?'文字を戻す':'文字を大きく';$('#lgbtn2').textContent=on?'文字 戻す':'文字 大';$('#lgbtn3').textContent=on?'文字を戻す':'文字を大きく';[$('#lgbtn'),$('#lgbtn2'),$('#lgbtn3')].forEach(b=>b.setAttribute('aria-pressed',on));setTimeout(renderAll,50);};
 {const tb=document.createElement('div');tb.id='tipbox';tb.hidden=true;document.body.appendChild(tb);
  document.addEventListener('click',e=>{const t=e.target.closest('.tip');if(!t){tb.hidden=true;return;}e.preventDefault();e.stopPropagation();const same=!tb.hidden&&tb.textContent===t.dataset.t;tb.textContent=t.dataset.t;tb.hidden=same;},true);
  document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('tip')){e.preventDefault();e.target.click();}});}
-$('#lgbtn').onclick=lgToggle;$('#lgbtn2').onclick=lgToggle;
+$('#lgbtn').onclick=lgToggle;$('#lgbtn2').onclick=lgToggle;$('#lgbtn3').onclick=lgToggle;$('#mntheme').onclick=()=>$('#themebtn').click();
 if(/[?&]dev=1(&|$)/.test(location.search)){$('#devbox').hidden=false;$('#tagsw').checked=true;document.body.classList.add('showtags');}
 
 /* ===== v8：場面（P1-16）・値札判定（P1-17）・せり（P1-19）・窓口・出張（P1-18/P2-6/P2-8）・整理（P2-9） ===== */
@@ -1302,13 +1321,13 @@ const SC={store:{n:'店で仕入れる',sub:'店の中・スマホを片手で',
  counter:{n:'店頭の窓口',sub:'お客様の前・iPad横',start:'s13',tabs:['s13','s0','s4','s5','s6']},
  visit:{n:'出張買取',sub:'お客様の家・電波なし',start:'s14',tabs:['s14','s0','s4','s5','s6']},
  office:{n:'家・事務所',sub:'整理・売れた価格の入力',start:'s15',tabs:['s15','s5','s4','s2','s6']}};
-const NEWS=['s11','s12','s13','s14','s15','s16'];
+const NEWS=['s11','s12','s13','s14','s15','s16','s17'];
 let scene=null;
 const sgn=n=>(n<0?'−':'+')+yen(Math.abs(n));
 const statHtml=a=>a.map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
 function renderScGrid(){const g=$('#scgrid');g.textContent='';Object.keys(SC).forEach(k=>{const b=el('button','scb'+(k===scene?' on':''));b.dataset.sc=k;b.appendChild(document.createTextNode(SC[k].n));b.appendChild(el('small',null,SC[k].sub));g.appendChild(b);});}
 function setScene(k){scene=k;const c=SC[k];$('#scbtn').textContent='場面：'+c.n+'（変える）';$('#hscene small').textContent='場面：'+c.n+'（押して変える）';
- $$('#tabs button').forEach(b=>{const x=c.tabs.indexOf(b.dataset.s);b.hidden=x<0;b.style.order=x<0?99:x;});show(c.start);}
+ $$('#tabs button').forEach(b=>{const x=c.tabs.indexOf(b.dataset.s);const mn=b.dataset.s==='s17';b.hidden=x<0&&!mn;b.style.order=mn?100:(x<0?99:x);});$('#mnscene').textContent='利用場面：'+c.n+'（選び直す）';show(c.start);}
 $('#scgrid').onclick=e=>{const b=e.target.closest('[data-sc]');if(b)setScene(b.dataset.sc);};
 
 /* 値札の判定 */
@@ -1335,8 +1354,9 @@ $('#s11').addEventListener('click',e=>{const a=e.target.closest('[data-tg]'),r=e
 $('#tgm').oninput=e=>{const i=match(e.target.value);if(i<0){$('#tgnote').textContent=e.target.value.trim()?NOHIT(e.target.value):'';const b=$('#tgres');b.textContent='';b.appendChild(el('div','note','型番が見つからないため判定できません'));$('#tgbuy').disabled=true;$('#tgskip').disabled=true;return;}$('#tgnote').textContent='';tgI=i;renderTag();};
 function tgReveal(){setTimeout(()=>{const b=$('#tgres');if(!b||$('#tgbuy').disabled)return;const r=b.getBoundingClientRect(),ymax=innerHeight-170;if(r.top<0||r.bottom>ymax)scrollBy({top:r.bottom-ymax+12,behavior:'smooth'});},60);}
 $('#tgp').oninput=()=>{renderTag();tgReveal();};$('#tgc').onchange=()=>{renderTag();tgReveal();};
-$('#hmenu').onclick=()=>{const h=document.querySelector('header'),o=h.classList.toggle('mopen');$('#hmenu').textContent=o?'✕ 閉じる':'≡ メニュー';$('#hmenu').setAttribute('aria-expanded',o);};
-document.addEventListener('click',e=>{const b=e.target.closest('#hbtns [data-go]');if(b){document.querySelector('header').classList.remove('mopen');$('#hmenu').textContent='≡ メニュー';$('#hmenu').setAttribute('aria-expanded',false);}});
+/* メニューの手数料はせりの欄と同じ値を共有 */
+$('#auf2').addEventListener('input',()=>{$('#auf').value=$('#auf2').value;$('#auf').dispatchEvent(new Event('input',{bubbles:true}));});
+$('#auf').addEventListener('input',()=>{if(document.activeElement!==$('#auf2'))$('#auf2').value=$('#auf').value;});
 $('#tgskip').onclick=()=>{const c=tgCalc(),t=PR[tgI].short+'・値札 '+yen(c.price)+'円 → 見送り';if(tgH[0]===t){$('#tgdone').textContent='同じ見送りはもう履歴に残しています（二重には記録しません）。';return;}tgH.unshift(t);renderTag();$('#tgdone').textContent='見送りとして履歴に残しました（例です。保存されません）。';};
 $('#tgbuy').onclick=()=>{const c=tgCalc(),t=PR[tgI].short+'・値札 '+yen(c.price)+'円 → 買う';if(tgH[0]!==t)tgH.unshift(t);
  qi=tgI;qc=0;qr=tgR;qchk=[true,true,true,true];syncFromQuick();renderQuick();ledFill({i:tgI,item:PR[tgI].item,feat:PR[tgI].feat,offer:c.price,s:'s11'});
