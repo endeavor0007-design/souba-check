@@ -691,12 +691,12 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <!-- 12 せり（古物市場） -->
 <section class="screen" id="s12"><span class="tag">P1-19・P2-7</span>
 <h2>せり（古物市場）</h2>
-<p class="note" style="margin-top:0">出品番号と上限は、せりの前に決めておきます。落札はボタン1回で記録します。</p>
+<p class="note" style="margin-top:0">①せりの前に、市場の出品目録を見て「出品番号と上限を入れる」から一覧に足します ②せりの間は一覧から品を選び、下見で決めた品の状態（S・A・B・C）を選んで、額を入れて「落札（記録する）」を押します ③押し間違えたときは、下の「今日の落札の記録」の「取り消す」で消せます。</p>
 <div class="two">
-<div class="card"><h3>出品番号の一覧</h3><div id="aul"></div><button id="auout" style="width:100%;margin-top:10px">一覧にない品が出たとき</button><div class="warnbox" id="auoutbox" hidden style="font-size:16px">事前に調べていない品は、上限が出ません。<ol style="margin:6px 0 0;padding-left:1.4em"><li>せりの間は見送るのが目安です（その場で調べると次の品に間に合いません）</li><li>気になった品は出品番号を控え、せりの後に「調べる」で相場を確かめて、次回の一覧に入れます</li></ol></div></div>
+<div class="card"><h3>出品番号の一覧</h3><details id="auprep" open style="border:2px dashed var(--line);border-radius:12px;padding:10px;margin-bottom:8px"><summary style="font-weight:700;cursor:pointer">＋ 出品番号と上限を入れる（せりの前の準備）</summary><label for="auano">出品番号（出品目録の番号）</label><input id="auano" placeholder="例：A-120" maxlength="20"><label for="auait">品（型番で選ぶ・お試しは3機種だけ）</label><select id="auait"></select><div class="row"><div><label for="aualot">点数（ロット）</label><input id="aualot" type="number" inputmode="numeric" value="1" min="1"></div><div><label for="auahi">自分の上限（円・空欄なら相場から自動）</label><input id="auahi" type="number" inputmode="numeric" placeholder="例：18000"></div></div><button class="pri" id="auadd" style="width:100%;margin-top:10px">一覧に足す</button><p class="note" id="auaddmsg"></p></details><div id="aul"></div><button id="auout" style="width:100%;margin-top:10px">一覧にない品が出たとき</button><div class="warnbox" id="auoutbox" hidden style="font-size:16px">事前に調べていない品は、上限が出ません。<ol style="margin:6px 0 0;padding-left:1.4em"><li>せりの間は見送るのが目安です（その場で調べると次の品に間に合いません）</li><li>気になった品は出品番号を控え、せりの後に「調べる」で相場を確かめて、次回の一覧に入れます</li></ol></div></div>
 <div>
 <div class="card kbig"><div class="note">出品番号</div><div class="big" id="aun" style="font-size:44px"></div><div id="aunm" style="font-size:18px;font-weight:700"></div><div class="note" id="aulot"></div>
-<div class="note" style="margin-top:8px">品の状態（下見で決める）：S＝新品同様／A＝美品・付属品そろう／B＝使用感あり・動作OK／C＝傷・欠品・難あり</div><div class="seg" id="aurk" style="flex-wrap:wrap"><button data-r="S">S 新品同様</button><button data-r="A">A 美品</button><button class="on" data-r="B">B 使用感</button><button data-r="C">C 傷・難</button></div><div class="note" style="margin-top:8px">自分の上限（状態<span id="aurkn">B</span>の場合・市場の手数料込みで逆算）</div><div class="big" id="auhi" style="font-size:56px"></div>
+<div class="note" style="margin-top:8px">品の状態（下見で決める）：S＝新品同様／A＝美品・付属品そろう／B＝使用感あり・動作OK／C＝傷・欠品・難あり</div><div class="seg" id="aurk" style="flex-wrap:wrap"><button data-r="S">S 新品同様</button><button data-r="A">A 美品</button><button class="on" data-r="B">B 使用感</button><button data-r="C">C 傷・難</button></div><div class="note" style="margin-top:8px" id="auhilab">自分の上限（状態<span id="aurkn">B</span>の場合・市場の手数料込みで逆算）</div><div class="big" id="auhi" style="font-size:56px"></div><div class="row" style="align-items:flex-end"><div><label for="auown">上限を自分で決める（円・落札額と比べる額）</label><input id="auown" type="number" inputmode="numeric" placeholder="空欄なら相場から自動"></div><div><button id="auownclr" style="width:100%">相場の目安に戻す</button></div></div>
 <div class="stats rs" id="aust" style="margin-top:8px"></div></div>
 <div class="card"><label style="margin-top:0">いまの額・落札額（円）</label>
 <input id="aub" class="bigin" type="number" inputmode="numeric" placeholder="額を入れる" aria-label="落札額">
@@ -708,8 +708,8 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="calc" id="aucalc"></div><p class="note" id="aumsg"></p></div>
 <div class="actbar"><button id="aumax">上限の額を入れる</button><button class="pri" id="aubtn">落札（記録する）</button></div>
 </div></div>
-<div class="card"><h3>今日の落札の記録</h3>
-<div class="tablewrap"><table class="cards"><thead><tr><th>番号</th><th>品名</th><th>ロット<abbr class="tip" tabindex="0" role="button" data-t="ロット：まとめて落札した一山の品。1点ずつの原価は按分で出します。">?</abbr></th><th>状態</th><th class="num">落札額</th><th class="num">手数料込みの原価</th><th>売主</th><th></th></tr></thead><tbody id="aurt"></tbody></table></div>
+<div class="card"><h3>今日の落札の記録</h3><p class="note" id="aurecmsg" aria-live="polite"></p>
+<div class="tablewrap"><table class="cards"><thead><tr><th>番号</th><th>品名</th><th>ロット<abbr class="tip" tabindex="0" role="button" data-t="ロット：まとめて落札した一山の品。1点ずつの原価は按分で出します。">?</abbr></th><th>状態</th><th class="num">落札額</th><th class="num">手数料込みの原価</th><th>売主</th><th></th><th>押し間違え</th></tr></thead><tbody id="aurt"></tbody></table></div>
 <p class="note">市場の取引票と合わせて保管してください。記録の義務や免除の有無は、警察・市場主に確認してください。ロットの按分<abbr class="tip" tabindex="0" role="button" data-t="按分：まとめ買いの代金を、品ごとの見込み価値の比で割り振ること。">?</abbr>は目安の計算です。</p></div>
 </section>
 
@@ -1277,13 +1277,13 @@ const AU=[{no:'A-101',nm:'WH-1000XM4 ブラック',i:0,lot:1},{no:'A-102',nm:'Sw
 const auRec=[{no:'A-098',nm:'Switch 旧型',lot:1,bid:8600,f:5,cost:9030,seller:'S-1180',over:false}];let auI=0;const auRk={},auBid={};const rk=a=>auRk[a.no]||'B';
 /* v12：上限は市場の手数料込みで逆算（落札額×(1+手数料) が事前の上限を超えないように） */
 const auFee=()=>{const i=document.getElementById('auf');return i?(+i.value||0)/100:0.05;};
-const auHi=a=>Math.floor(lim(a.i,rk(a)).hi*a.lot/(1+auFee())/100)*100;
+const auHi=a=>a.own?a.own:Math.floor(lim(a.i,rk(a)).hi*a.lot/(1+auFee())/100)*100;
 function renderAuList(){const box=$('#aul');box.textContent='';AU.forEach((a,k)=>{const d=el('div','cand'+(k===auI?' sel':''));d.dataset.au=k;const t=el('div');t.style.minWidth='0';
- t.appendChild(el('b',null,a.no+'　'+a.nm));t.appendChild(el('div','meta','ロット '+a.lot+'点・状態'+rk(a)+(auRk[a.no]?'':'（仮）')+'・上限 '+yen(auHi(a))+' 円'));
+ t.appendChild(el('b',null,a.no+'　'+a.nm));t.appendChild(el('div','meta','ロット '+a.lot+'点・状態'+rk(a)+(auRk[a.no]?'':'（仮）')+'・上限 '+yen(auHi(a))+' 円'+(a.own?'（自分で決めた額）':'（相場から自動）')));
  if(auRec.some(r=>r.no===a.no))t.appendChild(el('span','badge b-warn','落札済み'));d.appendChild(t);box.appendChild(d);});}
-function renderAuDetail(){const a=AU[auI],L=lim(a.i,rk(a));$('#aurkn').textContent=rk(a)+(auRk[a.no]?'':'（仮・下見で選んでください）');$$('#aurk button').forEach(x=>x.classList.toggle('on',x.dataset.r===rk(a)));
+function renderAuDetail(){const a=AU[auI],L=lim(a.i,rk(a));auHiLab();$$('#aurk button').forEach(x=>x.classList.toggle('on',x.dataset.r===rk(a)));
  $('#aun').textContent=a.no;$('#aunm').textContent=a.nm;$('#aulot').textContent='ロット '+a.lot+' 点'+(a.lot>1?'（落札額は点数で按分して、1点ごとの原価にします）':'');
- $('#auhi').textContent=yen(auHi(a))+' 円';
+ $('#auhi').textContent=yen(auHi(a))+' 円';$('#auown').value=a.own||'';auHiLab();
  $('#aust').innerHTML=statHtml([['真ん中の価格（1点）',yen(L.m)+'円','状態'+rk(a)+'・直近90日'],['件数',L.n+'件','お試しの架空データ'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]);
  $('#aub').value=auBid[a.no]||'';auUpd();}
 function auUpd(){const a=AU[auI],hi=auHi(a),b=+$('#aub').value||0,f=(+$('#auf').value||0)/100,L=lim(a.i,rk(a));auBid[a.no]=$('#aub').value;
@@ -1293,7 +1293,7 @@ function auUpd(){const a=AU[auI],hi=auHi(a),b=+$('#aub').value||0,f=(+$('#auf').
  const cost=Math.round(b*(1+f)),prof=L.m?Math.round(a.lot*(L.m*(1-FEE)-L.sh-slow(L.m,L.d,TP))-cost):0;
  $('#aucalc').innerHTML=[['落札額',yen(b)+' 円'],['市場の手数料（'+(+$('#auf').value||0)+'%）','+ '+yen(b*f)+' 円'],['実質原価（手数料込み）',yen(cost)+' 円'],a.lot>1?['1点あたりの原価（按分）',yen(cost/a.lot)+' 円']:null,['見込み利益（目安）',b?sgn(prof)+' 円':'—']].filter(Boolean).map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('');
  $('#aubtn').textContent=over?'上限超えで落札を記録':'落札（記録する）';$('#aubtn').classList.toggle('ng',over);$('#aubtn').disabled=!b;}
-function renderAuRec(){$('#aurt').innerHTML=auRec.map(r=>'<tr>'+td('番号',esc(r.no))+td('品名',esc(r.nm))+td('ロット',r.lot+'点')+td('状態',r.rk?'状態'+r.rk:'—')+td('落札額',yen(r.bid),'num')+td('手数料込みの原価',yen(r.cost)+'（'+r.f+'%）','num')+td('売主',esc(r.seller||'（未入力）'))+td('メモ',r.over?'<span class="badge b-warn">上限超え</span>':'—')+'</tr>').join('');}
+function renderAuRec(){$('#aurt').innerHTML=auRec.map((r,k)=>'<tr>'+td('番号',esc(r.no))+td('品名',esc(r.nm))+td('ロット',r.lot+'点')+td('状態',r.rk?'状態'+r.rk:'—')+td('落札額',yen(r.bid),'num')+td('手数料込みの原価',yen(r.cost)+'（'+r.f+'%）','num')+td('売主',esc(r.seller||'（未入力）'))+td('メモ',r.over?'<span class="badge b-warn">上限超え</span>':'—')+td('押し間違え','<button data-undo="'+k+'">取り消す</button>')+'</tr>').join('');}
 $('#auf').addEventListener('input',()=>{renderAuList();$('#auhi').textContent=yen(auHi(AU[auI]))+' 円';});
 $('#aurk').onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;auRk[AU[auI].no]=b.dataset.r;renderAuList();renderAuDetail();};
 $('#auout').onclick=()=>{const x=$('#auoutbox');x.hidden=!x.hidden;};
@@ -1303,7 +1303,19 @@ $('#s12').addEventListener('click',e=>{const s=e.target.closest('[data-as]');if(
 $('#aumax').onclick=()=>{$('#aub').value=auHi(AU[auI]);auUpd();};
 $('#aubtn').onclick=()=>{const a=AU[auI],b=+$('#aub').value;if(!b)return;const f=+$('#auf').value||0;
  auRec.unshift({no:a.no,nm:a.nm,lot:a.lot,bid:b,f:f,cost:Math.round(b*(1+f/100)),seller:$('#aus').value.trim(),rk:rk(a),over:b>auHi(a)});$('#aus').value='';
- auBid[a.no]='';$('#aub').value='';$('#aumsg').textContent='記録しました（例です。保存されません）。';renderAuList();auUpd();renderAuRec();};
+ auBid[a.no]='';$('#aub').value='';$('#aumsg').textContent='記録しました（例です。保存されません）。押し間違えたときは、下の記録の「取り消す」で消せます。';renderAuList();auUpd();renderAuRec();};
+PR.forEach((p,k)=>{if(k>2)return;const o=el('option',null,p.short);o.value=k;$('#auait').appendChild(o);});
+$('#auadd').onclick=()=>{const no=$('#auano').value.trim(),m=$('#auaddmsg');if(!no){m.textContent='出品番号を入れてください。';return;}
+ if(AU.some(a=>a.no===no)){m.textContent=no+' はもう一覧にあります。';return;}
+ const i=+$('#auait').value,lot=Math.max(1,+$('#aualot').value||1),own=Math.max(0,+$('#auahi').value||0);
+ AU.push({no:no,nm:PR[i].short+(lot>1?'（まとめ）':''),i:i,lot:lot,own:own||0});auI=AU.length-1;
+ $('#auano').value='';$('#auahi').value='';$('#aualot').value=1;m.textContent=no+' を一覧に足しました（例です。保存されません）。';renderAuList();renderAuDetail();};
+function auHiLab(){const a=AU[auI];if(a.own){$('#auhilab').textContent='自分の上限（あなたが決めた額・落札額そのものと比べます。手数料は別に上乗せ）';}else{$('#auhilab').innerHTML='自分の上限（状態<span id="aurkn"></span>の場合・市場の手数料込みで逆算）';$('#aurkn').textContent=rk(a)+(auRk[a.no]?'':'（仮・下見で選んでください）');}}
+$('#auown').oninput=()=>{const a=AU[auI];a.own=Math.max(0,+$('#auown').value||0);$('#auhi').textContent=yen(auHi(a))+' 円';auHiLab();renderAuList();auUpd();};
+$('#auownclr').onclick=()=>{AU[auI].own=0;renderAuList();renderAuDetail();};
+$('#aurt').onclick=e=>{const b=e.target.closest('[data-undo]');if(!b)return;const r=auRec[+b.dataset.undo];
+ if(!confirm(r.no+'（'+r.nm+'・'+yen(r.bid)+'円）の落札の記録を取り消しますか？'))return;
+ auRec.splice(+b.dataset.undo,1);$('#aumsg').textContent=$('#aurecmsg').textContent=r.no+' の記録を取り消しました（例です。保存されません）。';renderAuList();renderAuRec();};
 
 /* 窓口 */
 const CQ=[{i:0,r:'B'},{i:1,r:'B'},{i:2,r:'A'}].map(x=>({...x,offer:f100(lim(x.i,x.r).hi*.92)}));let cqI=0,cview=false;
