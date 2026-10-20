@@ -32,6 +32,7 @@ input,select,textarea{width:100%;font:inherit;padding:11px 12px;border:1px solid
 button{font:inherit;min-height:46px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;cursor:pointer}
 button.pri{background:var(--pri);color:var(--pri-ink);border-color:var(--pri);font-weight:700}
 button:disabled{opacity:.45;cursor:not-allowed}
+tr.voided td{color:var(--sub)}
 .row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 140px}
 .cand{display:flex;gap:12px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:12px;margin:8px 0;cursor:pointer;background:var(--card)}
 .cand.sel{border-color:var(--pri);background:var(--soft)}
@@ -204,9 +205,9 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="band">完成形のイメージ（お試し用の架空データ）・開発中　※数字・出品者はすべて架空です</div>
 <header><h1>相場チェック<br><small>調べる → 相場 → 買取額 → 台帳 を1か所で</small></h1><div class="hmob"><button id="hscene" data-go="s16"><b>相場チェック</b><small>場面を選ぶ</small></button><button class="themebtn" id="lgbtn2" aria-pressed="false" aria-label="文字を大きくする">文字 大</button><button class="themebtn" id="hmenu" aria-expanded="false" aria-controls="hbtns">≡ メニュー</button></div><div class="hbtns" id="hbtns"><button class="themebtn" id="scbtn" data-go="s16" style="font-weight:700">場面を選ぶ</button><button class="themebtn pri" id="authbtn" data-go="s9" style="font-weight:700">ログイン／登録</button><button class="themebtn" data-go="s7">料金（いまは無料）</button><button class="themebtn" data-go="s8">友だちに紹介</button><button class="themebtn" id="themebtn">明るさ切替</button><button class="themebtn" id="lgbtn" aria-pressed="false">文字を大きく</button></div></header>
 <div class="wrap"><div class="infopc"><p class="offl">電波なしでも台帳と買取額の計算は使える予定（相場は前回分）。この試作では電波なしの動作は未確認です。</p>
-<p class="note" style="margin:0 0 6px;font-size:12px">ログインなしでも、早い査定と計算は使えます。メモ・履歴の保存、要望の投稿、紹介はログインが必要です。</p></div>
+<p class="note" style="margin:0 0 6px;font-size:12px">ログインなしでも、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p></div>
 <details class="infosp"><summary>ⓘ 電波なし・ログインなしでも使える範囲</summary><p class="offl">電波なしでも台帳と買取額の計算は使える予定（相場は前回分）。この試作では電波なしの動作は未確認です。</p>
-<p class="note" style="margin:0 0 6px;font-size:12px">ログインなしでも、早い査定と計算は使えます。メモ・履歴の保存、要望の投稿、紹介はログインが必要です。</p></details></div>
+<p class="note" style="margin:0 0 6px;font-size:12px">ログインなしでも、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p></details></div>
 
 <!-- 常設の検索窓 -->
 <div class="wrap" id="topwrap" hidden>
@@ -219,21 +220,21 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <label style="margin-top:0">キーワード・型番・バーコード番号（JAN）でまとめて検索（メルカリなど7つの売り場）</label>
 <div class="sbar">
 <input id="gq" placeholder="例：WH-1000XM4" inputmode="search" aria-label="検索">
-<select id="gp" aria-label="期間"><option value="30">30日</option><option value="90" selected>90日</option><option value="365">1年</option><option value="1095">3年</option><option value="3650">10年（契約後・時期未定）</option></select>
+<select id="gp" aria-label="期間"><option value="30">30日</option><option value="90" selected>90日</option><option value="365">1年</option><option value="1095">3年</option><option value="3650">10年（検討中）</option></select>
 <button class="pri" id="gsgo">検索</button>
-<button id="algo">値下がり・値上がりのお知らせ<span class="pill soon">提供開始：相場データの契約後（時期未定）</span></button>
+<button id="algo">値下がり・値上がりのお知らせ<span class="pill soon">検討中（相場データの提供元が未定）</span></button>
 </div>
-<p class="note" id="p10" hidden>10年分<span class="pill soon">提供開始：相場データの契約後（時期未定）</span>は、いまは表示できません。このお試し版では、直近1000日ほどのお試し用データです。</p>
+<p class="note" id="p10" hidden>10年分<span class="pill soon">検討中（相場データの提供元が未定）</span>は、いまは表示できません。このお試し版では、直近1000日ほどのお試し用データです。</p>
 <div id="alertbox" hidden class="card" style="background:var(--soft);margin-bottom:0">
-<h3>お知らせを登録（例・送信されません）<span class="pill soon">提供開始：相場データの契約後（時期未定）</span></h3>
-<p class="note">値動きのお知らせは、相場データの契約後に提供を始める予定です（料金表では有料の予定）。ここでは動きの例だけ試せます。</p>
+<h3>お知らせを登録（例・送信されません）<span class="pill soon">検討中（相場データの提供元が未定）</span></h3>
+<p class="note">値動きのお知らせは検討中です（相場データの提供元が未定です）。ここでは動きの例だけ試せます。</p>
 <div class="row"><div><label>種類</label><select id="at"><option>値下がり</option><option>値上がり</option></select></div>
 <div><label>この価格を下回る／上回ったら（円）</label><input id="av" type="number" inputmode="numeric"></div></div>
 <button class="pri" id="aadd" style="width:100%;margin-top:10px">登録する</button>
 <ul class="log" id="alist"></ul>
 </div>
 <div id="sres" hidden></div>
-<details><summary>ランキング（直近30日・このお試し版のデータ内）</summary>
+<details><summary>ランキング（例・持ち寄りが集まったら表示します）</summary>
 <div class="seg" id="rkseg" style="margin-top:6px"><button class="on" data-k="sold">よく売れている品</button><button data-k="move">値動きの大きい品</button><button data-k="turn">売れるまでが短い品</button></div>
 <ul class="rank" id="rank"></ul>
 <p class="note" id="rknote"></p></details>
@@ -280,7 +281,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="stats rs" id="kst"></div>
 <div id="kwarn"></div></div>
 <div class="card kbig"><div class="note" style="font-size:15px">この額まで（買ってよい上限の目安）</div>
-<div class="big" id="kmx">—</div><p class="range" id="krg" style="margin:4px 0"></p>
+<div class="big" id="kmx">—</div><p class="range" id="krg" style="margin:4px 0"></p><p class="range" id="krg2" style="margin:4px 0"></p>
 <button class="pri" id="kled" style="width:100%;min-height:58px;font-size:19px" disabled>台帳に入れる</button>
 <p class="note" id="kledn"></p>
 <div class="warnbox" style="text-align:left">過去の売り切れから出した目安です。実際の売値・状態・相場で変わります。最終判断はご自身で。</div>
@@ -309,11 +310,11 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <section class="screen" id="s1"><span class="tag">P1-1</span>
 <h2>① 品物を調べる</h2>
 <div class="card">
-<div class="row"><button class="pri" id="photo">写真を撮る</button><button id="barcode">バーコード番号（JAN）を読む</button></div>
+<div class="row"><button class="pri" id="photo">写真を撮る<span class="pill soon">検討中（費用の出どころが未定）</span></button><button id="barcode">バーコード番号（JAN）を読む</button></div>
 <label>型番・商品名・バーコード番号（JAN）を入れてください</label>
 <input id="q" placeholder="例：WH-1000XM4" inputmode="search">
 <p class="note" id="samplenote">いまは例として「WH-1000XM4」を調べた結果を出しています（このお試し版で調べられるのは WH-1000XM4／Switch／Kiss X10 の3つ）。</p>
-<p class="note">写真は「候補を出すだけ」です。自動では確定しません。</p>
+<p class="note">写真で候補を出す機能は検討中です（費用の出どころが未定）。出すときも「候補を出すだけ」で、自動では確定しません。</p>
 </div>
 <div class="card">
 <span class="tag">P1-10</span><h3>候補（一致度が高い順）</h3>
@@ -348,7 +349,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <span class="tag" style="top:8px">P1-2</span>
 <p class="note">1. 7つの売り場の売り切れ検索を一度に開く　2. 開いたページの文字をコピー　3. ここに貼り付け</p>
 <button class="pri" id="open7" style="width:100%">7つの売り場の売り切れ検索を一度に開く</button>
-<button disabled style="width:100%;margin-top:8px">自動で取り込む<span class="pill soon">提供開始：相場データの契約後（時期未定）</span></button>
+<button disabled style="width:100%;margin-top:8px">自動で取り込む<span class="pill soon">検討中（相場データの提供元が未定）</span></button>
 <div class="links" id="links7" hidden></div>
 <p class="note" id="open7n" hidden>お試し版では、リンクの一覧を出すだけです（実物では新しいタブで開きます）。リンクは例です。</p>
 <label>貼り付け欄</label><textarea id="paste" rows="3" placeholder="ここにページの文字を貼り付け（例：何も貼らなくても動きます）"></textarea>
@@ -359,7 +360,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="hasdata">
 <div class="card">
 <div class="row">
-<div><label>期間</label><select id="fp"><option value="30">直近30日</option><option value="90" selected>直近90日</option><option value="365">直近1年</option><option value="1095">直近3年</option><option value="3650">直近10年（契約後）</option></select></div>
+<div><label>期間</label><select id="fp"><option value="30">直近30日</option><option value="90" selected>直近90日</option><option value="365">直近1年</option><option value="1095">直近3年</option><option value="3650">直近10年（検討中）</option></select></div>
 <div><label>状態</label><select id="fc"><option value="">すべて</option><option>S</option><option>A</option><option>B</option><option>C</option></select></div>
 <div><label>除外キーワード</label><input id="fx" value="ジャンク"></div>
 </div>
@@ -368,11 +369,11 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <label class="swl" style="margin-bottom:0"><input type="checkbox" id="norep"><span>同じ出品者の繰り返し（3回以上）を除外する</span></label>
 </div>
 <div class="card">
-<div class="stats" id="stats"></div>
+<div class="stats" id="stats"></div><p class="range" id="s2rg" style="margin:6px 0"></p>
 <div class="stats" id="turn" style="margin-top:10px"></div>
 <span class="tag" style="top:auto;bottom:4px">P1-9</span>
 <div id="lowwarn"></div>
-<p class="note">平均ではなく「真ん中の価格」を使います。そこから大きく外れた「飛び抜けた価格」は薄く表示し、計算から除外します。</p>
+<p class="note">平均は偏りに弱いので、幅は安値・高値で見ます。上限の計算は、初期設定では安値基準です。そこから大きく外れた「飛び抜けた価格」は薄く表示し、計算から除外します。安値＝直近の売り切れのうち、飛び抜けた価格を除いた安い方の価格（いちばん安い1件ではありません）。</p>
 </div>
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><h3 style="margin:0">価格の推移</h3>
@@ -412,8 +413,8 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 </div>
 <div class="card">
 <h3>この額までなら買ってよい（目安）</h3>
-<div class="big" id="mx"></div>
-<p class="range" id="rg"></p>
+<div class="big" id="mx"></div><div id="mxb" style="font-size:20px;font-weight:700"></div>
+<p class="range" id="rg"></p><div class="row" style="align-items:center;gap:8px"><span class="note">上限の基準：</span><span class="seg" style="width:auto"><button data-lb="mid">真ん中</button><button data-lb="low">安値</button></span></div><p class="note" style="margin:4px 0">はじめは安値基準です（安値で売れても赤字にならない額）。「真ん中」に切り替えると上限が上がります</p><p class="note" style="font-size:12px;margin:4px 0">安値＝直近の売り切れのうち、飛び抜けた価格を除いた安い方の価格（いちばん安い1件ではありません）</p>
 <div class="calc" id="calc"></div>
 <div class="warnbox">これは過去の売り切れから出した目安です。実際の売値・状態・相場の変動で変わります。最終判断はご自身で行ってください。</div>
 </div>
@@ -428,16 +429,20 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <!-- ④ 台帳 -->
 <section class="screen" id="s4"><span class="tag">P1-4</span>
 <h2>④ 古物台帳</h2>
-<p class="note">項目は例です。実際の必要項目は警察・行政書士の案内で確認します。</p>
-<p class="note" style="font-size:12px;margin:0 0 6px">本人確認の案内：1万円以上の買取は本人確認が必要。1万円未満でも、ゲームソフト・CD/DVD・書籍・バイクとその部品などは必要。【公開前に条文で確認】</p>
-<div class="card" style="margin-bottom:4px"><b>この端末に保存されます。機種変更・削除で消えるので、月1回CSVで保存を</b>
+<p class="note">項目は例です。実際の必要項目は警察・行政書士の案内で確認します。この台帳は例です。法定の帳簿そのものとして使えるか、記載事項・保存期間は公開前に確認中です。</p>
+<p class="note" style="font-weight:700;color:var(--text)">古物台帳は消さずに訂正の記録を残します。間違えたときは、下の「最近の記録」の「訂正」を押してください（削除はできません）。</p>
+<p class="note" style="font-size:12px;margin:0 0 6px">本人確認の案内：1万円以上の買取は本人確認が必要。1万円未満でも、ゲームソフト・CD/DVD・書籍・バイクとその部品・エアコンの室外機・ヒートポンプ・電線・グレーチング（2025年10月の改正で追加）などは必要。品目は最新の警察の案内で確認してください。【公開前に条文で確認】</p>
+<div class="card" style="margin-bottom:4px"><b>お試し版では保存されません。正式版では、こまめにCSVで保存する予定です</b>
 <div class="note" id="csvdate" style="margin-top:4px"></div></div>
+<div class="card" id="pendbox" hidden></div>
 <div class="card">
+<p class="need" style="margin:0 0 8px;font-weight:700">お試し版です。実在の氏名・住所・書類番号は入力しないでください。入力内容は保存も送信もされません。</p>
+<div id="corrbox" class="need" hidden><b>記録の訂正</b><p class="note" id="corrinfo" style="margin:4px 0"></p><label style="color:inherit">訂正の理由（必須）</label><input id="lreason" maxlength="80" placeholder="例：買取額の入れ間違い" autocomplete="off"><button id="lcorrx" style="margin-top:8px">訂正をやめる</button></div>
 <div class="row">
 <div><label>日時</label><input id="ldt" value="2026-10-16 14:20"></div>
-<div><label>数量</label><input value="1" inputmode="numeric"></div>
+<div><label>数量</label><input id="lqty" value="1" inputmode="numeric"></div>
 </div>
-<label>品目の区分</label><select id="lcat"><option>ヘッドホン・家電など</option><option>ゲーム機本体</option><option>カメラ</option><option>ゲームソフト</option><option>CD・DVD</option><option>書籍</option><option>バイク・バイク部品</option><option>ブランド品（バッグ・時計など）</option><option>その他</option></select>
+<label>品目の区分</label><select id="lcat"><option>ヘッドホン・家電など</option><option>ゲーム機本体</option><option>カメラ</option><option>ゲームソフト</option><option>CD・DVD</option><option>書籍</option><option>バイク・バイク部品</option><option>エアコンの室外機</option><option>ヒートポンプ</option><option>電線</option><option>グレーチング</option><option>ブランド品（バッグ・時計など）</option><option>その他</option></select>
 <div id="brandbox" hidden class="need" style="border-style:dashed"><b>ブランド品の確認</b>
 <label class="chk" style="border:0"><input type="checkbox" id="bauth"><span>真贋（本物か）の確認をした<em>この道具は本物かどうかを判定しません。確認は店の方で行います。</em></span></label>
 <label style="color:inherit">確認の方法（シリアル・刻印・付属品）をメモ</label><input id="bmemo" maxlength="120" placeholder="例：内側の刻印とシリアルを確認、保存袋・ギャランティカードあり"></div>
@@ -447,16 +452,16 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <p class="note" id="lbinfo"></p>
 <div id="idneed" class="need" hidden></div><p class="note" id="idnone" hidden></p>
 <h3 style="margin-top:16px">買取の相手方 <span class="req" id="idreq" hidden>（本人確認 必須）</span></h3>
-<div class="row"><div><label>氏名</label><input id="lnm" value="山田 太郎（例）"></div><div><label>年齢</label><input value="34" inputmode="numeric"></div></div>
-<label>住所</label><input value="東京都〇〇区△△1-2-3（例）">
-<div class="row"><div><label>職業</label><input value="会社員（例）"></div>
-<div><label>本人確認の方法</label><select id="lid"><option>運転免許証</option><option>マイナンバーカード（表面）</option><option>パスポート</option><option>その他</option></select></div></div>
+<div class="row"><div><label>氏名</label><input id="lnm" placeholder="例：山田 太郎" autocomplete="off"></div><div><label>年齢</label><input id="lage" placeholder="例：34" inputmode="numeric"></div></div>
+<label>住所</label><input id="laddr" placeholder="例：東京都〇〇区△△1-2-3">
+<div class="row"><div><label>職業</label><input id="ljob" placeholder="例：会社員"></div>
+<div><label>本人確認の方法</label><select id="lid"><option value="">選んでください</option><option>運転免許証</option><option>マイナンバーカード（表面）</option><option>パスポート</option><option>その他</option></select></div></div>
 <label class="chk" id="idokrow" style="border:0"><input type="checkbox" id="lidok"><span>本人確認書類を見て確認した<em>必須：1万円以上、または対象の品目のとき</em></span></label>
-<label>個別メモ</label><textarea rows="3">右イヤーパッドに少し劣化。次回は付属ケースの有無を先に確認する。</textarea>
+<label>個別メモ</label><textarea id="lmemo" rows="3" placeholder="例：右イヤーパッドに少し劣化"></textarea>
 <div class="row" style="margin-top:14px"><button class="pri" id="save">台帳に記録する</button><button id="csv">CSVで出力</button></div>
-<p class="note" id="dmsg"></p>
+<p class="note" id="dmsg" aria-live="polite"></p><button id="lback" hidden style="width:100%;margin-top:8px"></button>
 </div>
-<div class="card"><h3>最近の記録</h3><div class="tablewrap"><table class="cards"><thead><tr><th>日時</th><th>品目</th><th class="num">買取額</th><th>相手方</th><th>確認</th></tr></thead><tbody id="ltb"></tbody></table></div></div>
+<div class="card"><h3>最近の記録</h3><div class="tablewrap"><table class="cards"><thead><tr><th>日時</th><th>品目</th><th class="num">買取額</th><th>相手方</th><th>確認</th><th>訂正</th></tr></thead><tbody id="ltb"></tbody></table></div></div>
 </section>
 
 <!-- ⑤ 履歴 -->
@@ -480,33 +485,29 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <p class="note" style="margin:0 0 8px">公開前のため、利用者の要望はまだありません。下は、開発中に実際に出た要望と指摘です（出どころを書いています）。</p>
 <div class="stats rs"><div class="stat"><div class="k">対応済み</div><div class="v">5件</div></div><div class="stat"><div class="k">対応中</div><div class="v">2件</div></div><div class="stat"><div class="k">検討中</div><div class="v">3件</div></div></div>
 <div class="row" style="margin-top:8px"><button data-go="s7">料金を見る（いまは無料）</button><button data-go="s8">紹介コード</button></div>
-<p class="note" style="margin:8px 0 0">初期の参加者は「共同開発メンバー（先着30名）」とお呼びします。中身は先着の割引特典で、要望を出すなどの条件や義務はありません（要望は任意で歓迎します）。※ポイントで受けられる特典（有料1か月無料・バッジ等）は別の制度で、点数などの条件があります（予定）。上の半額特典には影響しません。</p></div>
+<p class="note" style="margin:8px 0 0">初期の参加者は「共同開発メンバー（先着30名）」とお呼びします。中身は先着の割引特典で、要望を出すなどの条件や義務はありません（要望は任意で歓迎します）。※ポイントで受けられる特典（有料1か月無料・バッジ等）は別の制度で、点数などの条件があります（検討中）。上の半額特典には影響しません。</p></div>
 <div class="card"><h3>実際に出た要望10件（開発中・実在）</h3>
 <p class="note" style="margin:0 0 6px">これは利用者の声ではなく、運営・テストから出たものです。2026-10-18 時点。</p>
 <div id="realreq">
-<div class="vrow"><b>型番の照合を完全一致にしてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：v11（部分一致は候補として出し、買う前に型番を目で確認する形に）</span></div>
-<div class="vrow"><b>全角の型番も通してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：v11</span></div>
-<div class="vrow"><b>スマホで「文字を大きく」を見つけやすく</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：v11（ヘッダーの「文字 大」）</span></div>
-<div class="vrow"><b>用語（簡易確認・ロット・按分・回転）を説明してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：v11（「?」をタップ）</span></div>
-<div class="vrow"><b>送料・梱包費も余裕をもって計算してほしい</b><br><span class="note">出どころ：2026-10-16 古物商の方（開発の相談相手）／状態：対応済み／版：v9</span></div>
-<div class="vrow"><b>電波なしの動作を実機で確かめてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応中／表示は正直にした版：v11。実機確認はこれから</span></div>
-<div class="vrow"><b>要望の初期表示は実在のものだけにしてほしい</b><br><span class="note">出どころ：2026-10-17 古物商の方（開発の相談相手）／状態：対応中／版：v11（この画面）</span></div>
+<div class="vrow"><b>型番の照合を完全一致にしてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1（部分一致は候補として出し、買う前に型番を目で確認する形に）</span></div>
+<div class="vrow"><b>全角の型番も通してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1</span></div>
+<div class="vrow"><b>スマホで「文字を大きく」を見つけやすく</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1（ヘッダーの「文字 大」）</span></div>
+<div class="vrow"><b>用語（簡易確認・ロット・按分・回転）を説明してほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応済み／版：3.1（「?」をタップ）</span></div>
+<div class="vrow"><b>送料・梱包費も余裕をもって計算してほしい</b><br><span class="note">出どころ：2026-10-16 古物商の方（開発の相談相手）／状態：対応済み／版：1.8</span></div>
+<div class="vrow"><b>電波なしの動作を実機で確かめてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：対応中／表示は正直にした版：3.1。実機確認はこれから</span></div>
+<div class="vrow"><b>要望の初期表示は実在のものだけにしてほしい</b><br><span class="note">出どころ：2026-10-17 古物商の方（開発の相談相手）／状態：対応中／版：3.1（この画面）</span></div>
 <div class="vrow"><b>客向け表示の切り替えを分かりやすく</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：検討中</span></div>
 <div class="vrow"><b>せりで上限超えのとき、1タップで記録できないように</b><br><span class="note">出どころ：テスト担当（2026-10-17）／状態：検討中</span></div>
 <div class="vrow"><b>相場の量（10年分）をそろえてほしい</b><br><span class="note">出どころ：テスト担当（2026-10-17。せどりの方を想定した指摘）／状態：検討中（データ提供元と相談中）</span></div></div></div>
-<div class="card"><h3>公開前の改善履歴（v1〜v11）</h3>
+<div class="card"><h3>改善履歴（1日1行）</h3>
+<p class="note" style="margin:0 0 6px">番号は「更新した日の数.その日の何回目」です（例：1日目の1回目＝1.1、2回目＝1.2。更新のない日は数えません）。新しい順。</p>
 <ul class="log" style="margin:0;padding-left:18px">
-<li>v1→v2（10/16）検索窓・期間・お知らせ・ランキング・取り込みなどを追加</li>
-<li>v3（10/16）要望・投票・対応の速さ・改善履歴・見分け方メモ</li>
-<li>v4（10/16）料金・紹介・貢献者ランキング・回転率</li>
-<li>v5（10/16）説明と3手順・用語の言い換え・間違えやすい商品の辞書</li>
-<li>v6（10/16）早い査定・まとめ査定・大きな文字・本人確認・電波なしの案内</li>
-<li>v7（10/16）データ活用の要望・ユーザー登録・マイページ・管理画面</li>
-<li>v8（10/16）利用場面の選択・値札判定・せり・窓口・出張。画面が止まる不具合を修正</li>
-<li>v9（10/16）送料・梱包費の余裕つき見積もりを全計算に共通化</li>
-<li>v10（10/17）スマホのヘッダーを1行に・判定結果を上に・注意書きを「ⓘ」に</li>
-<li>v11（10/18）型番は完全一致のみ判定・電波なしの表示を正直に・「文字 大」・用語の注釈・この画面</li></ul></div>
-<div class="card"><p class="note" style="margin-bottom:0">要望は毎週まとめて判断し、すべてに状態と理由をお返しします。見送りでも、票が倍以上（5票以上）になれば必ず再検討します。</p></div>
+<li>5.1〜5.5（10/20）説明ページから店頭の買取へ直行・見出しの言い換え・値札判定の誤判定を修正／共同開発メンバーは先着の割引特典だけと明記／せりで出品番号と上限を入れる欄・落札の取り消し／全画面に安値・平均・高値（上限は安値基準）・どの画面から買っても台帳に届く・台帳の訂正・押し間違えの戻し方／まだ作れていない機能を「検討中」に</li>
+<li>4.1（10/19）せりの状態ボタン・一覧にない品の案内・お試し専用の色分け</li>
+<li>3.1〜3.2（10/18）型番は完全一致のみ判定・電波なしの表示を正直に・「文字 大」・用語の注釈・この画面／言い換え・JANコード13桁・候補0件の案内・せりの上限を手数料込みに</li>
+<li>2.1（10/17）スマホのヘッダーを1行に・判定結果を上に・注意書きを「ⓘ」に</li>
+<li>1.1〜1.8（10/16）検索と相場の一覧・要望と投票・料金と紹介・用語の言い換え・早い査定とまとめ査定・本人確認・利用場面の選択（値札判定・せり・窓口・出張）・送料と梱包費の余裕つき計算</li></ul></div>
+<div class="card"><p class="note" style="margin-bottom:0">要望は毎週まとめて判断し、すべてに状態と理由をお返しします。見送りでも、同じ要望が増えたら再検討します。</p></div>
 <div class="card"><h3>要望を送る</h3>
 <label style="margin-top:0">題名</label><input id="rt" placeholder="例：まとめ買いの一括査定" maxlength="60" autocomplete="off">
 <div id="sim" class="sim" hidden></div>
@@ -528,14 +529,14 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <p class="note" id="cdnote" style="margin:8px 0 0"></p>
 <div class="mine" id="cmine"></div>
 <div id="ctl"></div>
-<p class="note" style="margin-bottom:4px">点の付け方：データ＝相場の持ち寄り1件1点（同じ品は1日3件まで）＋自分のメモへの「役に立った」1つ1点／提案＝採用・公開10点（票5以上で＋5点）／紹介＝登録（メール確認＋5日使用）1点・有料2回目の支払い10点。月間の総合は、各部門を100点までにして合算します（累計の総合には上限をつけません）。</p>
-<p class="note" style="margin:0 0 8px">自分への投票・自分の紹介・空の登録は数えません。不正が分かれば点と特典を取り消します。表示名を出さない選択もできます。</p>
-<h3 style="font-size:14px;margin:8px 0 0">各部門の特典（予定・値引きと無料期間のみ。現金・商品券はありません）</h3>
+<p class="note" style="margin-bottom:4px">点の付け方：データ＝相場の持ち寄り1件1点（同じ品は1日3件まで）＋自分のメモへの「役に立った」1つ1点／提案＝採用・公開10点（票5以上で＋5点）／紹介＝登録（メール確認＋5日以上ログイン）1点・有料2回目の支払い10点。月間の総合は、各部門を100点までにして合算します（累計の総合には上限をつけません）。</p>
+<p class="note" style="margin:0 0 8px">自分への投票・自分の紹介・空の登録は数えません。不正が分かれば点と特典を取り消します。同じ端末・回線の場合は確認のうえ無効にすることがあります。表示名を出さない選択もできます。特典は有料化の日から使えます。点は有料化の日まで失効しません。</p>
+<h3 style="font-size:14px;margin:8px 0 0">各部門の特典（検討中・確定ではありません。値引きと無料期間のみ。現金・商品券はありません）</h3>
 <ul class="pr" id="cben"></ul></div>
 <div class="card"><h3>今後の予定（ロードマップ・例）</h3>
-<div class="hl"><i style="width:72px">10月下旬</i><span>iPhoneのネットワーク利用制限の確認欄／免許証の読み取り</span></div>
+<div class="hl"><i style="width:72px">10月下旬</i><span>iPhoneのネットワーク利用制限の確認欄</span></div>
 <div class="hl"><i style="width:72px">11月</i><span>まとめ買いの一括査定</span></div>
-<div class="hl"><i style="width:72px">検討中</i><span>ブランド品のシリアル確認欄／メール通知</span></div>
+<div class="hl"><i style="width:72px">検討中</i><span>ブランド品のシリアル確認欄／メール通知／免許証の読み取り</span></div>
 <p class="note" style="margin:6px 0 0">予定は票数や状況で変わることがあります。</p></div>
 <div class="card"><h3>改善履歴</h3><div id="rh"></div></div>
 <h3 style="margin-top:22px;font-size:14px;color:var(--sub)">はじめにお聞きしたいこと</h3>
@@ -557,7 +558,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <section class="screen" id="s7"><span class="tag">P1-7（§9）</span>
 <button data-go="s6" style="min-height:40px;margin-top:8px">← 要望タブへ戻る</button>
 <h2>料金</h2>
-<div class="free">いまは「開発中・無料」<small>共同開発の期間中は、下の無料の機能をすべて無料で使えます。まだ課金は始まっていません。</small></div>
+<div class="free">いまは「開発中・無料」<small>共同開発の期間中は、下の無料の機能をすべて無料で使えます。まだ課金は始まっていません。有料化は、品質が整ったと判断した時点で検討します（時期は未定。報告の有無で料金や特典は変わりません。決まりしだい60日前までにお知らせします）。</small></div>
 <div class="card"><h3>予定の料金（例・確定ではありません）</h3>
 <div class="plan"><div>共同開発メンバー（先着30名）<b>有料化の日から6か月 無料</b><span class="note">7か月目以降も、有料プランを続けている間は定価から50%引（割引率は固定・定価は未定）</span></div><div>正式版（予定）<b>月額制</b><span class="note">金額は未定。決まりしだい、有料化の60日前までにお知らせします</span></div></div></div>
 <div class="card"><h3>無料と有料の線引き（予定）</h3>
@@ -567,8 +568,8 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <tr><td>買取額の計算</td><td>全部</td><td>—</td></tr>
 <tr><td>古物台帳</td><td>無制限・端末内・CSV出力</td><td>クラウドバックアップ・複数端末同期</td></tr>
 <tr><td>自分の履歴と推移</td><td>直近12か月</td><td>全期間・状態別集計</td></tr>
-<tr><td>相場データ（過去の取引）</td><td>各売り場の検索リンクのみ</td><td>期間・件数つき（契約後）</td></tr>
-<tr><td>値動きのお知らせ・新品価格</td><td>—（お試し版では動きだけ試せます）</td><td>有料（予定）</td></tr>
+<tr><td>相場データ（過去の取引）</td><td>各売り場の検索リンクのみ</td><td>検討中（相場データの提供元が未定）</td></tr>
+<tr><td>値動きのお知らせ・新品価格</td><td>—（お試し版では動きだけ試せます）</td><td>検討中</td></tr>
 <tr><td>要望・投票・見分け方メモ</td><td>全部</td><td>—</td></tr>
 <tr><td>相場の共有</td><td>提供した人は閲覧可</td><td>閲覧のみは有料</td></tr>
 </tbody></table>
@@ -579,7 +580,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <tr><td>相場の推移グラフ</td><td>—</td><td>検討中</td></tr>
 <tr><td>値動きのお知らせ</td><td>—</td><td>検討中</td></tr>
 </tbody></table>
-<p class="note"><b>提供開始：申し込みが集まり、データの提携ができてから。</b>いまは提供しておらず、料金も決まっていません。下のアンケートで、使いたい人の数と払える額を確認します。</p></div>
+<p class="note"><b>検討中（相場データの提供元が未定）。</b>いまは提供しておらず、料金も決まっていません。下のアンケートで、使いたい人の数と払える額を確認します。</p></div>
 <div class="card" id="upsv"><span class="tag">P1-13</span><h3>上位プランを使いたいですか（アンケート・例）</h3>
 <div class="q"><b>1. 過去10年分の相場つきの上位プランを使いたいですか</b>
 <div class="vote" id="upq1" style="grid-template-columns:1fr"><button>月2,980円までなら使う</button><button>月5,000円までなら使う</button><button>月10,000円までなら使う</button><button>無料版で十分</button></div></div>
@@ -604,10 +605,10 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="sample" id="rsample"></div>
 <p class="note" style="font-size:12px;margin:4px 0 0">※ 文頭の【PR】は、広告・紹介であることの表示です。</p>
 <button id="rcopy2" style="width:100%;margin-top:8px">文をコピー</button>
-<p class="note">SNSなどで紹介するときは、先頭の【PR】と「紹介コード利用で特典あり」を消さずに載せてください。表示のない投稿は、特典を取り消します。</p></div>
+<p class="note">SNSなどで紹介するときは、先頭の【PR】と「紹介コード利用で特典あり」を消さずに載せてください。表示のない投稿が分かった場合は、取り消すことがあります。</p></div>
 <div class="card"><h3>紹介の実績（例）</h3>
-<div class="stats rs"><div class="stat"><div class="k">登録（累計）</div><div class="v">5人</div><div class="s">うち今月3人・メール確認＋5日使用</div></div><div class="stat"><div class="k">有料（累計）</div><div class="v">2人</div><div class="s">うち今月1人・2回目の支払い済み</div></div><div class="stat"><div class="k">もらった特典（累計）</div><div class="v">2か月分</div><div class="s">うち今月1か月分・予定の特典</div></div></div>
-<p class="note" style="margin:8px 0 0;font-size:12px">特典の条件（予定）：紹介された人が有料で2回目の支払いをしたあとに付きます（紹介した人・された人とも有料1か月分の割引）。紹介した人は年3か月分まで。自分・同じカード・端末・メールの紹介は対象外。現金の報酬はありません。</p></div>
+<div class="stats rs"><div class="stat"><div class="k">登録（累計）</div><div class="v">5人</div><div class="s">うち今月3人・メール確認＋5日以上ログイン</div></div><div class="stat"><div class="k">有料（累計）</div><div class="v">2人</div><div class="s">うち今月1人・2回目の支払い済み</div></div><div class="stat"><div class="k">もらった特典（累計）</div><div class="v">2か月分</div><div class="s">うち今月1か月分・予定の特典</div></div></div>
+<p class="note" style="margin:8px 0 0;font-size:12px">特典の条件（予定）：紹介された人が有料で2回目の支払いをしたあとに付きます（紹介した人・された人とも割引。内容は検討中です）。紹介した人は年3か月分まで。自分・同じカード・同じメールの紹介は対象外。同じ端末・回線の場合は確認のうえ無効にすることがあります。現金の報酬はありません。</p></div>
 </section>
 
 <!-- ⑨ ログイン／登録 -->
@@ -629,7 +630,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="card" id="lgdone" hidden><h3>ログインしました（例）</h3>
 <p><b id="lgname"></b> さん、ようこそ。</p>
 <button class="pri" data-go="s10" style="width:100%">マイページを開く</button></div>
-<p class="note" style="font-size:12px">ログインしなくても、早い査定と計算は使えます。メモ・履歴の保存、要望の投稿、紹介はログインが必要です。</p>
+<p class="note" style="font-size:12px">ログインしなくても、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p>
 </section>
 
 <!-- ⑩ マイページ -->
@@ -654,12 +655,12 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="card"><h3>貢献の点数（例）</h3>
 <div class="stats" style="grid-template-columns:repeat(3,1fr)"><div class="stat"><div class="k">データ</div><div class="v">42</div><div class="s">点</div></div><div class="stat"><div class="k">要望</div><div class="v">18</div><div class="s">点</div></div><div class="stat"><div class="k">紹介</div><div class="v">10</div><div class="s">点</div></div></div></div>
 <div class="card"><h3>データの保存先</h3>
-<p>メモ・履歴はアカウントに保存され、機種を変えても残ります。台帳のお客様の氏名・住所は、この端末だけに保存されます（有料プランで暗号化して預けることもできます・予定）。</p></div>
+<p>メモ・履歴はアカウントに保存され、機種を変えても残ります。台帳のお客様の氏名・住所は、この端末だけに保存されます（有料プランで暗号化して預ける機能は検討中です）。</p></div>
 <div class="card"><h3>退会・データの削除</h3>
 <div class="row"><button id="mpleave">退会する</button><button id="mpdel">データを削除する</button></div>
 <p class="note" id="mpdmsg"></p></div>
 </div>
-<p class="note" style="font-size:12px">ログインしなくても、早い査定と計算は使えます。メモ・履歴の保存、要望の投稿、紹介はログインが必要です。</p>
+<p class="note" style="font-size:12px">ログインしなくても、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p>
 </section>
 
 <!-- 16 場面の選択 -->
@@ -693,11 +694,11 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <h2>せり（古物市場）</h2>
 <p class="note" style="margin-top:0">①せりの前に、市場の出品目録を見て「出品番号と上限を入れる」から一覧に足します ②せりの間は一覧から品を選び、下見で決めた品の状態（S・A・B・C）を選んで、額を入れて「落札（記録する）」を押します ③押し間違えたときは、下の「今日の落札の記録」の「取り消す」で消せます。</p>
 <div class="two">
-<div class="card"><h3>出品番号の一覧</h3><details id="auprep" open style="border:2px dashed var(--line);border-radius:12px;padding:10px;margin-bottom:8px"><summary style="font-weight:700;cursor:pointer">＋ 出品番号と上限を入れる（せりの前の準備）</summary><label for="auano">出品番号（出品目録の番号）</label><input id="auano" placeholder="例：A-120" maxlength="20"><label for="auait">品（型番で選ぶ・お試しは3機種だけ）</label><select id="auait"></select><div class="row"><div><label for="aualot">点数（ロット）</label><input id="aualot" type="number" inputmode="numeric" value="1" min="1"></div><div><label for="auahi">自分の上限（円・空欄なら相場から自動）</label><input id="auahi" type="number" inputmode="numeric" placeholder="例：18000"></div></div><button class="pri" id="auadd" style="width:100%;margin-top:10px">一覧に足す</button><p class="note" id="auaddmsg"></p></details><div id="aul"></div><button id="auout" style="width:100%;margin-top:10px">一覧にない品が出たとき</button><div class="warnbox" id="auoutbox" hidden style="font-size:16px">事前に調べていない品は、上限が出ません。<ol style="margin:6px 0 0;padding-left:1.4em"><li>せりの間は見送るのが目安です（その場で調べると次の品に間に合いません）</li><li>気になった品は出品番号を控え、せりの後に「調べる」で相場を確かめて、次回の一覧に入れます</li></ol></div></div>
-<div>
-<div class="card kbig"><div class="note">出品番号</div><div class="big" id="aun" style="font-size:44px"></div><div id="aunm" style="font-size:18px;font-weight:700"></div><div class="note" id="aulot"></div>
-<div class="note" style="margin-top:8px">品の状態（下見で決める）：S＝新品同様／A＝美品・付属品そろう／B＝使用感あり・動作OK／C＝傷・欠品・難あり</div><div class="seg" id="aurk" style="flex-wrap:wrap"><button data-r="S">S 新品同様</button><button data-r="A">A 美品</button><button class="on" data-r="B">B 使用感</button><button data-r="C">C 傷・難</button></div><div class="note" style="margin-top:8px" id="auhilab">自分の上限（状態<span id="aurkn">B</span>の場合・市場の手数料込みで逆算）</div><div class="big" id="auhi" style="font-size:56px"></div><div class="row" style="align-items:flex-end"><div><label for="auown">上限を自分で決める（円・落札額と比べる額）</label><input id="auown" type="number" inputmode="numeric" placeholder="空欄なら相場から自動"></div><div><button id="auownclr" style="width:100%">相場の目安に戻す</button></div></div>
-<div class="stats rs" id="aust" style="margin-top:8px"></div></div>
+<div class="card"><h3>出品番号の一覧</h3><details id="auprep" style="border:2px dashed var(--line);border-radius:12px;padding:10px;margin-bottom:8px"><summary style="font-weight:700;cursor:pointer">＋ 出品番号と上限を入れる（せりの前の準備）</summary><label for="auano">出品番号（出品目録の番号）</label><input id="auano" placeholder="例：A-120" maxlength="20"><label for="auait">品（型番で選ぶ・お試しは3機種だけ）</label><select id="auait"></select><div class="row"><div><label for="aualot">点数（ロット）</label><input id="aualot" type="number" inputmode="numeric" value="1" min="1"></div><div><label for="auahi">自分の上限（円・空欄なら相場から自動）</label><input id="auahi" type="number" inputmode="numeric" placeholder="例：18000"></div></div><button class="pri" id="auadd" style="width:100%;margin-top:10px">一覧に足す</button><p class="note" id="auaddmsg"></p></details><div id="aul"></div><p class="note" id="auemsg" aria-live="polite"></p><button id="auout" style="width:100%;margin-top:10px">一覧にない品が出たとき</button><div class="warnbox" id="auoutbox" hidden style="font-size:16px">事前に調べていない品は、上限が出ません。<ol style="margin:6px 0 0;padding-left:1.4em"><li>せりの間は見送るのが目安です（その場で調べると次の品に間に合いません）</li><li>気になった品は出品番号を控え、せりの後に「調べる」で相場を確かめて、次回の一覧に入れます</li></ol></div></div>
+<div id="audet">
+<div class="card kbig"><div class="note">出品番号</div><div class="big" id="aun" style="font-size:44px"></div><div id="aunm" style="font-size:18px;font-weight:700"></div><div class="row" style="margin-top:6px"><button id="auedit">出品番号を直す</button><button id="audel">一覧から外す</button></div><div class="note" id="aulot"></div>
+<div class="note" style="margin-top:8px">品の状態（下見で決める）：S＝新品同様／A＝美品・付属品そろう／B＝使用感あり・動作OK／C＝傷・欠品・難あり</div><div class="seg" id="aurk" style="flex-wrap:wrap"><button data-r="S">S 新品同様</button><button data-r="A">A 美品</button><button class="on" data-r="B">B 使用感</button><button data-r="C">C 傷・難</button></div><div class="note" style="margin-top:8px" id="auhilab">自分の上限（状態<span id="aurkn">B</span>の場合・市場の手数料込みで逆算）</div><div class="big" id="auhi" style="font-size:56px"></div><div id="aubas" style="font-size:20px;font-weight:700"></div><div class="row" style="align-items:flex-end"><div><label for="auown">上限を自分で決める（円・落札額と比べる額）</label><input id="auown" type="number" inputmode="numeric" placeholder="空欄なら相場から自動"></div><div><button id="auownclr" style="width:100%">相場の目安に戻す</button></div></div>
+<div class="stats rs" id="aust" style="margin-top:8px"></div><p class="range" id="aurg" style="margin:6px 0"></p><div class="row" style="align-items:center;gap:8px"><span class="note">上限の基準：</span><span class="seg" style="width:auto"><button data-lb="mid">真ん中</button><button data-lb="low">安値</button></span></div><p class="note" style="margin:4px 0">はじめは安値基準です（安値で売れても赤字にならない額）。「真ん中」に切り替えると上限が上がります</p><p class="note" style="font-size:12px;margin:4px 0">安値＝直近の売り切れのうち、飛び抜けた価格を除いた安い方の価格（いちばん安い1件ではありません）</p></div>
 <div class="card"><label style="margin-top:0">いまの額・落札額（円）</label>
 <input id="aub" class="bigin" type="number" inputmode="numeric" placeholder="額を入れる" aria-label="落札額">
 <div class="stepb"><button data-as="500">+500</button><button data-as="1000">+1,000</button><button data-as="-1000">−1,000</button></div>
@@ -706,11 +707,11 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div><label>市場の手数料（%）</label><input id="auf" type="number" inputmode="decimal" value="5"></div></div>
 <p class="note">手数料の料率は市場ごとに違います。5%はお試しの仮の数字で、市場の規約に合わせて自分で設定します。</p>
 <div class="calc" id="aucalc"></div><p class="note" id="aumsg"></p></div>
-<div class="actbar"><button id="aumax">上限の額を入れる</button><button class="pri" id="aubtn">落札（記録する）</button></div>
+<button id="auundo" hidden style="position:fixed;left:12px;right:12px;bottom:84px;z-index:50;min-height:52px;font-size:18px;font-weight:700">元に戻す（直前の落札の記録を取り消す）</button><div class="actbar"><button id="aumax">上限の額を入れる</button><button class="pri" id="aubtn">落札（記録する）</button></div>
 </div></div>
 <div class="card"><h3>今日の落札の記録</h3><p class="note" id="aurecmsg" aria-live="polite"></p>
-<div class="tablewrap"><table class="cards"><thead><tr><th>番号</th><th>品名</th><th>ロット<abbr class="tip" tabindex="0" role="button" data-t="ロット：まとめて落札した一山の品。1点ずつの原価は按分で出します。">?</abbr></th><th>状態</th><th class="num">落札額</th><th class="num">手数料込みの原価</th><th>売主</th><th></th><th>押し間違え</th></tr></thead><tbody id="aurt"></tbody></table></div>
-<p class="note">市場の取引票と合わせて保管してください。記録の義務や免除の有無は、警察・市場主に確認してください。ロットの按分<abbr class="tip" tabindex="0" role="button" data-t="按分：まとめ買いの代金を、品ごとの見込み価値の比で割り振ること。">?</abbr>は目安の計算です。</p></div>
+<div class="tablewrap"><table class="cards"><thead><tr><th>番号</th><th>品名</th><th>ロット<abbr class="tip" tabindex="0" role="button" data-t="ロット：まとめて落札した一山の品。1点ずつの原価は按分で出します。">?</abbr></th><th>状態</th><th class="num">落札額</th><th class="num">手数料込みの原価</th><th>売主</th><th></th><th>台帳</th><th>押し間違え</th></tr></thead><tbody id="aurt"></tbody></table></div>
+<p class="note">せりの落札は市場の取引票と合わせて保管してください。台帳への記載や本人確認の要否は、管轄の警察に確認してください（公開前に条文で確認中）。記録の義務や免除の有無は、警察・市場主に確認してください。ロットの按分<abbr class="tip" tabindex="0" role="button" data-t="按分：まとめ買いの代金を、品ごとの見込み価値の比で割り振ること。">?</abbr>は目安の計算です。</p></div>
 </section>
 
 <!-- 13 窓口 -->
@@ -741,6 +742,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div><b style="color:var(--warn)">電波が必要</b><ul class="log"><li>相場の新しい取り込み</li><li>7つの売り場の検索</li><li>要望の投稿・投票</li><li>他の端末への反映</li></ul></div></div>
 <p class="note">設計上は、電波がない間の記録は端末の中に残り、電波が戻ってから反映する予定です（反映は有料機能の予定）。相場は前回の取り込みを表示します。<b>この試作では電波なしの動作は確かめていません。実機での確認はこれからで、使えない場合もあります。</b></p></div>
 <div class="card"><span class="tag">P2-8</span><h3>お客様の品物と写真</h3><div id="vl"></div>
+<div class="row" style="align-items:flex-end;margin-top:8px"><div><label style="margin-top:0" for="vam">品を足す</label><select id="vam"></select></div><div><label style="margin-top:0" for="var">状態</label><select id="var"><option>S</option><option>A</option><option selected>B</option><option>C</option></select></div><div><button id="vaddb" style="width:100%">足す</button></div></div>
 <div class="cli" style="margin-top:8px"><b>合計の提示額</b><b id="vtot" style="font-size:26px"></b></div>
 <p class="note">写真・氏名・住所は、この端末の中だけに入ります。他の人の顔や書類が写り込まないよう注意してください。</p></div>
 <div class="card qt" id="vq" hidden></div>
@@ -817,11 +819,21 @@ function analyse(o){const f=o.rows.filter(r=>r.d<=o.P&&(!o.rank||r.s===o.rank)&&
  const cnt={};f.filter(r=>!r.out).forEach(r=>cnt[r.u]=(cnt[r.u]||0)+1);
  f.forEach(r=>{if(!r.out&&r.u.startsWith('user_')&&cnt[r.u]>=3)r.rep=cnt[r.u];r.xr=o.norep&&r.rep>0});
  const ok=f.filter(r=>!r.out&&!r.xr),p=ok.map(r=>r.p);
- return {f,ok,m:med(p),q:q1(p),m30:med(ok.filter(r=>r.d<=30).map(r=>r.p)),m90:med(ok.filter(r=>r.d<=90).map(r=>r.p)),n30:ok.filter(r=>r.d<=30).length};}
+ const ps=[...p].sort((x,y)=>x-y),n=ps.length,pl=n>=10?ps[Math.floor((n-1)*.1)]:n>=5?ps[0]:null,ph=n>=10?ps[Math.ceil((n-1)*.9)]:n>=5?ps[n-1]:null,avg=n?p.reduce((t,v)=>t+v,0)/n:0,rm=n>=10?'p':n>=5?'m':'x';
+ return {f,ok,n,pl,ph,avg,rm,m:med(p),q:q1(p),m30:med(ok.filter(r=>r.d<=30).map(r=>r.p)),m90:med(ok.filter(r=>r.d<=90).map(r=>r.p)),n30:ok.filter(r=>r.d<=30).length};}
 const DEF={P:90,rank:'B',X:'ジャンク',tol:40,norep:false};
+/* 相場の幅（§10）：どの画面でも同じ並び・同じ文言 */
+let lbase='low';
+const rLo=a=>a.rm==='m'?'最安':'安値',rHi=a=>a.rm==='m'?'最高':'高値';
+const ctxOf=(P,r)=>(P>=365?(P/365)+'年':'直近'+P+'日')+'・'+(r?'状態'+r:'全状態');
+const skew=a=>a.m>0&&a.rm!=='x'&&Math.abs(a.avg-a.m)/a.m>=.1;
+function rangeTxt(a,ctx){if(!a||a.rm==='x')return '件数が少なく幅は出せません（'+(a?a.n:0)+'件）';
+ return '<b>'+rLo(a)+' '+yen(a.pl)+'円</b>・平均 '+yen(a.avg)+'円・'+rHi(a)+' '+yen(a.ph)+'円（'+ctx+'・'+a.n+'件）'+(a.rm==='m'?'　※件数が少ないため、いちばん安い・高い1件です':'')+(skew(a)?'　※偏りあり（平均と真ん中が10%以上ずれています）':'');}
+const lbOf=(hi,lo)=>lbase==='low'&&lo!=null?Math.min(lo,hi):hi;
+const lbHtml='<span class="note">上限の基準：</span><span class="seg" data-lbseg="1"><button data-lb="mid">真ん中</button><button data-lb="low">安値</button></span>';
 /* 買取額の目安（初期設定）を品物ごとに先に出し、台帳・履歴の買値をその幅の中に置く */
 const H=[];let hid=0;
-PR.forEach((p,i)=>{const a=analyse({rows:ROWS[i],...DEF});p.M=a.m;p.hi=mxf(a.m,FEE,SHIPtot(i),PF,p.turn[0],TP);p.lo=mxf(Math.min(a.q,a.m),FEE,SHIPtot(i),PF,p.turn[0],TP);p.mid=f100((p.hi+p.lo)/2);
+PR.forEach((p,i)=>{const a=analyse({rows:ROWS[i],...DEF});p.M=a.m;p.hi=mxf(a.m,FEE,SHIPtot(i),PF,p.turn[0],TP);p.lo=mxf(a.pl||Math.min(a.q,a.m),FEE,SHIPtot(i),PF,p.turn[0],TP);p.mid=f100((p.hi+p.lo)/2);
  const add=(db,t,buy,sell,ds,who,idm)=>H.push({id:++hid,i,db,t,buy,sell,ds,who,idm});
  if(i===0){add(0,'14:20',p.mid,null,null,'山田 太郎','免許証');add(44,'11:05',f100(p.lo+(p.hi-p.lo)*.8),r100(p.M*.98),25,'高橋 健','免許証');add(87,'16:30',p.lo,r100(p.M*.95),60,'田中 美咲','マイナカード');add(52,'10:10',p.lo,null,null,'中村 直樹','免許証');}
  if(i===1){add(1,'11:05',p.mid,null,null,'佐藤 花子','マイナカード');add(50,'15:10',p.hi,r100(p.M*.97),31,'小林 誠','免許証');add(28,'12:00',p.mid,null,null,'渡辺 結','マイナカード');}
@@ -919,7 +931,7 @@ function onQuery(v,src){if(src!=='q')$('#q').value=v;if(src!=='gq')$('#gq').valu
  if(i!==pi||!$('#cands').querySelector('.cand'))setProduct(i);}
 $('#q').oninput=e=>onQuery(e.target.value,'q');$('#gq').oninput=e=>onQuery(e.target.value,'gq');
 document.addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(b){onQuery(PR[+b.dataset.p].model,'x');}});
-$('#photo').onclick=()=>alert('例です（実物ではカメラが開きます）');$('#barcode').onclick=()=>alert('例です');
+$('#photo').onclick=()=>alert('検討中の機能です（まだありません）');$('#barcode').onclick=()=>alert('例です');
 
 /* 常設の検索・お知らせ・ランキング */
 function syncP(v){P=+v;$('#gp').value=v;$('#fp').value=v;$('#p10').hidden=P!==3650;touched=false;}
@@ -959,10 +971,11 @@ function renderMarket(){const p=PR[pi],nm=p.cands[ci][0];
  if(empty)return;
  const a=analyse({rows:ROWS[pi],P,rank:$('#fc').value,X:$('#fx').value.trim(),tol,norep}),f=a.f;
  $('#tolv').textContent='±'+tol+'%';
- $('#stats').innerHTML=[['件数（除外後）',a.ok.length+'件','除外 '+(f.length-a.ok.length)+'件'],['真ん中の価格',yen(a.m)+'円','安いほうから4分の1の価格 '+yen(a.q)+'円'],['直近30日の真ん中の価格',a.m30?yen(a.m30)+'円':'—',a.n30+'件'],['直近90日の真ん中の価格',a.m90?yen(a.m90)+'円':'—','新品最安 '+yen(p.newp)+'円']].map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
+ $('#stats').innerHTML=[[rLo(a),a.pl?yen(a.pl)+'円':'—',a.rm==='x'?'件数が少なく幅は出せません':(a.rm==='m'?'最も安い価格':'下位10%の価格')],['平均',a.rm==='x'?'—':yen(a.avg)+'円',skew(a)?'偏りあり（真ん中と10%以上ずれ）':'売り切れ '+a.n+'件の平均'],[rHi(a),a.ph?yen(a.ph)+'円':'—',a.rm==='m'?'最も高い価格':a.rm==='p'?'上位10%の価格':''],['件数（除外後）',a.ok.length+'件','除外 '+(f.length-a.ok.length)+'件'],['真ん中の価格',yen(a.m)+'円','安いほうから4分の1の価格 '+yen(a.q)+'円'],['直近30日の真ん中の価格',a.m30?yen(a.m30)+'円':'—',a.n30+'件'],['直近90日の真ん中の価格',a.m90?yen(a.m90)+'円':'—','新品最安 '+yen(p.newp)+'円']].map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
  const tn=TURN(p);
  $('#turn').innerHTML=[['売れるまでの日数の目安','ふつう '+tn.d+'日','出品から売り切れまで（例）'],['売れる割合',tn.r+'%','直近30日の売り切れ '+tn.s+'件÷（売り切れ＋出品中 '+tn.l+'件）']].map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
  const reps=[...new Set(f.filter(r=>r.rep).map(r=>r.u+'（'+r.rep+'回）'))];
+ $('#s2rg').innerHTML=rangeTxt(a,ctxOf(P,$('#fc').value));
  $('#lowwarn').innerHTML=(a.ok.length<5?'<div class="warnbox">件数が5件未満のため「参考値」です。</div>':'')+(reps.length?'<div class="warnbox">同じ出品者の繰り返しがあります：'+reps.join('、')+'。つり上げの可能性があるため、根拠を確認してください。'+(norep?'（いまは除外して計算しています）':'（上のスイッチで除外できます）')+'</div>':'');
  $('#tb').innerHTML=[...f].sort((x,y)=>x.d-y.d).map(r=>'<tr class="'+(r.out||r.xr?'out':'')+'">'+td('日付',dstr(r.d))+td('売り場',r.c)+td('価格',yen(r.p),'num')+td('状態',r.s)+td('出品者',r.u+(r.rep?'<span class="badge b-warn">同一出品者 '+r.rep+'回</span>':'')+(r.out?'<span class="badge b-out">飛び抜けた価格（計算から除外）</span>':'')+(r.xr?'<span class="badge b-out">反復・除外</span>':''))+td('メモ',r.m||'—')+td('元ページ','<a href="'+url(r.c,p.model)+'" target="_blank" rel="noopener">検索ページ</a>')+'</tr>').join('')||'<tr><td colspan="7">該当なし</td></tr>';
  chart(f,a,p);}
@@ -971,6 +984,8 @@ function chart(f,a,p){const W=cw('#chart'),H2=260,L=44,R=10,T=14,B=30,maxd=Math.
  for(let v=0;v<=top;v+=step)s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="var(--line)"/><text x="'+(L-6)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v/1000+'千</text>';
  [maxd,Math.round(maxd*2/3),Math.round(maxd/3),0].forEach((d,i)=>s+='<text x="'+X(d)+'" y="'+(H2-9)+'" text-anchor="'+(i===0?'start':i===3?'end':'middle')+'">'+dlab(d)+'</text>');
  s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(p.newp)+'" y2="'+Y(p.newp)+'" stroke="var(--ng)" stroke-dasharray="6 4"/><text x="'+(W-R)+'" y="'+(Y(p.newp)-4)+'" text-anchor="end">新品最安 '+yen(p.newp)+'</text>';
+ if(a.pl)s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(a.pl)+'" y2="'+Y(a.pl)+'" stroke="var(--ng)" stroke-dasharray="2 3"/><text x="'+(L+4)+'" y="'+(Y(a.pl)+16)+'">'+rLo(a)+' '+yen(a.pl)+'</text>';
+ if(a.ph)s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(a.ph)+'" y2="'+Y(a.ph)+'" stroke="var(--ink)" stroke-dasharray="2 3"/><text x="'+(L+4)+'" y="'+(Y(a.ph)-4)+'">'+rHi(a)+' '+yen(a.ph)+'</text>';
  if(a.m)s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(a.m)+'" y2="'+Y(a.m)+'" stroke="var(--ink)" stroke-opacity=".5"/><text x="'+(L+4)+'" y="'+(Y(a.m)+16)+'">真ん中の価格 '+yen(a.m)+'</text>';
  const col=r=>mode==='ch'?ccol[r.c]:scol[r.s];
  f.forEach(r=>{const dim=r.out||r.xr;s+='<circle cx="'+X(r.d)+'" cy="'+Y(r.p)+'" r="'+(dim?3:4.5)+'" fill="'+col(r)+'" fill-opacity="'+(dim?.25:.85)+'"/>'});
@@ -992,39 +1007,89 @@ function renderCalc(){const p=PR[pi];$('#sub3').textContent=p.cands[ci][0]+' ／
  const chn=SHIP_CHN[$('#ch').selectedIndex]||'メルカリ';if(SHIP_last!==pi){$('#shz').value=SHIP_SZ[pi];SHIP_last=pi;}SHIP_SZ[pi]=+$('#shz').value;SHIP_O.mode=+$('#shm').value;SHIP_O.real=$('#shr').value==='1';
  const sc=SHIPcalc(pi,chn),sh=sc.t,ac=SHIP_ACT[SHIPsz(pi)];
  const tn=TURN(p),per=Math.max(0,+$('#tp').value||0);TP=per;
- const hi=mxf(sp,fee,sh,pf,tn.d,per),lo=mxf(Math.min(a.q||sp,sp),fee,sh,pf,tn.d,per),ex=Math.max(0,tn.d-30);
+ const hi=mxf(sp,fee,sh,pf,tn.d,per),lo=mxf(Math.min(a.pl||a.q||sp,sp),fee,sh,pf,tn.d,per),useLo=lbase==='low'&&!!a.pl,top=useLo?lo:hi,ex=Math.max(0,tn.d-30);
  $('#shnote').textContent=(ac?'あなたの実績（例）：'+SHIP_SZN[SHIPsz(pi)]+'サイズの平均 送料'+yen(ac.s)+'円・梱包'+yen(ac.p)+'円（'+ac.n+'件）。':'このサイズの自分の実績はまだありません（目安表で計算します）。')+(SHIP_O.real&&ac&&chn!=='店頭販売'?'実績で計算中です。':'')+(chn==='店頭販売'?'店頭販売は送料0円として計算します。':'');
- $('#mx').textContent=sp?yen(hi)+' 円':'—';
- $('#rg').textContent=sp?'目安の幅：'+yen(lo)+'〜'+yen(hi)+'円（幅の下の値は、安いほうから4分の1の価格で売れた場合）':(empty?'相場の記録が0件です。② で取り込むか、売れそうな価格を自分で入れてください。':'');
- $('#calc').innerHTML=sp?[['売れそうな価格',yen(sp)+' 円'],['売り場手数料（'+Math.round(fee*100)+'%）','− '+yen(sp*fee)+' 円'],['送料（'+sc.z+'サイズ・余裕込み）','− '+yen(sc.s)+' 円'],['梱包費（余裕込み）','− '+yen(sc.p)+' 円'],['ほしい利益','− '+yen(pf)+' 円'],['売れるまでの見込み（ふつうの日数）',tn.d+' 日'],['売れるのが遅い分の下げ（30日超 '+ex+'日×'+per+'%）','− '+yen(slow(sp,tn.d,per))+' 円'],['買ってよい上限の目安','= '+yen(hi)+' 円']].map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join(''):'';
+ $('#mx').textContent=sp?yen(top)+' 円':'—';$('#mxb').textContent=sp?'この額以下なら買ってよい（'+(useLo?rLo(a)+'基準':'真ん中基準')+'）':'';
+ $$('[data-lb]').forEach(b=>b.classList.toggle('on',b.dataset.lb===lbase));
+ $('#rg').textContent=sp?'目安の幅：'+yen(lo)+'〜'+yen(hi)+'円（幅の下は、'+rLo(a)+'で売れた場合）'+(lbase==='low'?(a.pl?'　いまは'+rLo(a)+'基準の上限です。':'　件数が少なく安値が出せないため、真ん中基準のままです。'):''):(empty?'相場の記録が0件です。② で取り込むか、売れそうな価格を自分で入れてください。':'');
+ $('#calc').innerHTML=sp?[['売れそうな価格',yen(sp)+' 円'],['売り場手数料（'+Math.round(fee*100)+'%）','− '+yen(sp*fee)+' 円'],['送料（'+sc.z+'サイズ・余裕込み）','− '+yen(sc.s)+' 円'],['梱包費（余裕込み）','− '+yen(sc.p)+' 円'],['ほしい利益','− '+yen(pf)+' 円'],['売れるまでの見込み（ふつうの日数）',tn.d+' 日'],['売れるのが遅い分の下げ（30日超 '+ex+'日×'+per+'%）','− '+yen(slow(sp,tn.d,per))+' 円'],['買ってよい上限の目安'+(useLo?'（'+rLo(a)+'基準）':''),'= '+yen(top)+' 円'],a.pl?['（参考）'+rLo(a)+' '+yen(a.pl)+'円で売れた場合の上限','= '+yen(lo)+' 円']:null].filter(Boolean).map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join(''):'';
  $('#spnote').textContent=touched?'手で変更した価格を使っています。':'初期値は、選んだ状態 '+rank+' の売り切れの真ん中の価格（②）です。変更できます。';
  const old=a.ok.reduce((m,r)=>Math.max(m,r.d),0);
- $('#basis').textContent=empty?'根拠となる記録がまだありません。':'根拠：状態 '+rank+'、'+(P>=365?(P/365)+'年':'直近'+P+'日')+'の売り切れ '+a.ok.length+'件（飛び抜けた価格 '+(a.f.filter(r=>r.out).length)+'件'+(norep?'・反復 '+a.f.filter(r=>r.xr).length+'件':'')+' を除外）、真ん中の価格 '+yen(a.m)+'円、最も古い取引は'+old+'日前。これは目安です。';}
+ $('#basis').textContent=empty?'根拠となる記録がまだありません。':'根拠：状態 '+rank+'、'+(P>=365?(P/365)+'年':'直近'+P+'日')+'の売り切れ '+a.ok.length+'件（飛び抜けた価格 '+(a.f.filter(r=>r.out).length)+'件'+(norep?'・反復 '+a.f.filter(r=>r.xr).length+'件':'')+' を除外）、真ん中の価格 '+yen(a.m)+'円、最も古い取引は'+old+'日前。'+rangeTxt(a,ctxOf(P,rank)).replace(/<\/?b>/g,'')+'。これは目安です。';}
 $('#shz').innerHTML=SHIP_SZN.map((n,k)=>'<option value="'+k+'">'+n+(k?'サイズ':'')+'</option>').join('');$('#shz').value=SHIP_SZ[0];
 ['#sp','#shz','#shm','#shr','#pf','#ch','#tp'].forEach(s=>$(s).addEventListener('input',()=>{if(s==='#sp')touched=true;renderCalc();
  if(/^#sh/.test(s)||s==='#ch'){renderQuick();renderBatch();renderTag();}}));
 $('#shz').value=SHIP_SZ[pi];/* 品物ごとのサイズを表示に反映（切替時は renderCalc の前に呼ぶ） */
 
 /* 台帳 */
-function fillLedger(){const p=PR[pi];$('#lit').value=p.item;$('#lft').value=p.feat;$('#lb').value=p.mid;
+function fillLedger(){const p=PR[pi];ledClear();$('#lit').value=p.item;$('#lft').value=p.feat;$('#lb').value=p.mid;
  $('#lbinfo').textContent='買取額の目安の幅（状態B・初期設定）：'+yen(p.lo)+'〜'+yen(p.hi)+'円。このお試し版の買取額は幅の中です。';
  $('#lcat').value=['ヘッドホン・家電など','ゲーム機本体','カメラ'][pi];updId();}
 /* 本人確認：1万円以上、または対象の品目のとき必須（公開前に条文で確認） */
-const ID_CATS=['ゲームソフト','CD・DVD','書籍','バイク・バイク部品'];
+const ID_CATS=['ゲームソフト','CD・DVD','書籍','バイク・バイク部品','エアコンの室外機','ヒートポンプ','電線','グレーチング'];
 const needId=(b,cat)=>b>=10000||ID_CATS.includes(cat);
 function updId(){const b=+$('#lb').value||0,cat=$('#lcat').value,n=needId(b,cat);
  const why=[b>=10000?'買取額が1万円以上':'',ID_CATS.includes(cat)?'品目が「'+cat+'」':''].filter(Boolean).join('、');
  $('#idneed').hidden=!n;$('#idneed').textContent=n?'本人確認が必要です（'+why+'）。書類の種類を選び、確認欄にチェックを入れないと記録できません。':'';
- $('#idnone').hidden=n;$('#idnone').textContent='この買取額・品目では、本人確認は必須の対象ではない見込みです（【公開前に条文で確認】）。';
+ $('#idnone').hidden=n;$('#idnone').textContent='1万円未満でも対象の品目なら必要です。品目は最新の警察の案内で確認してください。';
  $('#idreq').hidden=!n;$('#idokrow').hidden=!n;
  $('#brandbox').hidden=!cat.startsWith('ブランド品');}
 $('#lb').addEventListener('input',updId);$('#lcat').onchange=updId;
 const hname=h=>PR[h.i].short;
-function renderLedger(){$('#ltb').innerHTML=[...H].sort((a,b)=>a.db-b.db||b.id-a.id).map(h=>'<tr>'+td('日時',esc(h.dt||dstr(h.db)+' '+h.t))+td('品目',hname(h))+td('買取額',yen(h.buy),'num')+td('相手方',esc(h.who))+td('確認',esc(h.idm))+'</tr>').join('');}
-$('#save').onclick=()=>{const b=+$('#lb').value;if(!b){$('#dmsg').textContent='買取額を入れてください。';return;}
- if(needId(b,$('#lcat').value)&&!$('#lidok').checked){$('#dmsg').textContent='本人確認が必要な買取です。「本人確認書類を見て確認した」にチェックを入れてください。';return;}
- H.push({id:++hid,i:pi,db:0,t:($('#ldt').value.split(' ')[1]||'14:20'),buy:b,sell:null,ds:null,who:$('#lnm').value.replace('（例）',''),idm:$('#lid').value.replace('（表面）','')});/* 保存は入力のまま。画面に出すときだけ esc() */
- $('#dmsg').textContent='一覧に1行追加しました（例です。実物では端末内に保存されます）。';renderLedger();renderHist();};
+const CATS=['ヘッドホン・家電など','ゲーム機本体','カメラ'],LDT0='2026-10-16 14:20';
+const LV=[];/* 訂正で取り消した元の行（消さずに残す） */
+const PEND=[];let pidc=0;
+const CUR={pid:null,corr:null,i:null,ref:null};
+let LBACK=null;
+const BACKN={s0:'早い査定・まとめて査定',s11:'値札の判定',s12:'せり',s13:'窓口',s14:'出張'};
+const nowS=()=>{const d=new Date();return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');};
+const idOpt=m=>{m=m||'';const o=[...$('#lid').options].find(x=>x.value&&(x.value===m||x.value.includes(m)||(/マイナ/.test(m)&&/マイナ/.test(x.value))));return o?o.value:'';};
+function ledClear(){['lit','lft','lb','lnm','lage','laddr','ljob','lmemo','bmemo','lreason'].forEach(k=>$('#'+k).value='');
+ $('#lqty').value='1';$('#lid').value='';$('#lidok').checked=false;$('#bauth').checked=false;$('#lcat').selectedIndex=0;$('#ldt').value=LDT0;$('#lbinfo').textContent='';
+ CUR.pid=CUR.corr=CUR.i=CUR.ref=null;LBACK=null;$('#corrbox').hidden=true;$('#lback').hidden=true;$('#save').textContent='台帳に記録する';updId();}
+function ledFill(o){ledClear();$('#lit').value=o.item||'';$('#lft').value=o.feat||'';$('#lb').value=o.offer||'';$('#lcat').value=o.cat||CATS[o.i]||CATS[0];$('#lqty').value=o.qty||1;
+ CUR.i=o.i;CUR.pid=o.pid||null;CUR.ref=o.ref||null;LBACK=o.s?{s:o.s}:null;if(o.who)$('#lnm').value=o.who;updId();}
+function renderPend(){const b=$('#pendbox');b.hidden=!PEND.length;if(!PEND.length){b.textContent='';return;}
+ b.innerHTML='<h3 style="margin-top:0">未保存の品 '+PEND.length+' 点</h3><p class="note">ほかの画面から届いた品です。1点ずつ「入力する」を押し、相手方などを確かめて「台帳に記録する」で保存します。</p>'+PEND.map(p=>'<div class="vrow"><b>'+esc(p.item)+'</b>　'+yen(p.offer)+' 円<br><small class="note">'+esc(p.from||'')+(CUR.pid===p.pid?'・いま入力中':'')+'</small><div class="row" style="margin-top:6px"><button data-pl="'+p.pid+'">入力する</button><button data-px="'+p.pid+'">台帳に送らない</button></div></div>').join('');}
+function loadPend(pid){const p=PEND.find(x=>x.pid===pid);if(!p)return;ledFill({pid:p.pid,i:p.i,item:p.item,feat:p.feat,offer:p.offer,qty:p.qty,ref:p.ref,s:p.s,who:p.who});$('#lbinfo').textContent=p.info||'';renderPend();}
+function sendPend(list,msg){list.forEach(o=>{const ex=o.key&&PEND.find(p=>p.key===o.key);if(ex)Object.assign(ex,o,{pid:ex.pid});else PEND.push({...o,pid:++pidc});});
+ const f=PEND.find(p=>p.key===list[0].key);show('s4');if(f)loadPend(f.pid);$('#dmsg').textContent=msg;}
+$('#pendbox').onclick=e=>{const l=e.target.closest('[data-pl]'),x=e.target.closest('[data-px]');
+ if(l){loadPend(+l.dataset.pl);$('#dmsg').textContent='入力欄に入れました。相手方などを確かめて「台帳に記録する」を押してください（例です。保存されません）。';}
+ if(x){const k=PEND.findIndex(p=>p.pid===+x.dataset.px);if(k<0)return;if(CUR.pid===PEND[k].pid)ledClear();PEND.splice(k,1);renderPend();$('#dmsg').textContent='台帳に送るのをやめました（元の画面の記録は残っています）。';}};
+function renderLedger(){const rows=[...H.map(h=>({h,v:false})),...LV.map(h=>({h,v:true}))].sort((a,b)=>a.h.db-b.h.db||b.h.id-a.h.id);
+ $('#ltb').innerHTML=rows.map(({h,v})=>{const p=v?'<s>':'',q=v?'</s>':'';
+  const act=v?'<small class="note">取り消し（訂正済み）<br>理由：'+esc(h.vreason)+'<br>'+esc(h.vat)+'</small>':'<button style="min-height:40px" data-corr="'+h.id+'">訂正</button>'+(h.corrOf?'<br><small class="note">訂正後の記録（理由：'+esc(h.creason)+'）</small>':'');
+  return '<tr'+(v?' class="voided"':'')+'>'+td('日時',p+esc(h.dt||dstr(h.db)+' '+h.t)+q)+td('品目',p+esc(h.item||hname(h))+(+h.qty>1?' ×'+esc(h.qty):'')+q)+td('買取額',p+yen(h.buy)+q,'num')+td('相手方',p+esc(h.who||'（未入力）')+q)+td('確認',p+esc(h.idm||'—')+q)+td('訂正',act)+'</tr>';}).join('');
+ renderPend();}
+$('#ltb').onclick=e=>{const b=e.target.closest('[data-corr]');if(!b)return;const h=H.find(x=>x.id===+b.dataset.corr);if(!h)return;
+ ledClear();CUR.corr=h.id;CUR.i=h.i;$('#lit').value=h.item||hname(h);$('#lft').value=h.feat||'';$('#lb').value=h.buy;$('#lcat').value=h.cat||CATS[h.i]||CATS[0];$('#lqty').value=h.qty||1;
+ $('#lnm').value=h.who||'';$('#lage').value=h.age||'';$('#laddr').value=h.addr||'';$('#ljob').value=h.job||'';$('#lmemo').value=h.memo||'';$('#lid').value=idOpt(h.idm);$('#lidok').checked=h.idok!==false&&!!h.idm;
+ $('#bauth').checked=!!h.bauth;$('#bmemo').value=h.bmemo||'';$('#ldt').value=h.dt||dstr(h.db)+' '+h.t;updId();
+ $('#corrinfo').textContent='訂正する記録：'+(h.dt||dstr(h.db)+' '+h.t)+'　'+(h.item||hname(h))+'　'+yen(h.buy)+'円。元の記録は消さずに取り消し線で残り、直した記録が新しく加わります。';
+ $('#corrbox').hidden=false;$('#save').textContent='訂正を記録する';$('#dmsg').textContent='直したい所を直し、訂正の理由を入れて「訂正を記録する」を押してください。';$('#corrbox').scrollIntoView({block:'center'});};
+$('#lcorrx').onclick=()=>{ledClear();$('#dmsg').textContent='訂正をやめました。記録は変わっていません。';};
+$('#lback').onclick=e=>{if(e.currentTarget.dataset.s)show(e.currentTarget.dataset.s);};
+$('#save').onclick=()=>{const m=$('#dmsg'),b=+$('#lb').value,item=$('#lit').value.trim(),cat=$('#lcat').value;
+ if(!b){m.textContent='買取額を入れてください。';return;}
+ if(!item){m.textContent='品目を入れてください。';return;}
+ const need=needId(b,cat);
+ if(need&&!$('#lid').value){m.textContent='本人確認が必要な買取です。「本人確認の方法」を選んでください。';return;}
+ if(need&&!$('#lidok').checked){m.textContent='本人確認が必要な買取です。「本人確認書類を見て確認した」にチェックを入れてください。';return;}
+ const reason=$('#lreason').value.trim(),old=CUR.corr?H.find(h=>h.id===CUR.corr):null;
+ if(CUR.corr&&!old){m.textContent='訂正する記録が見つかりません。';return;}
+ if(old&&!reason){m.textContent='訂正の理由を入れてください（必須）。';return;}
+ const i=CUR.i!=null?CUR.i:pi,who=$('#lnm').value.trim(),now=Date.now();
+ if(!old&&H.some(h=>h.ts&&now-h.ts<300000&&h.i===i&&h.item===item&&h.buy===b&&h.who===who)&&!confirm('同じ記録がありますが、もう1件保存しますか？'))return;
+ const rec={id:++hid,i,db:old?old.db:0,t:($('#ldt').value.split(' ')[1]||'14:20'),buy:b,sell:old?old.sell:null,ds:old?old.ds:null,who,idm:$('#lid').value,idok:$('#lidok').checked,
+  item,feat:$('#lft').value.trim(),cat,qty:Math.max(1,+$('#lqty').value||1),age:$('#lage').value.trim(),addr:$('#laddr').value.trim(),job:$('#ljob').value.trim(),memo:$('#lmemo').value.trim(),
+  bauth:$('#bauth').checked,bmemo:$('#bmemo').value.trim(),ts:now};/* 保存は入力のまま。画面に出すときだけ esc() */
+ if(old){H.splice(H.indexOf(old),1);old.vreason=reason;old.vat='訂正の日時：'+nowS();LV.push(old);rec.corrOf=old.id;rec.creason=reason;}
+ if(CUR.pid){const k=PEND.findIndex(p=>p.pid===CUR.pid);if(k>=0)PEND.splice(k,1);}
+ if(CUR.ref){CUR.ref.saved=true;renderAuRec();}
+ const back=LBACK&&LBACK.s;H.push(rec);ledClear();renderLedger();renderHist();
+ m.textContent=old?'訂正を記録しました。元の記録は取り消し線と理由つきで残っています（例です。保存されません）。':'台帳に1行追加しました。入力欄は空にしました（例です。保存されません）。'+(PEND.length?'未保存の品があと '+PEND.length+' 点あります。':'');
+ if(back){const lb=$('#lback');lb.dataset.s=back;lb.textContent=BACKN[back]+'に戻る';lb.hidden=false;}};
 let csvAgo=28;
 function renderCsv(){$('#csvdate').textContent='前回のCSV保存：'+(csvAgo===0?'今日':dstr(csvAgo)+'（'+csvAgo+'日前）')+'（例）'+(csvAgo>=30?'　30日以上たっています。今すぐ保存を。':'');}
 $('#csv').onclick=()=>{csvAgo=0;renderCsv();$('#dmsg').textContent='例です。実物では台帳をCSVファイルで保存できます。';};
@@ -1038,7 +1103,7 @@ function renderHist(){const sold=H.filter(h=>h.sell!=null);
  $('#hturn').innerHTML=[['買取から売却までの日数','ふつう '+md+'日','売却済み '+sold.length+'件'],['売れ残り','在庫 '+H.filter(h=>h.sell==null).length+'件','長い順に下に3件']].map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
  $('#hold').innerHTML=old.map(h=>'<div class="hl"><i style="width:60px">'+h.db+'日</i><span>'+esc(hname(h))+'<br><small class="note">買値 '+yen(h.buy)+'円・目安 '+TURN(PR[h.i]).d+'日</small></span></div>').join('');
  $('#htb').innerHTML=[...H].sort((a,b)=>a.db-b.db||b.id-a.id).map(h=>{const r=h.sell!=null?Math.round(h.sell/h.buy*100):null;
-  return '<tr>'+td('型番',hname(h))+td('買取日',dstr(h.db))+td('買値',yen(h.buy),'num')+td('売値',h.sell!=null?yen(h.sell):'—','num')+td('買値に対する売値の割合',r!=null?r+'%':'—','num')+td('状態',h.sell==null?'<button style="min-height:40px" data-sell="'+h.id+'">売値を入力</button>':(r<100?'<span class="badge b-out">損失</span>':''))+'</tr>';}).join('');
+  return '<tr>'+td('型番',hname(h))+td('買取日',dstr(h.db))+td('買値',yen(h.buy),'num')+td('売値',h.sell!=null?yen(h.sell):'—','num')+td('買値に対する売値の割合',r!=null?r+'%':'—','num')+td('状態',h.sell==null?'<button style="min-height:40px" data-sell="'+h.id+'">売値を入力</button>':(r<100?'<span class="badge b-out">損失</span> ':'')+'<button style="min-height:40px" data-sell="'+h.id+'">売値を直す</button>')+'</tr>';}).join('');
  const mine=H.filter(h=>h.i===pi);$('#hh').textContent='同じ型番の自分の推移：'+PR[pi].short;
  const W=cw('#hist'),H2=200,L=44,R=10,T=12,B=28,vals=mine.flatMap(h=>[h.buy,h.sell]).filter(v=>v!=null);
  const lo=f100(Math.min(...vals)/2000*2000)-0,mn=Math.floor((Math.min(...vals)-500)/2000)*2000,mxv=Math.ceil((Math.max(...vals)+500)/2000)*2000;
@@ -1051,8 +1116,9 @@ function renderHist(){const sold=H.filter(h=>h.sell!=null);
  [[90,'start'],[60,'middle'],[30,'middle'],[0,'end']].forEach(([d,an])=>s+='<text x="'+X(d)+'" y="'+(H2-8)+'" text-anchor="'+an+'">'+dlab(d)+'</text>');
  $('#hist').setAttribute('viewBox','0 0 '+W+' '+H2);$('#hist').innerHTML=s;}
 $('#htb').onclick=e=>{const b=e.target.closest('[data-sell]');if(!b)return;const h=H.find(x=>x.id===+b.dataset.sell);
- const v=+prompt('実際に売れた価格（円）を入れてください（例）',PR[h.i].M);if(!v)return;h.sell=v;h.ds=0;
- $('#hlog').insertAdjacentHTML('afterbegin','<li>売値を入力：'+hname(h)+' '+yen(v)+'円（買値に対する売値の割合 '+Math.round(v/h.buy*100)+'%）・お試しのため保存されません</li>');renderHist();};
+ const fix=h.sell!=null,t=prompt(fix?'売値を直します。実際に売れた価格（円）を入れてください（例）':'実際に売れた価格（円）を入れてください（例）',fix?h.sell:PR[h.i].M);if(t===null)return;const v=+t;
+ if(!(v>0)){$('#hlog').insertAdjacentHTML('afterbegin','<li>売値は1円以上の数で入れてください。変えていません。</li>');return;}if(h.sell==null)h.ds=0;h.sell=v;
+ $('#hlog').insertAdjacentHTML('afterbegin','<li>'+(fix?'売値を直す：':'売値を入力：')+hname(h)+' '+yen(v)+'円（買値に対する売値の割合 '+Math.round(v/h.buy*100)+'%）・お試しのため保存されません</li>');renderHist();};
 
 /* 改善要望（P1-6） */
 const RQ=[
@@ -1060,7 +1126,7 @@ const RQ=[
 {t:'同じ出品者の繰り返しを初期で除外してほしい',b:'同じ人の出品が並ぶと相場が高く見える。最初から除外された状態にしてほしい。',sc:'相場の一覧を見て、買いすぎそうになったとき',v:34,s:'公開済み',ai:'公開しました。初期で有効にしています（10/14）。',d:'09/28',id:1,n:'リユース山田'},
 {t:'iPhoneのネットワーク利用制限の確認欄がほしい',b:'確認チェックに、ネットワーク利用制限の欄を足してほしい。',sc:'店頭でiPhoneを買い取るとき、制限ありだと後で売れず損をする',v:31,s:'採用',when:'11月中旬予定',ai:'票が多く、買取時の損が大きいため採用しました。',d:'10/09',id:2,n:'せどり花子'},
 {t:'ブランド品のシリアル番号の確認欄',b:'ブランド品の確認チェックに、シリアル番号の欄がほしい。',sc:'出張買取で、本物か迷う品を預かるとき',v:27,s:'再検討中',ai:'前回（票12）は、照合に使える公開データが確認できず見送りました。票が27に増えたため、今週あらためて判断します。',d:'10/02',id:3,n:'古物商K'},
-{t:'台帳に免許証を読み取って入力したい',b:'免許証を撮ると氏名・住所が台帳に入る形にしてほしい。',sc:'混んでいる店頭で、1件ずつ手で入力する時間がない',v:22,s:'開発中',ai:'読み取り結果は必ず目で確認する形で作っています。',d:'10/11',id:4,n:'匿名'},
+{t:'台帳に免許証を読み取って入力したい',b:'免許証を撮ると氏名・住所が台帳に入る形にしてほしい。',sc:'混んでいる店頭で、1件ずつ手で入力する時間がない',v:22,s:'検討中',ai:'精度と個人情報の扱いを確認中です。作るかどうかは未定です。',d:'10/11',id:4,n:'匿名'},
 {t:'まとめ買いの一括査定',b:'10点まとめて型番を入れ、買取額の合計を出したい。',sc:'仕入れ先で10点まとめて見るとき',v:18,s:'検討中',ai:'画面の作り方を検討中です。今週中に返答します。',d:'10/12',id:5,n:'user_t55'},
 {t:'相場の値下がり通知をLINEで受け取りたい',b:'値下がりのお知らせをLINEに届けてほしい。',sc:'店の外にいて、アプリを開けないとき',v:15,s:'見送り',ai:'LINEの利用条件と費用が未確認のため見送りました。メール通知は先に検討します。',d:'09/30',id:6,n:'匿名'},
 {t:'台帳をCSVで出すとき列の順を変えたい',b:'CSVの列の順を、手持ちの帳簿に合わせて変えたい。',sc:'月末に帳簿へ貼り付けるとき',v:9,s:'公開済み',ai:'公開しました（10/10）。',d:'10/01',id:7,n:'せどり花子'},
@@ -1118,7 +1184,7 @@ const CAP=x=>Math.min(100,x);
 const cc=v=>ctm==='m'?CAP(v):v;/* 部門ごと100点までは月間だけ。累計には掛けない */
 const cpt=c=>{const d=c[1],p=c[2]*10+c[3]*5,r=c[5]+c[6]*10;return {d,p,r,t:cc(d)+cc(p)+cc(r)};};
 const CDN={t:'総合（月間）＝データ・提案・紹介の点を、各部門100点までにして足した点です。累計は上限なしで足します。',d:'データ＝持ち寄った相場と、見分け方メモの「役に立った」の数。',p:'提案＝採用された要望の数と、その要望への票。',r:'紹介＝紹介で有料になった人数（2回目の支払いのあと）。'};
-const CBEN=[['データ','30点で有料1か月無料（年3回まで）／100点で新機能の先行利用／上位は見分け方メモに表示名を掲載（予定）'],['提案','採用1件でその機能の先行利用／累計30点で有料1か月無料（年2回まで）／改善履歴に表示名（予定）'],['紹介','有料2回目の支払い成功1件ごとに、有料1か月分の割引（年3か月まで）。登録だけの点は特典にならず、ランキングのみ（予定）'],['総合','月間上位10位に表示名の掲載＋有料プランを10%引き（会員の間）。3部門すべて1点以上で「共同開発者」バッジ（予定）']];
+const CBEN=[['データ','30点で有料1か月無料（年3回まで）／100点で新機能の先行利用／上位は見分け方メモに表示名を掲載（検討中）'],['提案','採用1件でその機能の先行利用／累計30点で有料1か月無料（年2回まで）／改善履歴に表示名（検討中）'],['紹介','有料2回目の支払い成功1件ごとに、割引（内容は検討中。年3か月まで）。登録だけの点は特典にならず、ランキングのみ（検討中）'],['総合','月間上位10位（月の最低点あり）に表示名の掲載＋翌月の有料プランの料金が10%引き。3部門すべて1点以上で「共同開発者」バッジ（検討中）']];
 function renderCt(){const box=$('#ctl');box.textContent='';
  const L=CT[ctm].map(c=>({n:c[0],c,k:cpt(c)})).sort((x,y)=>y.k[ctd]-x.k[ctd]);
  const mi=L.findIndex(x=>x.n==='あなた');
@@ -1173,7 +1239,8 @@ $('#send').onclick=()=>$('#smsg').textContent='例です。送信はされませ
 let qi=0,qc=0,qr='B',qchk=[true,true,true,true],qmode='one';
 const BL=[[0,'B'],[1,'B'],[2,'B']];
 const lim=(i,r)=>{const a=analyse({rows:ROWS[i],P:90,rank:r,X:'ジャンク',tol:40,norep:false}),p=PR[i];
- return {m:a.m,n:a.ok.length,d:p.turn[0],hi:a.m?mxf(a.m,FEE,SHIPtot(i),PF,p.turn[0],TP):0,sh:SHIPtot(i)};};
+ const hiMid=a.m?mxf(a.m,FEE,SHIPtot(i),PF,p.turn[0],TP):0,loHi=a.pl?mxf(a.pl,FEE,SHIPtot(i),PF,p.turn[0],TP):null;
+ return {m:a.m,n:a.ok.length,d:p.turn[0],hi:lbOf(hiMid,loHi),hiMid,sh:SHIPtot(i),a,ctx:ctxOf(90,r),lo:a.pl,up:a.ph,avg:a.avg,rm:a.rm,loHi};};
 function renderQuick(){const p=PR[qi],ck=['型番','色','世代','付属品'];
  $('#kchips').innerHTML=PR.map((x,j)=>'<button class="'+(j===qi?'pri':'')+'" data-kp="'+j+'">'+esc(x.model)+'</button>').join('');
  $('#kc').innerHTML=p.cands.map((c,i)=>'<div class="cand'+(i===qc?' sel':'')+(i?' na':'')+'" data-kc="'+i+'"><div class="thumb">写真</div><div><b>'+esc(c[0])+'</b><span class="meta">'+esc(c[1])+'</span></div><div class="match">'+c[2]+'%</div></div>').join('');
@@ -1184,10 +1251,11 @@ function renderQuick(){const p=PR[qi],ck=['型番','色','世代','付属品'];
  $('#khint').textContent='型番：'+p.mh+'／色：'+p.color+'／世代：'+p.gen+'／付属品：'+p.acc;
  $('#krk').innerHTML=[['S','新品同様'],['A','美品'],['B','使用感'],['C','傷・難']].map(r=>'<button data-kr="'+r[0]+'" class="'+(qr===r[0]?'on':'')+'">'+r[0]+'<small>'+r[1]+'</small></button>').join('');
  const L=qr?lim(qi,qr):null,okc=qchk.every(Boolean),ready=okc&&qr&&qc===0&&L&&L.m>0;
- $('#kst').innerHTML=(L&&qc===0?[['真ん中の価格',L.m?yen(L.m)+'円':'—','状態'+qr+'・架空データ'],['件数',L.n+'件','除外後'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]:[['真ん中の価格','—',''],['件数','—',''],['売れるまで','—','']]).map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
+ $('#kst').innerHTML=(L&&qc===0?[[rLo(L.a),L.lo?yen(L.lo)+'円':'—',L.rm==='x'?'件数が少なく幅は出せません':'状態'+qr+'・架空データ'],['平均',L.rm==='x'?'—':yen(L.avg)+'円',''],[rHi(L.a),L.up?yen(L.up)+'円':'—',''],['真ん中の価格',L.m?yen(L.m)+'円':'—','状態'+qr+'・架空データ'],['件数',L.n+'件','除外後'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]:[['安値','—',''],['平均','—',''],['高値','—',''],['真ん中の価格','—',''],['件数','—',''],['売れるまで','—','']]).map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
  $('#kwarn').innerHTML=qc!==0?'<div class="warnbox">このお試し版では、選んだ候補の相場は未対応です。先頭の候補を選ぶと表示します。</div>':!qr?'<div class="warnbox">状態ランクを選んでください。</div>':(L&&L.n<5?'<div class="warnbox">'+(L.n?'件数が5件未満のため「参考値」です。':'この状態の記録がありません。③で売れそうな価格を自分で入れてください。')+'</div>':'');
  $('#kmx').textContent=ready?yen(L.hi)+' 円':'—';
- $('#krg').textContent=ready?'真ん中の価格 '+yen(L.m)+'円から、手数料10%・送料と梱包費（'+SHIPcalc(qi).z+'サイズ・余裕込み 計'+yen(L.sh)+'円）・利益2,500円・売れるまでの日数分を引いた目安':(okc?'':'4つの確認をすべて通すと出ます。');
+ $('#krg').textContent=ready?(lbase==='low'&&L.loHi!=null?rLo(L.a)+' '+yen(L.lo)+'円':'真ん中の価格 '+yen(L.m)+'円')+'から、手数料10%・送料と梱包費（'+SHIPcalc(qi).z+'サイズ・余裕込み 計'+yen(L.sh)+'円）・利益2,500円・売れるまでの日数分を引いた目安':(okc?'':'4つの確認をすべて通すと出ます。');
+ $('#krg2').innerHTML=ready?rangeTxt(L.a,L.ctx)+(L.loHi!=null&&lbase==='low'?'<br>（参考）真ん中の価格で売れた場合の上限：'+yen(L.hiMid)+'円':(L.loHi!=null?'<br>'+rLo(L.a)+'で売れた場合の上限：'+yen(L.loHi)+'円':'')):'';
  $('#kled').disabled=!ready;
  $('#kledn').textContent=ready&&needId(L.hi,$('#lcat').value)?'1万円以上の見込み：台帳で本人確認が必須になります。':'';}
 function qSelect(i){qi=i;qc=0;qchk=[false,false,false,false];qr='';$('#kmsg').textContent='';$('#kq').value=PR[i].model;renderQuick();}
@@ -1202,22 +1270,23 @@ function syncFromQuick(){pi=qi;ci=qc;rePrev=-1;repMsg='';confirmed=true;rank=qr;
  renderCands();renderChecks(true);$('#rankSel').value=qr;upd();$('#fc').value=qr;touched=false;setLock();fillLedger();}
 document.querySelector('#s0').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b||b.disabled)return;
  if(qchk.every(Boolean)&&qr&&qc===0)syncFromQuick();show(b.dataset.k);});
-$('#kled').onclick=()=>{const L=lim(qi,qr);syncFromQuick();$('#lb').value=L.hi;updId();
+$('#kled').onclick=()=>{const L=lim(qi,qr);syncFromQuick();ledFill({i:qi,item:PR[qi].item,feat:PR[qi].feat,offer:L.hi,s:'s0'});
  $('#lbinfo').textContent='早い査定の上限（状態'+qr+'）を入れました。実際の買取額に直してください。';
  $('#dmsg').textContent='早い査定から入力しました。相手方と本人確認を入れて「台帳に記録する」を押してください（例）。';show('s4');};
 /* まとめて */
 $('#bm').innerHTML=PR.map((p,i)=>'<option value="'+i+'">'+esc(p.short)+'</option>').join('');
 function renderBatch(){let tot=0,big=false;
  $('#bl').innerHTML=BL.map(([i,r],k)=>{const L=lim(i,r);tot+=L.hi;if(L.hi>=10000)big=true;
-  return '<div class="bi"><div class="nm"><b>'+esc(PR[i].short)+'</b>　状態'+esc(r)+'<br><small class="note">'+(L.m?'真ん中の価格 '+yen(L.m)+'円・'+L.n+'件':'相場の記録なし（上限0円）')+'</small></div><div class="am">'+yen(L.hi)+'円</div><button data-bx="'+k+'">外す</button></div>';}).join('')||'<p class="note">まだ品がありません。上で足してください。</p>';
+  return '<div class="bi"><div class="nm"><b>'+esc(PR[i].short)+'</b>　状態'+esc(r)+'<br><small class="note">'+(L.m?'真ん中の価格 '+yen(L.m)+'円・'+L.n+'件'+(L.lo?'・'+rLo(L.a)+' '+yen(L.lo)+'円':''):'相場の記録なし（上限0円）')+'</small></div><div class="am">'+yen(L.hi)+'円</div><button data-bx="'+k+'">外す</button></div>';}).join('')||'<p class="note">まだ品がありません。上で足してください。</p>';
  $('#btot').textContent=yen(tot)+' 円';$('#bsub').textContent=BL.length+'品の上限の合計（お試し用データ・直近90日）';
  $('#bwarn').innerHTML=big?'<div class="need">1万円以上の品があります。台帳で本人確認が必須です。</div>':'';
  $('#bled').disabled=!BL.length;}
 $('#badd').onclick=()=>{if(!$('#bchk').checked){$('#bmsg').textContent='型番・色・世代・付属品の4つを確認してから足してください。';return;}
  BL.push([+$('#bm').value,$('#br').value]);$('#bmsg').textContent='足しました（'+BL.length+'品）。';renderBatch();};
 $('#bl').onclick=e=>{const b=e.target.closest('[data-bx]');if(b){BL.splice(+b.dataset.bx,1);renderBatch();}};
-$('#bled').onclick=()=>{BL.forEach(([i,r])=>{const L=lim(i,r);H.push({id:++hid,i,db:0,t:'14:20',buy:L.hi,sell:null,ds:null,who:'（台帳で相手方を入力）',idm:needId(L.hi,'')?'要・本人確認':'—'});});
- const n=BL.length;BL.length=0;renderBatch();renderLedger();renderHist();$('#dmsg').textContent='まとめて'+n+'件を台帳に入れました。相手方と本人確認は、各行を確認して入力してください（例です。保存されません）。';show('s4');};
+let bu=0;
+$('#bled').onclick=()=>{const n=BL.length;if(!n)return;const list=BL.map(([i,r])=>{const L=lim(i,r);return {key:'b'+(++bu),i,item:PR[i].item,feat:PR[i].feat,offer:L.hi,s:'s0',from:'まとめて査定・状態'+r};});
+ BL.length=0;renderBatch();sendPend(list,'まとめて'+n+'件を台帳に届けました。1点ずつ「入力する」を押し、相手方と本人確認を確かめて保存してください（例です。保存されません）。');};
 $('#qmode').onclick=e=>{const b=e.target.closest('button');if(!b)return;qmode=b.dataset.m;$$('#qmode button').forEach(x=>x.classList.toggle('on',x===b));$('#qone').hidden=qmode!=='one';$('#qmany').hidden=qmode!=='many';};
 /* 大きな文字・開発用表示 */
 const lgToggle=()=>{const on=document.body.classList.toggle('lg');$('#lgbtn').textContent=on?'文字を戻す':'文字を大きく';$('#lgbtn2').textContent=on?'文字 戻す':'文字 大';[$('#lgbtn'),$('#lgbtn2')].forEach(b=>b.setAttribute('aria-pressed',on));setTimeout(renderAll,50);};
@@ -1245,7 +1314,7 @@ $('#scgrid').onclick=e=>{const b=e.target.closest('[data-sc]');if(b)setScene(b.d
 /* 値札の判定 */
 let tgI=0,tgR='B';const tgH=[];
 function tgCalc(){const L=lim(tgI,tgR),price=+$('#tgp').value||0;
- const prof=L.m?Math.round(L.m*(1-FEE)-L.sh-slow(L.m,L.d,TP)-price):0;return {L,price,prof,buy:L.m>0&&price<=L.hi};}
+ const prof=L.m?Math.round(L.m*(1-FEE)-L.sh-slow(L.m,L.d,TP)-price):0;const profLo=L.lo?Math.round(L.lo*(1-FEE)-L.sh-slow(L.lo,L.d,TP)-price):null;return {L,price,prof,profLo,buy:L.m>0&&price<=L.hi};}
 function renderTag(){
  $('#tgchips').innerHTML=PR.map((x,j)=>'<button class="'+(j===tgI?'pri':'')+'" data-tg="'+j+'">'+esc(x.model)+'</button>').join('');
  $('#tgr').innerHTML=[['S','新品同様'],['A','美品'],['B','使用感'],['C','傷・難']].map(r=>'<button data-tr="'+r[0]+'" class="'+(tgR===r[0]?'on':'')+'">'+r[0]+'<small>'+r[1]+'</small></button>').join('');
@@ -1254,6 +1323,7 @@ function renderTag(){
  else{const jp=el('div','note','判定した品：');jp.appendChild(el('b','',PR[tgI].short));box.appendChild(jp);
   box.appendChild(el('div','verdict '+(c.buy?'vy':'vn'),c.buy?'買い':'見送り'));
   box.appendChild(el('div','vl','見込み利益 '+sgn(c.prof)+' 円（目安）'));
+  box.appendChild(el('div','vl',c.profLo==null?'安値で売れた場合：件数が少なく幅は出せません（'+c.L.n+'件）':rLo(c.L.a)+'（'+yen(c.L.lo)+'円）で売れた場合の見込み利益 '+sgn(c.profLo)+' 円'));
   box.appendChild(el('div','vl','売れるまで ふつう '+c.L.d+' 日'));
   box.appendChild(el('p','note','この値札までなら買ってよい目安：'+yen(c.L.hi)+' 円（状態'+tgR+'）'+(c.buy?'':'。いまの値札だと、ほしい利益 '+yen(PF)+' 円に届きません。')));}
  $('#tgbuy').disabled=!ok;$('#tgskip').disabled=!ok;$('#tgbuy').textContent=!ok?(c.price>0?'確認すると判定します':'値札の額を入れると判定します'):(c.buy?'買う→台帳へ':'それでも買う→台帳へ');
@@ -1267,33 +1337,35 @@ function tgReveal(){setTimeout(()=>{const b=$('#tgres');if(!b||$('#tgbuy').disab
 $('#tgp').oninput=()=>{renderTag();tgReveal();};$('#tgc').onchange=()=>{renderTag();tgReveal();};
 $('#hmenu').onclick=()=>{const h=document.querySelector('header'),o=h.classList.toggle('mopen');$('#hmenu').textContent=o?'✕ 閉じる':'≡ メニュー';$('#hmenu').setAttribute('aria-expanded',o);};
 document.addEventListener('click',e=>{const b=e.target.closest('#hbtns [data-go]');if(b){document.querySelector('header').classList.remove('mopen');$('#hmenu').textContent='≡ メニュー';$('#hmenu').setAttribute('aria-expanded',false);}});
-$('#tgskip').onclick=()=>{const c=tgCalc();tgH.unshift(PR[tgI].short+'・値札 '+yen(c.price)+'円 → 見送り');renderTag();$('#tgdone').textContent='見送りとして履歴に残しました（例です。保存されません）。';};
-$('#tgbuy').onclick=()=>{const c=tgCalc();tgH.unshift(PR[tgI].short+'・値札 '+yen(c.price)+'円 → 買う');
- qi=tgI;qc=0;qr=tgR;qchk=[true,true,true,true];syncFromQuick();renderQuick();$('#lb').value=c.price;updId();
+$('#tgskip').onclick=()=>{const c=tgCalc(),t=PR[tgI].short+'・値札 '+yen(c.price)+'円 → 見送り';if(tgH[0]===t){$('#tgdone').textContent='同じ見送りはもう履歴に残しています（二重には記録しません）。';return;}tgH.unshift(t);renderTag();$('#tgdone').textContent='見送りとして履歴に残しました（例です。保存されません）。';};
+$('#tgbuy').onclick=()=>{const c=tgCalc(),t=PR[tgI].short+'・値札 '+yen(c.price)+'円 → 買う';if(tgH[0]!==t)tgH.unshift(t);
+ qi=tgI;qc=0;qr=tgR;qchk=[true,true,true,true];syncFromQuick();renderQuick();ledFill({i:tgI,item:PR[tgI].item,feat:PR[tgI].feat,offer:c.price,s:'s11'});
  $('#lbinfo').textContent='値札判定の額を入れました。実際の買取（仕入れ）額に直してください。';$('#dmsg').textContent='値札判定から入力しました（例）。';show('s4');};
 
 /* せり */
 const AU=[{no:'A-101',nm:'WH-1000XM4 ブラック',i:0,lot:1},{no:'A-102',nm:'Switch 有機EL ホワイト（まとめ）',i:1,lot:3},{no:'A-105',nm:'Kiss X10 ボディ',i:2,lot:1},{no:'A-108',nm:'WH-1000XM4 ブラック（まとめ）',i:0,lot:4},{no:'A-112',nm:'Switch 有機EL ホワイト',i:1,lot:1}];
-const auRec=[{no:'A-098',nm:'Switch 旧型',lot:1,bid:8600,f:5,cost:9030,seller:'S-1180',over:false}];let auI=0;const auRk={},auBid={};const rk=a=>auRk[a.no]||'B';
+let auu=0;const auRec=[{uid:0,i:1,no:'A-098',nm:'Switch 旧型',lot:1,bid:8600,f:5,cost:9030,seller:'S-1180',over:false}];let auI=0;const auRk={},auBid={};const rk=a=>auRk[a.no]||'B';
 /* v12：上限は市場の手数料込みで逆算（落札額×(1+手数料) が事前の上限を超えないように） */
 const auFee=()=>{const i=document.getElementById('auf');return i?(+i.value||0)/100:0.05;};
-const auHi=a=>a.own?a.own:Math.floor(lim(a.i,rk(a)).hi*a.lot/(1+auFee())/100)*100;
-function renderAuList(){const box=$('#aul');box.textContent='';AU.forEach((a,k)=>{const d=el('div','cand'+(k===auI?' sel':''));d.dataset.au=k;const t=el('div');t.style.minWidth='0';
+const auHi=a=>{if(a.own)return a.own;const L=lim(a.i,rk(a));return Math.floor(lbOf(L.hi,L.loHi)*a.lot/(1+auFee())/100)*100;};
+function renderAuList(){const box=$('#aul');box.textContent='';if(!AU.length)$('#auprep').open=true;if(!AU.length)box.appendChild(el('p','note','一覧は空です。上の「出品番号と上限を入れる」から足してください。'));AU.forEach((a,k)=>{const d=el('div','cand'+(k===auI?' sel':''));d.dataset.au=k;const t=el('div');t.style.minWidth='0';
  t.appendChild(el('b',null,a.no+'　'+a.nm));t.appendChild(el('div','meta','ロット '+a.lot+'点・状態'+rk(a)+(auRk[a.no]?'':'（仮）')+'・上限 '+yen(auHi(a))+' 円'+(a.own?'（自分で決めた額）':'（相場から自動）')));
  if(auRec.some(r=>r.no===a.no))t.appendChild(el('span','badge b-warn','落札済み'));d.appendChild(t);box.appendChild(d);});}
-function renderAuDetail(){const a=AU[auI],L=lim(a.i,rk(a));auHiLab();$$('#aurk button').forEach(x=>x.classList.toggle('on',x.dataset.r===rk(a)));
+function renderAuDetail(){$('#audet').hidden=!AU.length;if(!AU.length)return;const a=AU[auI],L=lim(a.i,rk(a));auHiLab();$$('#aurk button').forEach(x=>x.classList.toggle('on',x.dataset.r===rk(a)));
  $('#aun').textContent=a.no;$('#aunm').textContent=a.nm;$('#aulot').textContent='ロット '+a.lot+' 点'+(a.lot>1?'（落札額は点数で按分して、1点ごとの原価にします）':'');
  $('#auhi').textContent=yen(auHi(a))+' 円';$('#auown').value=a.own||'';auHiLab();
- $('#aust').innerHTML=statHtml([['真ん中の価格（1点）',yen(L.m)+'円','状態'+rk(a)+'・直近90日'],['件数',L.n+'件','お試しの架空データ'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]);
+ $('#aust').innerHTML=statHtml([[rLo(L.a)+'（1点）',L.lo?yen(L.lo)+'円':'—',L.rm==='x'?'件数が少なく幅は出せません':'状態'+rk(a)+'・直近90日'],['平均（1点）',L.rm==='x'?'—':yen(L.avg)+'円',''],[rHi(L.a)+'（1点）',L.up?yen(L.up)+'円':'—',''],['真ん中の価格（1点）',yen(L.m)+'円','状態'+rk(a)+'・直近90日'],['件数',L.n+'件','お試しの架空データ'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]);
+ $('#aurg').innerHTML=rangeTxt(L.a,L.ctx);
  $('#aub').value=auBid[a.no]||'';auUpd();}
 function auUpd(){const a=AU[auI],hi=auHi(a),b=+$('#aub').value||0,f=(+$('#auf').value||0)/100,L=lim(a.i,rk(a));auBid[a.no]=$('#aub').value;
  const over=b>hi;$('#aub').classList.toggle('over',over);
  const al=$('#aualert');al.className=over?'alert':(b?'okline':'');
  al.textContent=over?'上限を超えています（+'+yen(b-hi)+'円）。上限は事前に決めた額です。':(b?'上限の範囲内です（あと '+yen(hi-b)+' 円）':'');
- const cost=Math.round(b*(1+f)),prof=L.m?Math.round(a.lot*(L.m*(1-FEE)-L.sh-slow(L.m,L.d,TP))-cost):0;
- $('#aucalc').innerHTML=[['落札額',yen(b)+' 円'],['市場の手数料（'+(+$('#auf').value||0)+'%）','+ '+yen(b*f)+' 円'],['実質原価（手数料込み）',yen(cost)+' 円'],a.lot>1?['1点あたりの原価（按分）',yen(cost/a.lot)+' 円']:null,['見込み利益（目安）',b?sgn(prof)+' 円':'—']].filter(Boolean).map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('');
+ const cost=Math.round(b*(1+f)),profLo=L.lo?Math.round(a.lot*(L.lo*(1-FEE)-L.sh-slow(L.lo,L.d,TP))-cost):null,prof=L.m?Math.round(a.lot*(L.m*(1-FEE)-L.sh-slow(L.m,L.d,TP))-cost):0;
+ if(b&&profLo!=null&&profLo<0){al.className='alert';al.textContent+=(al.textContent?'　':'')+rLo(L.a)+'で売れると赤字（'+sgn(profLo)+'円）。';}
+ $('#aucalc').innerHTML=[['落札額',yen(b)+' 円'],['市場の手数料（'+(+$('#auf').value||0)+'%）','+ '+yen(b*f)+' 円'],['実質原価（手数料込み）',yen(cost)+' 円'],a.lot>1?['1点あたりの原価（按分）',yen(cost/a.lot)+' 円']:null,['見込み利益（目安・真ん中で売れた場合）',b?sgn(prof)+' 円':'—'],['見込み利益（'+rLo(L.a)+'で売れた場合）',b?(profLo==null?'幅は出せません（件数少）':sgn(profLo)+' 円'):'—']].filter(Boolean).map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('');
  $('#aubtn').textContent=over?'上限超えで落札を記録':'落札（記録する）';$('#aubtn').classList.toggle('ng',over);$('#aubtn').disabled=!b;}
-function renderAuRec(){$('#aurt').innerHTML=auRec.map((r,k)=>'<tr>'+td('番号',esc(r.no))+td('品名',esc(r.nm))+td('ロット',r.lot+'点')+td('状態',r.rk?'状態'+r.rk:'—')+td('落札額',yen(r.bid),'num')+td('手数料込みの原価',yen(r.cost)+'（'+r.f+'%）','num')+td('売主',esc(r.seller||'（未入力）'))+td('メモ',r.over?'<span class="badge b-warn">上限超え</span>':'—')+td('押し間違え','<button data-undo="'+k+'">取り消す</button>')+'</tr>').join('');}
+function renderAuRec(){$('#aurt').innerHTML=auRec.map((r,k)=>'<tr>'+td('番号',esc(r.no))+td('品名',esc(r.nm))+td('ロット',r.lot+'点')+td('状態',r.rk?'状態'+r.rk:'<span class="note">未選択</span> '+['S','A','B','C'].map(x=>'<button style="min-height:36px" data-rrk="'+k+':'+x+'">'+x+'</button>').join(''))+td('落札額',yen(r.bid),'num')+td('手数料込みの原価',yen(r.cost)+'（'+r.f+'%）','num')+td('売主',esc(r.seller||'（未入力）'))+td('メモ',r.over?'<span class="badge b-warn">上限超え</span>':'—')+td('台帳',r.saved?'<span class="note">台帳に保存済み</span>':'<button data-ledr="'+k+'">台帳へ送る</button>')+td('押し間違え','<button data-undo="'+k+'">取り消す</button>')+'</tr>').join('');}
 $('#auf').addEventListener('input',()=>{renderAuList();$('#auhi').textContent=yen(auHi(AU[auI]))+' 円';});
 $('#aurk').onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;auRk[AU[auI].no]=b.dataset.r;renderAuList();renderAuDetail();};
 $('#auout').onclick=()=>{const x=$('#auoutbox');x.hidden=!x.hidden;};
@@ -1301,22 +1373,44 @@ $('#aul').onclick=e=>{const d=e.target.closest('[data-au]');if(!d)return;auI=+d.
 $('#aub').oninput=auUpd;$('#auf').oninput=auUpd;
 $('#s12').addEventListener('click',e=>{const s=e.target.closest('[data-as]');if(s){$('#aub').value=Math.max(0,(+$('#aub').value||0)+(+s.dataset.as));auUpd();}});
 $('#aumax').onclick=()=>{$('#aub').value=auHi(AU[auI]);auUpd();};
-$('#aubtn').onclick=()=>{const a=AU[auI],b=+$('#aub').value;if(!b)return;const f=+$('#auf').value||0;
- auRec.unshift({no:a.no,nm:a.nm,lot:a.lot,bid:b,f:f,cost:Math.round(b*(1+f/100)),seller:$('#aus').value.trim(),rk:rk(a),over:b>auHi(a)});$('#aus').value='';
- auBid[a.no]='';$('#aub').value='';$('#aumsg').textContent='記録しました（例です。保存されません）。押し間違えたときは、下の記録の「取り消す」で消せます。';renderAuList();auUpd();renderAuRec();};
+$('#aubtn').onclick=()=>{const a=AU[auI],b=+$('#aub').value;if(!b)return;const f=+$('#auf').value||0,hi0=auHi(a);
+ if(hi0>0&&(b>hi0*2||(String(b).length>String(hi0).length&&b>hi0*1.5))&&!confirm('桁を確かめてください。落札額 '+yen(b)+' 円は、上限 '+yen(hi0)+' 円よりかなり大きい額です。このまま記録しますか？'))return;
+ auRec.unshift({uid:++auu,i:a.i,no:a.no,nm:a.nm,lot:a.lot,bid:b,f:f,cost:Math.round(b*(1+f/100)),seller:$('#aus').value.trim(),rk:auRk[a.no]||'',over:b>auHi(a)});$('#aus').value='';
+ auBid[a.no]='';$('#aub').value='';$('#aumsg').textContent='記録しました（例です。保存されません）。押し間違えたときは、下の記録の「取り消す」で消せます。';renderAuList();auUpd();renderAuRec();
+ const ub=$('#auundo');ub.hidden=false;ub.dataset.uid=auRec[0].uid;clearTimeout(auUT);auUT=setTimeout(()=>{ub.hidden=true;},6000);};
+let auUT=0;
+$('#auundo').onclick=()=>{const k=auRec.findIndex(r=>String(r.uid)===$('#auundo').dataset.uid);if(k>=0)auUndo(k,true);$('#auundo').hidden=true;};
 PR.forEach((p,k)=>{if(k>2)return;const o=el('option',null,p.short);o.value=k;$('#auait').appendChild(o);});
 $('#auadd').onclick=()=>{const no=$('#auano').value.trim(),m=$('#auaddmsg');if(!no){m.textContent='出品番号を入れてください。';return;}
  if(AU.some(a=>a.no===no)){m.textContent=no+' はもう一覧にあります。';return;}
  const i=+$('#auait').value,lot=Math.max(1,+$('#aualot').value||1),own=Math.max(0,+$('#auahi').value||0);
  AU.push({no:no,nm:PR[i].short+(lot>1?'（まとめ）':''),i:i,lot:lot,own:own||0});auI=AU.length-1;
  $('#auano').value='';$('#auahi').value='';$('#aualot').value=1;m.textContent=no+' を一覧に足しました（例です。保存されません）。';renderAuList();renderAuDetail();};
-function auHiLab(){const a=AU[auI];if(a.own){$('#auhilab').textContent='自分の上限（あなたが決めた額・落札額そのものと比べます。手数料は別に上乗せ）';}else{$('#auhilab').innerHTML='自分の上限（状態<span id="aurkn"></span>の場合・市場の手数料込みで逆算）';$('#aurkn').textContent=rk(a)+(auRk[a.no]?'':'（仮・下見で選んでください）');}}
-$('#auown').oninput=()=>{const a=AU[auI];a.own=Math.max(0,+$('#auown').value||0);$('#auhi').textContent=yen(auHi(a))+' 円';auHiLab();renderAuList();auUpd();};
+function auBas(){const a=AU[auI],L=lim(a.i,rk(a));$('#aubas').textContent='この額以下なら買ってよい（'+(a.own?'自分で決めた額':(lbase==='low'&&L.loHi!=null?rLo(L.a)+'基準':'真ん中基準'))+'）';}
+function auHiLab(){const a=AU[auI];auBas();if(a.own){$('#auhilab').textContent='自分の上限（あなたが決めた額・落札額そのものと比べます。手数料は別に上乗せ）';}else{$('#auhilab').innerHTML='自分の上限（状態<span id="aurkn"></span>の場合・市場の手数料込みで逆算）';$('#aurkn').textContent=rk(a)+(auRk[a.no]?'':'（仮・下見で選んでください）');}}
+$('#auown').oninput=()=>{const a=AU[auI];a.own=Math.max(0,+$('#auown').value||0);auBas();$('#auhi').textContent=yen(auHi(a))+' 円';auHiLab();renderAuList();auUpd();};
 $('#auownclr').onclick=()=>{AU[auI].own=0;renderAuList();renderAuDetail();};
-$('#aurt').onclick=e=>{const b=e.target.closest('[data-undo]');if(!b)return;const r=auRec[+b.dataset.undo];
- if(!confirm(r.no+'（'+r.nm+'・'+yen(r.bid)+'円）の落札の記録を取り消しますか？'))return;
- auRec.splice(+b.dataset.undo,1);$('#aumsg').textContent=$('#aurecmsg').textContent=r.no+' の記録を取り消しました（例です。保存されません）。';renderAuList();renderAuRec();};
+$('#aurt').onclick=e=>{const m=$('#aurecmsg'),rr=e.target.closest('[data-rrk]'),lg=e.target.closest('[data-ledr]');
+ if(rr){const [k,x]=rr.dataset.rrk.split(':');auRec[+k].rk=x;renderAuRec();m.textContent='状態を '+x+' にしました。';return;}
+ if(lg){const r=auRec[+lg.dataset.ledr];if(!r.rk){m.textContent=r.no+'：品の状態（S・A・B・C）が仮のままです。記録の「状態」の欄から選んでから、もう一度「台帳へ送る」を押してください。';return;}
+  sendPend([{key:'a'+r.uid,i:r.i,item:r.nm,feat:'出品番号 '+r.no+'・状態'+r.rk+(r.lot>1?'・'+r.lot+'点まとめ':''),offer:r.cost,qty:r.lot,who:(r.seller||'売主の番号 未入力')+'（古物市場）',s:'s12',from:'せり '+r.no+'（手数料込みの原価）',ref:r}],'せりの落札 '+r.no+' を台帳に届けました。買取額は手数料込みの原価です。相手方などを確かめて保存してください（例です。保存されません）。');return;}
+ const b=e.target.closest('[data-undo]');if(!b)return;auUndo(+b.dataset.undo,false);};
+function auUndo(k,quick){const m=$('#aurecmsg'),r=auRec[k];if(!r)return;
+ if(r.saved){m.textContent=r.no+' は台帳に保存済みです。台帳の行は消せないので、台帳の「訂正」で直してください。';return;}
+ if(!quick&&!confirm(r.no+'（'+r.nm+'・'+yen(r.bid)+'円）の落札の記録を取り消しますか？'))return;
+ const pk=PEND.findIndex(p=>p.ref===r);if(pk>=0){if(CUR.pid===PEND[pk].pid)ledClear();PEND.splice(pk,1);}
+ auRec.splice(k,1);$('#auundo').hidden=true;$('#aumsg').textContent=m.textContent=r.no+' の記録を取り消しました（例です。保存されません）。';renderAuList();renderAuRec();}
+$('#auedit').onclick=()=>{const a=AU[auI],m=$('#auemsg'),v=prompt('正しい出品番号を入れてください',a.no);if(v===null)return;const no=v.trim().slice(0,20);
+ if(!no){m.textContent='出品番号が空です。直していません。';return;}if(no===a.no){m.textContent='番号は変わっていません。';return;}
+ if(AU.some(x=>x!==a&&x.no===no)){m.textContent=no+' はもう一覧にあります。直していません。';return;}
+ const o=a.no;a.no=no;if(o in auRk){auRk[no]=auRk[o];delete auRk[o];}if(o in auBid){auBid[no]=auBid[o];delete auBid[o];}auRec.forEach(r=>{if(r.no===o)r.no=no;});
+ m.textContent='出品番号を '+o+' から '+no+' に直しました（例です。保存されません）。';renderAuList();renderAuDetail();renderAuRec();};
+$('#audel').onclick=()=>{const a=AU[auI],m=$('#auemsg');
+ if(auRec.some(r=>r.no===a.no)){m.textContent=a.no+' は落札の記録があるため、一覧から外せません。外すには、先に下の「今日の落札の記録」で「取り消す」を押してください。';return;}
+ if(!confirm(a.no+'（'+a.nm+'）を一覧から外しますか？'))return;
+ AU.splice(auI,1);delete auRk[a.no];delete auBid[a.no];auI=Math.max(0,Math.min(auI,AU.length-1));m.textContent=a.no+' を一覧から外しました（例です。保存されません）。';renderAuList();renderAuDetail();};
 
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lb]');if(!b)return;lbase=b.dataset.lb;renderCalc();renderAuList();renderAuDetail();if(typeof renderQuick==='function')renderQuick();});
 /* 窓口 */
 const CQ=[{i:0,r:'B'},{i:1,r:'B'},{i:2,r:'A'}].map(x=>({...x,offer:f100(lim(x.i,x.r).hi*.92)}));let cqI=0,cview=false;
 function cProf(q){const L=lim(q.i,q.r);return L.m?Math.round(L.m*(1-FEE)-L.sh-slow(L.m,L.d,TP)-q.offer):0;}
@@ -1324,8 +1418,9 @@ function cSelect(k){cqI=k;$('#cdoff').value=CQ[k].offer;cUpd();}
 function cUpd(){const q=CQ[cqI],L=lim(q.i,q.r);q.offer=+$('#cdoff').value||0;const over=q.offer>L.hi,prof=cProf(q);
  $('#cstaff').hidden=cview;$('#ccust').hidden=!cview;$('#cled').hidden=cview;$('#ctog').textContent=cview?'スタッフ表示に戻す':'お客様に見せる表示';
  $('#cdnm').textContent=PR[q.i].item+'（状態'+q.r+'）';$('#cdhi').textContent=yen(L.hi)+' 円';
- $('#cdst').innerHTML=statHtml([['真ん中の価格',yen(L.m)+'円','状態'+q.r+'・架空データ'],['件数',L.n+'件','お試しの架空データ'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]);
+ $('#cdst').innerHTML=statHtml([[rLo(L.a),L.lo?yen(L.lo)+'円':'—',L.rm==='x'?'件数が少なく幅は出せません':'状態'+q.r+'・直近90日'],['平均',L.rm==='x'?'—':yen(L.avg)+'円',''],[rHi(L.a),L.up?yen(L.up)+'円':'—',''],['真ん中の価格',yen(L.m)+'円','状態'+q.r+'・架空データ'],['件数',L.n+'件','お試しの架空データ'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]);
  $('#cdoff').classList.toggle('over',over);const al=$('#cdal');al.className=over?'alert':'';al.textContent=over?'上限を超えています（+'+yen(q.offer-L.hi)+'円）':'';
+ if(L.loHi!=null&&q.offer>L.loHi){al.className='alert';al.textContent+=(al.textContent?'　':'')+rLo(L.a)+'で売れると赤字です（'+rLo(L.a)+'基準の上限 '+yen(L.loHi)+'円を超えています）。';}
  $('#cdcalc').innerHTML=[['提示額',yen(q.offer)+' 円'],['見込み利益（目安）',sgn(prof)+' 円']].map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('');
  const cl=$('#cl');cl.textContent='';let tot=0,tp=0;
  CQ.forEach((x,k)=>{tot+=x.offer;tp+=cProf(x);const d=el('div','cand'+(k===cqI?' sel':''));d.dataset.cq=k;const t=el('div');t.style.minWidth='0';t.appendChild(el('b',null,PR[x.i].short));t.appendChild(el('div','meta','状態'+x.r+'・提示 '+yen(x.offer)+' 円'));d.appendChild(t);cl.appendChild(d);});
@@ -1336,28 +1431,30 @@ function cUpd(){const q=CQ[cqI],L=lim(q.i,q.r);q.offer=+$('#cdoff').value||0;con
 $('#cl').onclick=e=>{const d=e.target.closest('[data-cq]');if(d)cSelect(+d.dataset.cq);};
 $('#cdoff').oninput=cUpd;
 $('#ctog').onclick=()=>{cview=!cview;cUpd();scrollTo(0,0);};
-$('#cled').onclick=()=>{const q=CQ[cqI];qi=q.i;qc=0;qr=q.r;qchk=[true,true,true,true];syncFromQuick();renderQuick();$('#lb').value=q.offer;updId();$('#dmsg').textContent='窓口の提示額を入れました。相手方と本人確認を入れてください（例）。';show('s4');};
+$('#cled').onclick=()=>{sendPend(CQ.map((q,k)=>({key:'w'+k,i:q.i,item:PR[q.i].item,feat:PR[q.i].feat,offer:q.offer,s:'s13',from:'窓口・状態'+q.r})),'窓口の '+CQ.length+' 点を台帳に届けました。1点ずつ「入力する」を押し、相手方と本人確認を確かめて保存してください（例です。保存されません）。');};
 
 /* 出張 */
-const VS=[{i:0,r:'B',ph:1},{i:1,r:'B',ph:0},{i:2,r:'A',ph:2}].map(x=>({...x,offer:f100(lim(x.i,x.r).hi*.9)}));
-function vTot(){const t=VS.reduce((s,x)=>s+x.offer,0);$('#vtot').textContent=yen(t)+' 円';return t;}
+let vuid=3;const VS=[{i:0,r:'B',ph:1},{i:1,r:'B',ph:0},{i:2,r:'A',ph:2}].map((x,k)=>({...x,uid:k+1,offer:f100(lim(x.i,x.r).hi*.9)}));
+function vTot(){const t=VS.reduce((s,x)=>s+x.offer,0);$('#vtot').textContent=yen(t)+' 円';$('#vqb').disabled=$('#vled').disabled=!VS.length;return t;}
 function renderVisit(){const box=$('#vl');box.textContent='';
- VS.forEach((x,k)=>{const r=el('div','vrow'),h=el('div','cli');h.appendChild(el('b',null,PR[x.i].item));r.appendChild(h);
+ VS.forEach((x,k)=>{const r=el('div','vrow'),h=el('div','cli');h.appendChild(el('b',null,PR[x.i].item+'（状態'+x.r+'）'));const rm=el('button',null,'外す');rm.dataset.vx=k;h.appendChild(rm);r.appendChild(h);
   const lb=el('label',null,'提示額（円）');lb.style.margin='8px 0 4px';const inp=document.createElement('input');inp.type='number';inp.inputMode='numeric';inp.className='bigin';inp.style.fontSize='26px';inp.value=x.offer;inp.dataset.v=k;lb.appendChild(inp);r.appendChild(lb);
   const ph=el('div','ph');for(let n=1;n<=x.ph;n++)ph.appendChild(el('div','thumb','写真'+n));
-  const ab=el('button',null,'写真を足す（例）');ab.dataset.vp=k;ab.disabled=x.ph>=4;ph.appendChild(ab);r.appendChild(ph);box.appendChild(r);});vTot();}
+  const ab=el('button',null,'写真を足す（例）');ab.dataset.vp=k;ab.disabled=x.ph>=4;ph.appendChild(ab);r.appendChild(ph);box.appendChild(r);});if(!VS.length)box.appendChild(el('p','note','品がありません。下の「品を足す」から足してください。'));vTot();}
 $('#vl').oninput=e=>{const i=e.target.closest('[data-v]');if(i){VS[+i.dataset.v].offer=+i.value||0;vTot();}};
-$('#vl').onclick=e=>{const b=e.target.closest('[data-vp]');if(b){const x=VS[+b.dataset.vp];if(x.ph<4){x.ph++;renderVisit();}}};
+$('#vl').onclick=e=>{const vx=e.target.closest('[data-vx]');if(vx){const x=VS.splice(+vx.dataset.vx,1)[0];const pk=PEND.findIndex(p=>p.key==='v'+x.uid);if(pk>=0){if(CUR.pid===PEND[pk].pid)ledClear();PEND.splice(pk,1);}$('#vq').hidden=true;renderVisit();return;}const b=e.target.closest('[data-vp]');if(b){const x=VS[+b.dataset.vp];if(x.ph<4){x.ph++;renderVisit();}}};
 $('#vqb').onclick=()=>{const q=$('#vq');q.hidden=false;q.textContent='';const tot=vTot();
  q.appendChild(el('span','pillon','見積書の例'));q.appendChild(el('h3','', '買取見積書'));
  q.appendChild(el('div','note','日付：2026-10-16　／　お客様：　　　　　　　様（例・空欄）'));
  VS.forEach(x=>{const l=el('div','cli');l.style.cssText='padding:8px 0;border-bottom:1px solid var(--line)';l.appendChild(el('span',null,PR[x.i].item+'（状態'+x.r+'・写真'+x.ph+'枚）'));l.appendChild(el('b',null,yen(x.offer)+' 円'));q.appendChild(l);});
  const t=el('div','cli');t.style.cssText='padding:10px 0;font-size:20px';t.appendChild(el('b',null,'合計'));t.appendChild(el('b',null,yen(tot)+' 円'));q.appendChild(t);
- q.appendChild(el('div','note',tot>=10000?'1万円以上のため、本人確認書類の確認が必要です。　確認：□ 運転免許証　□ マイナンバーカード　□ その他':'本人確認：この金額・品目では必須の対象ではない見込み（公開前に条文で確認）'));
+ q.appendChild(el('div','note',tot>=10000?'1万円以上のため、本人確認書類の確認が必要です。　確認：□ 運転免許証　□ マイナンバーカード　□ その他':'本人確認：1万円未満でも対象の品目なら必要です。品目は最新の警察の案内で確認してください。'));
  q.appendChild(el('div','sg','お客様の署名欄（例）'));
  q.appendChild(el('p','note','この書面は例です。記載項目・書式は未確定で、法令の確認はまだ済んでいません。買取額は目安で、状態の最終確認のうえ確定します。'));
  q.scrollIntoView({block:'center'});};
-$('#vled').onclick=()=>{const x=VS[0];qi=x.i;qc=0;qr=x.r;qchk=[true,true,true,true];syncFromQuick();renderQuick();$('#lb').value=x.offer;updId();$('#dmsg').textContent='出張の提示額を入れました。相手方と本人確認を入れてください（例）。';show('s4');};
+PR.forEach((p,k)=>{const o=el('option',null,p.short);o.value=k;$('#vam').appendChild(o);});
+$('#vaddb').onclick=()=>{const i=+$('#vam').value,r=$('#var').value;VS.push({uid:++vuid,i,r,ph:0,offer:f100(lim(i,r).hi*.9)});$('#vq').hidden=true;renderVisit();};
+$('#vled').onclick=()=>{if(!VS.length)return;sendPend(VS.map(x=>({key:'v'+x.uid,i:x.i,item:PR[x.i].item,feat:PR[x.i].feat,offer:x.offer,s:'s14',from:'出張・状態'+x.r})),'出張の '+VS.length+' 点を台帳に届けました。1点ずつ「入力する」を押し、相手方と本人確認を確かめて保存してください（例です。保存されません）。');};
 
 /* 整理：売れた価格の一括入力 */
 function renderOffice(){const f=$('#of').value;
