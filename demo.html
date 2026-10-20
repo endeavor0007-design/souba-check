@@ -23,7 +23,10 @@ main,.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;position:relative}
 .card>.tag{top:6px;right:8px}
 h2{font-size:18px;margin:6px 0 4px}h3{font-size:16px;margin:0 0 8px}
-.note{color:var(--sub);font-size:13px}
+.note{color:var(--sub);font-size:16px}
+button.trial{background:repeating-linear-gradient(45deg,var(--soft) 0 8px,var(--card) 8px 16px);border:2px dashed var(--warn);color:var(--ink);font-weight:700}
+button.trial::after{content:"（お試し専用・実物にはありません）";display:block;font-size:15px;font-weight:400;color:var(--sub)}
+#aurk button{min-width:64px;font-size:16px;min-height:48px}
 label{display:block;font-size:14px;color:var(--sub);margin:10px 0 4px}
 input,select,textarea{width:100%;font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);min-height:46px}
 button{font:inherit;min-height:46px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;cursor:pointer}
@@ -622,7 +625,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div class="card" id="lgsent" hidden><h3>ログイン用のリンクを送りました（例）</h3>
 <p>送り先：<b id="lgto"></b></p>
 <p class="note">実際には送っていません。お試し版では、下のボタンでメールのリンクを押した場合の画面に進みます。</p>
-<button class="pri" id="lgopen" style="width:100%">メールのリンクを押した（例）</button></div>
+<button class="trial" id="lgopen" style="width:100%">メールのリンクを押した（例）</button></div>
 <div class="card" id="lgdone" hidden><h3>ログインしました（例）</h3>
 <p><b id="lgname"></b> さん、ようこそ。</p>
 <button class="pri" data-go="s10" style="width:100%">マイページを開く</button></div>
@@ -678,7 +681,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <input id="tgp" class="bigin" type="number" inputmode="numeric" value="9800" aria-label="値札の額">
 <div class="card kbig" id="tgres" style="margin:8px 0"></div>
 <label class="chk"><input type="checkbox" id="tgc" checked><span>型番・色・付属品を見た<em>簡易の確認です。違う型番だと判定が外れます。</em></span></label>
-<div class="rk4" id="tgr" style="margin-top:8px"></div></div>
+<p class="note" style="margin:8px 0 0">S＝新品同様／A＝美品・付属品そろう／B＝使用感あり・動作OK／C＝傷・欠品・難あり</p><div class="rk4" id="tgr" style="margin-top:8px"></div></div>
 <div class="card"><h3>この型番の自分の実績</h3><div id="tgmine" class="note"></div></div>
 <div class="card"><h3>直近の判定</h3><ul class="log" id="tgh"></ul><p class="note" id="tgdone"></p></div>
 <div class="warnbox">過去の売り切れから出した目安です（見込み利益は手数料10%・送料と梱包費（余裕込み・サイズは③で変更）込みの計算）。最終判断はご自身で。</div>
@@ -690,10 +693,10 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <h2>せり（古物市場）</h2>
 <p class="note" style="margin-top:0">出品番号と上限は、せりの前に決めておきます。落札はボタン1回で記録します。</p>
 <div class="two">
-<div class="card"><h3>出品番号の一覧</h3><div id="aul"></div></div>
+<div class="card"><h3>出品番号の一覧</h3><div id="aul"></div><button id="auout" style="width:100%;margin-top:10px">一覧にない品が出たとき</button><div class="warnbox" id="auoutbox" hidden style="font-size:16px">事前に調べていない品は、上限が出ません。<ol style="margin:6px 0 0;padding-left:1.4em"><li>せりの間は見送るのが目安です（その場で調べると次の品に間に合いません）</li><li>気になった品は出品番号を控え、せりの後に「調べる」で相場を確かめて、次回の一覧に入れます</li></ol></div></div>
 <div>
 <div class="card kbig"><div class="note">出品番号</div><div class="big" id="aun" style="font-size:44px"></div><div id="aunm" style="font-size:18px;font-weight:700"></div><div class="note" id="aulot"></div>
-<div class="note" style="margin-top:8px;font-size:15px">自分の上限（状態B〈ふつう〉の場合・市場の手数料込みで逆算）</div><div class="big" id="auhi" style="font-size:56px"></div>
+<div class="note" style="margin-top:8px">品の状態（下見で決める）：S＝新品同様／A＝美品・付属品そろう／B＝使用感あり・動作OK／C＝傷・欠品・難あり</div><div class="seg" id="aurk" style="flex-wrap:wrap"><button data-r="S">S 新品同様</button><button data-r="A">A 美品</button><button class="on" data-r="B">B 使用感</button><button data-r="C">C 傷・難</button></div><div class="note" style="margin-top:8px">自分の上限（状態<span id="aurkn">B</span>の場合・市場の手数料込みで逆算）</div><div class="big" id="auhi" style="font-size:56px"></div>
 <div class="stats rs" id="aust" style="margin-top:8px"></div></div>
 <div class="card"><label style="margin-top:0">いまの額・落札額（円）</label>
 <input id="aub" class="bigin" type="number" inputmode="numeric" placeholder="額を入れる" aria-label="落札額">
@@ -703,10 +706,10 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <div><label>市場の手数料（%）</label><input id="auf" type="number" inputmode="decimal" value="5"></div></div>
 <p class="note">手数料の料率は市場ごとに違います。5%はお試しの仮の数字で、市場の規約に合わせて自分で設定します。</p>
 <div class="calc" id="aucalc"></div><p class="note" id="aumsg"></p></div>
-<div class="actbar"><button id="aumax">上限まで</button><button class="pri" id="aubtn">落札（記録する）</button></div>
+<div class="actbar"><button id="aumax">上限の額を入れる</button><button class="pri" id="aubtn">落札（記録する）</button></div>
 </div></div>
 <div class="card"><h3>今日の落札の記録</h3>
-<div class="tablewrap"><table class="cards"><thead><tr><th>番号</th><th>品名</th><th>ロット<abbr class="tip" tabindex="0" role="button" data-t="ロット：まとめて落札した一山の品。1点ずつの原価は按分で出します。">?</abbr></th><th class="num">落札額</th><th class="num">手数料込みの原価</th><th>売主</th><th></th></tr></thead><tbody id="aurt"></tbody></table></div>
+<div class="tablewrap"><table class="cards"><thead><tr><th>番号</th><th>品名</th><th>ロット<abbr class="tip" tabindex="0" role="button" data-t="ロット：まとめて落札した一山の品。1点ずつの原価は按分で出します。">?</abbr></th><th>状態</th><th class="num">落札額</th><th class="num">手数料込みの原価</th><th>売主</th><th></th></tr></thead><tbody id="aurt"></tbody></table></div>
 <p class="note">市場の取引票と合わせて保管してください。記録の義務や免除の有無は、警察・市場主に確認してください。ロットの按分<abbr class="tip" tabindex="0" role="button" data-t="按分：まとめ買いの代金を、品ごとの見込み価値の比で割り振ること。">?</abbr>は目安の計算です。</p></div>
 </section>
 
@@ -757,7 +760,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 </main>
 <div class="wrap"><details id="devbox" hidden style="margin:28px 0 8px"><summary>お試しの切り替え（開発中の確認用）</summary>
 <div class="card"><p class="note">お試しの見え方を切り替えるボタンです。実際の画面にはありません。</p>
-<div class="row"><button id="unconf">【お試し】確認する前の画面を見る</button><button id="emptyb">【お試し】データがないときの画面を見る</button></div>
+<div class="row"><button class="trial" id="unconf">【お試し】確認する前の画面を見る</button><button class="trial" id="emptyb">【お試し】データがないときの画面を見る</button></div>
 <label class="swl"><input type="checkbox" id="tagsw"><span>開発用：番号を表示（仕様書の番号 P1-1 など）</span></label></div></details></div>
 
 <script>
@@ -1181,7 +1184,7 @@ function renderQuick(){const p=PR[qi],ck=['型番','色','世代','付属品'];
  $('#khint').textContent='型番：'+p.mh+'／色：'+p.color+'／世代：'+p.gen+'／付属品：'+p.acc;
  $('#krk').innerHTML=[['S','新品同様'],['A','美品'],['B','使用感'],['C','傷・難']].map(r=>'<button data-kr="'+r[0]+'" class="'+(qr===r[0]?'on':'')+'">'+r[0]+'<small>'+r[1]+'</small></button>').join('');
  const L=qr?lim(qi,qr):null,okc=qchk.every(Boolean),ready=okc&&qr&&qc===0&&L&&L.m>0;
- $('#kst').innerHTML=(L&&qc===0?[['真ん中の価格',L.m?yen(L.m)+'円':'—','状態'+qr+'・例'],['件数',L.n+'件','除外後'],['売れるまで','ふつう '+L.d+'日','例']]:[['真ん中の価格','—',''],['件数','—',''],['売れるまで','—','']]).map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
+ $('#kst').innerHTML=(L&&qc===0?[['真ん中の価格',L.m?yen(L.m)+'円':'—','状態'+qr+'・架空データ'],['件数',L.n+'件','除外後'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]:[['真ん中の価格','—',''],['件数','—',''],['売れるまで','—','']]).map(x=>'<div class="stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="s">'+x[2]+'</div></div>').join('');
  $('#kwarn').innerHTML=qc!==0?'<div class="warnbox">このお試し版では、選んだ候補の相場は未対応です。先頭の候補を選ぶと表示します。</div>':!qr?'<div class="warnbox">状態ランクを選んでください。</div>':(L&&L.n<5?'<div class="warnbox">'+(L.n?'件数が5件未満のため「参考値」です。':'この状態の記録がありません。③で売れそうな価格を自分で入れてください。')+'</div>':'');
  $('#kmx').textContent=ready?yen(L.hi)+' 円':'—';
  $('#krg').textContent=ready?'真ん中の価格 '+yen(L.m)+'円から、手数料10%・送料と梱包費（'+SHIPcalc(qi).z+'サイズ・余裕込み 計'+yen(L.sh)+'円）・利益2,500円・売れるまでの日数分を引いた目安':(okc?'':'4つの確認をすべて通すと出ます。');
@@ -1248,7 +1251,8 @@ function renderTag(){
  $('#tgr').innerHTML=[['S','新品同様'],['A','美品'],['B','使用感'],['C','傷・難']].map(r=>'<button data-tr="'+r[0]+'" class="'+(tgR===r[0]?'on':'')+'">'+r[0]+'<small>'+r[1]+'</small></button>').join('');
  const c=tgCalc(),ok=$('#tgc').checked&&c.price>0,box=$('#tgres');box.textContent='';
  if(!ok){box.appendChild(el('div','note',c.price>0?'確認にチェックを入れると、判定が出ます。':'値札の額を入れると、判定が出ます。'));}
- else{box.appendChild(el('div','verdict '+(c.buy?'vy':'vn'),c.buy?'買い':'見送り'));
+ else{const jp=el('div','note','判定した品：');jp.appendChild(el('b','',PR[tgI].short));box.appendChild(jp);
+  box.appendChild(el('div','verdict '+(c.buy?'vy':'vn'),c.buy?'買い':'見送り'));
   box.appendChild(el('div','vl','見込み利益 '+sgn(c.prof)+' 円（目安）'));
   box.appendChild(el('div','vl','売れるまで ふつう '+c.L.d+' 日'));
   box.appendChild(el('p','note','この値札までなら買ってよい目安：'+yen(c.L.hi)+' 円（状態'+tgR+'）'+(c.buy?'':'。いまの値札だと、ほしい利益 '+yen(PF)+' 円に届きません。')));}
@@ -1258,7 +1262,7 @@ function renderTag(){
  const ul=$('#tgh');ul.textContent='';if(!tgH.length)ul.appendChild(el('li','note','まだ判定の履歴はありません。'));tgH.slice(0,5).forEach(t=>ul.appendChild(el('li',null,t)));}
 $('#s11').addEventListener('click',e=>{const a=e.target.closest('[data-tg]'),r=e.target.closest('[data-tr]');
  if(a){tgI=+a.dataset.tg;$('#tgm').value=PR[tgI].model;$('#tgnote').textContent='';}if(r)tgR=r.dataset.tr;if(a||r)renderTag();});
-$('#tgm').oninput=e=>{const i=match(e.target.value);if(i<0){$('#tgnote').textContent=e.target.value.trim()?NOHIT(e.target.value):'';return;}$('#tgnote').textContent='';tgI=i;renderTag();};
+$('#tgm').oninput=e=>{const i=match(e.target.value);if(i<0){$('#tgnote').textContent=e.target.value.trim()?NOHIT(e.target.value):'';const b=$('#tgres');b.textContent='';b.appendChild(el('div','note','型番が見つからないため判定できません'));$('#tgbuy').disabled=true;$('#tgskip').disabled=true;return;}$('#tgnote').textContent='';tgI=i;renderTag();};
 function tgReveal(){setTimeout(()=>{const b=$('#tgres');if(!b||$('#tgbuy').disabled)return;const r=b.getBoundingClientRect(),ymax=innerHeight-170;if(r.top<0||r.bottom>ymax)scrollBy({top:r.bottom-ymax+12,behavior:'smooth'});},60);}
 $('#tgp').oninput=()=>{renderTag();tgReveal();};$('#tgc').onchange=()=>{renderTag();tgReveal();};
 $('#hmenu').onclick=()=>{const h=document.querySelector('header'),o=h.classList.toggle('mopen');$('#hmenu').textContent=o?'✕ 閉じる':'≡ メニュー';$('#hmenu').setAttribute('aria-expanded',o);};
@@ -1270,33 +1274,35 @@ $('#tgbuy').onclick=()=>{const c=tgCalc();tgH.unshift(PR[tgI].short+'・値札 '
 
 /* せり */
 const AU=[{no:'A-101',nm:'WH-1000XM4 ブラック',i:0,lot:1},{no:'A-102',nm:'Switch 有機EL ホワイト（まとめ）',i:1,lot:3},{no:'A-105',nm:'Kiss X10 ボディ',i:2,lot:1},{no:'A-108',nm:'WH-1000XM4 ブラック（まとめ）',i:0,lot:4},{no:'A-112',nm:'Switch 有機EL ホワイト',i:1,lot:1}];
-const auRec=[{no:'A-098',nm:'Switch 旧型',lot:1,bid:8600,f:5,cost:9030,seller:'S-1180',over:false}];let auI=0;const auBid={};
+const auRec=[{no:'A-098',nm:'Switch 旧型',lot:1,bid:8600,f:5,cost:9030,seller:'S-1180',over:false}];let auI=0;const auRk={},auBid={};const rk=a=>auRk[a.no]||'B';
 /* v12：上限は市場の手数料込みで逆算（落札額×(1+手数料) が事前の上限を超えないように） */
 const auFee=()=>{const i=document.getElementById('auf');return i?(+i.value||0)/100:0.05;};
-const auHi=a=>Math.floor(lim(a.i,'B').hi*a.lot/(1+auFee())/100)*100;
+const auHi=a=>Math.floor(lim(a.i,rk(a)).hi*a.lot/(1+auFee())/100)*100;
 function renderAuList(){const box=$('#aul');box.textContent='';AU.forEach((a,k)=>{const d=el('div','cand'+(k===auI?' sel':''));d.dataset.au=k;const t=el('div');t.style.minWidth='0';
- t.appendChild(el('b',null,a.no+'　'+a.nm));t.appendChild(el('div','meta','ロット '+a.lot+'点・自分の上限 '+yen(auHi(a))+' 円'));
+ t.appendChild(el('b',null,a.no+'　'+a.nm));t.appendChild(el('div','meta','ロット '+a.lot+'点・状態'+rk(a)+(auRk[a.no]?'':'（仮）')+'・上限 '+yen(auHi(a))+' 円'));
  if(auRec.some(r=>r.no===a.no))t.appendChild(el('span','badge b-warn','落札済み'));d.appendChild(t);box.appendChild(d);});}
-function renderAuDetail(){const a=AU[auI],L=lim(a.i,'B');
+function renderAuDetail(){const a=AU[auI],L=lim(a.i,rk(a));$('#aurkn').textContent=rk(a)+(auRk[a.no]?'':'（仮・下見で選んでください）');$$('#aurk button').forEach(x=>x.classList.toggle('on',x.dataset.r===rk(a)));
  $('#aun').textContent=a.no;$('#aunm').textContent=a.nm;$('#aulot').textContent='ロット '+a.lot+' 点'+(a.lot>1?'（落札額は点数で按分して、1点ごとの原価にします）':'');
  $('#auhi').textContent=yen(auHi(a))+' 円';
- $('#aust').innerHTML=statHtml([['真ん中の価格（1点）',yen(L.m)+'円','状態B・直近90日'],['件数',L.n+'件','例'],['売れるまで','ふつう '+L.d+'日','例']]);
+ $('#aust').innerHTML=statHtml([['真ん中の価格（1点）',yen(L.m)+'円','状態'+rk(a)+'・直近90日'],['件数',L.n+'件','お試しの架空データ'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]);
  $('#aub').value=auBid[a.no]||'';auUpd();}
-function auUpd(){const a=AU[auI],hi=auHi(a),b=+$('#aub').value||0,f=(+$('#auf').value||0)/100,L=lim(a.i,'B');auBid[a.no]=$('#aub').value;
+function auUpd(){const a=AU[auI],hi=auHi(a),b=+$('#aub').value||0,f=(+$('#auf').value||0)/100,L=lim(a.i,rk(a));auBid[a.no]=$('#aub').value;
  const over=b>hi;$('#aub').classList.toggle('over',over);
  const al=$('#aualert');al.className=over?'alert':(b?'okline':'');
  al.textContent=over?'上限を超えています（+'+yen(b-hi)+'円）。上限は事前に決めた額です。':(b?'上限の範囲内です（あと '+yen(hi-b)+' 円）':'');
  const cost=Math.round(b*(1+f)),prof=L.m?Math.round(a.lot*(L.m*(1-FEE)-L.sh-slow(L.m,L.d,TP))-cost):0;
  $('#aucalc').innerHTML=[['落札額',yen(b)+' 円'],['市場の手数料（'+(+$('#auf').value||0)+'%）','+ '+yen(b*f)+' 円'],['実質原価（手数料込み）',yen(cost)+' 円'],a.lot>1?['1点あたりの原価（按分）',yen(cost/a.lot)+' 円']:null,['見込み利益（目安）',b?sgn(prof)+' 円':'—']].filter(Boolean).map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('');
  $('#aubtn').textContent=over?'上限超えで落札を記録':'落札（記録する）';$('#aubtn').classList.toggle('ng',over);$('#aubtn').disabled=!b;}
-function renderAuRec(){$('#aurt').innerHTML=auRec.map(r=>'<tr>'+td('番号',esc(r.no))+td('品名',esc(r.nm))+td('ロット',r.lot+'点')+td('落札額',yen(r.bid),'num')+td('手数料込みの原価',yen(r.cost)+'（'+r.f+'%）','num')+td('売主',esc(r.seller||'（未入力）'))+td('メモ',r.over?'<span class="badge b-warn">上限超え</span>':'—')+'</tr>').join('');}
+function renderAuRec(){$('#aurt').innerHTML=auRec.map(r=>'<tr>'+td('番号',esc(r.no))+td('品名',esc(r.nm))+td('ロット',r.lot+'点')+td('状態',r.rk?'状態'+r.rk:'—')+td('落札額',yen(r.bid),'num')+td('手数料込みの原価',yen(r.cost)+'（'+r.f+'%）','num')+td('売主',esc(r.seller||'（未入力）'))+td('メモ',r.over?'<span class="badge b-warn">上限超え</span>':'—')+'</tr>').join('');}
 $('#auf').addEventListener('input',()=>{renderAuList();$('#auhi').textContent=yen(auHi(AU[auI]))+' 円';});
+$('#aurk').onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;auRk[AU[auI].no]=b.dataset.r;renderAuList();renderAuDetail();};
+$('#auout').onclick=()=>{const x=$('#auoutbox');x.hidden=!x.hidden;};
 $('#aul').onclick=e=>{const d=e.target.closest('[data-au]');if(!d)return;auI=+d.dataset.au;$('#aumsg').textContent='';renderAuList();renderAuDetail();};
 $('#aub').oninput=auUpd;$('#auf').oninput=auUpd;
 $('#s12').addEventListener('click',e=>{const s=e.target.closest('[data-as]');if(s){$('#aub').value=Math.max(0,(+$('#aub').value||0)+(+s.dataset.as));auUpd();}});
 $('#aumax').onclick=()=>{$('#aub').value=auHi(AU[auI]);auUpd();};
 $('#aubtn').onclick=()=>{const a=AU[auI],b=+$('#aub').value;if(!b)return;const f=+$('#auf').value||0;
- auRec.unshift({no:a.no,nm:a.nm,lot:a.lot,bid:b,f:f,cost:Math.round(b*(1+f/100)),seller:$('#aus').value.trim(),over:b>auHi(a)});
+ auRec.unshift({no:a.no,nm:a.nm,lot:a.lot,bid:b,f:f,cost:Math.round(b*(1+f/100)),seller:$('#aus').value.trim(),rk:rk(a),over:b>auHi(a)});$('#aus').value='';
  auBid[a.no]='';$('#aub').value='';$('#aumsg').textContent='記録しました（例です。保存されません）。';renderAuList();auUpd();renderAuRec();};
 
 /* 窓口 */
@@ -1306,7 +1312,7 @@ function cSelect(k){cqI=k;$('#cdoff').value=CQ[k].offer;cUpd();}
 function cUpd(){const q=CQ[cqI],L=lim(q.i,q.r);q.offer=+$('#cdoff').value||0;const over=q.offer>L.hi,prof=cProf(q);
  $('#cstaff').hidden=cview;$('#ccust').hidden=!cview;$('#cled').hidden=cview;$('#ctog').textContent=cview?'スタッフ表示に戻す':'お客様に見せる表示';
  $('#cdnm').textContent=PR[q.i].item+'（状態'+q.r+'）';$('#cdhi').textContent=yen(L.hi)+' 円';
- $('#cdst').innerHTML=statHtml([['真ん中の価格',yen(L.m)+'円','状態'+q.r],['件数',L.n+'件','例'],['売れるまで','ふつう '+L.d+'日','例']]);
+ $('#cdst').innerHTML=statHtml([['真ん中の価格',yen(L.m)+'円','状態'+q.r+'・架空データ'],['件数',L.n+'件','お試しの架空データ'],['売れるまで','ふつう '+L.d+'日','お試しの架空データ']]);
  $('#cdoff').classList.toggle('over',over);const al=$('#cdal');al.className=over?'alert':'';al.textContent=over?'上限を超えています（+'+yen(q.offer-L.hi)+'円）':'';
  $('#cdcalc').innerHTML=[['提示額',yen(q.offer)+' 円'],['見込み利益（目安）',sgn(prof)+' 円']].map(x=>'<div class="l"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('');
  const cl=$('#cl');cl.textContent='';let tot=0,tp=0;
@@ -1357,7 +1363,8 @@ $('#oapp').onclick=()=>{let n=0;$$('#otb [data-oh]').forEach(i=>{const h=H.find(
 function renderAll(){renderMemos();renderMarket();renderCalc();renderLedger();renderHist();}
 renderCands();renderChecks(true);$('#rankSel').value='B';upd();$('#fc').value='B';fillLedger();setLock();setEmpty();renderAll();
 qchk=[true,true,true,true];qr='B';renderQuick();renderBatch();renderCsv();
-show('s16');
+{const m=location.hash.match(/scene=(\w+)/);if(m&&SC[m[1]])setScene(m[1]);else show('s16');}
+addEventListener('hashchange',()=>{const m=location.hash.match(/scene=(\w+)/);if(m&&SC[m[1]])setScene(m[1]);});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(renderAll,150);});
 </script>
 <script data-goatcounter="https://security-madoguchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

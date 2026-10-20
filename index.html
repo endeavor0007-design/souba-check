@@ -39,10 +39,12 @@ ul{padding-left:1.2em}
 <body>
 <main>
 <span class="badge">開発中・無料のお試し</span>
-<h1>型番を1回入れるだけで、売れた値段の検索と買取額の上限の計算ができる</h1>
-<p>店頭や出張買取の「いくらで買っていいか」を、その場で決めるための道具です。メルカリ・ヤフオク・ラクマなどの売り切れ・落札の検索をまとめて開き、手数料と送料を引いた買取額の上限を計算します。</p>
+<h1>お客様の前で、いくらまで買ってよいかの目安を出す</h1>
+<p>型番を入れると、店頭や出張買取の「いくらで買っていいか」を、その場で決めるための道具です。メルカリ・ヤフオク・ラクマなどの売り切れ・落札の検索をまとめて開き、売れた値段を見てあなたが入れた売値から、手数料と送料を引いた買取額の上限を計算します。</p>
 
-<p><a class="btn" href="demo.html" style="font-size:1.1rem;padding:14px 18px">完成形のイメージを触ってみる（お試し用の架空データ）</a></p>
+<p><a class="btn" href="demo.html#scene=counter" style="font-size:1.1rem;padding:14px 18px">店頭の買取で試してみる（お試し用の架空データ）</a></p>
+<p>ほかの場面から：<a href="demo.html#scene=store">店で仕入れる</a>／<a href="demo.html#scene=market">古物市場のせり</a>／<a href="demo.html#scene=visit">出張買取</a>／<a href="demo.html#scene=office">家・事務所で整理</a></p>
+<p><a href="demo.html">場面を選ばずに全体を見る</a></p>
 <p class="small">開発は主にAIが担当しています。まだ開発中のため、画面や機能は変わることがあります。お試し画面の相場や要望の数字はすべて架空です（相場データの提供元とはまだ契約していません）。</p>
 
 <h2>1. 売れた値段をまとめて調べる</h2>
@@ -58,10 +60,13 @@ ul{padding-left:1.2em}
 <div class="card">
   <div class="row">
     <div><label for="sell">売れそうな価格（円）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
+  </div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">手数料・送料・利益を変える（初期値：手数料10%・送料750円・利益20%）</summary>
+  <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
     <div><label for="margin">残したい利益（売値の何%か）</label><input id="margin" type="text" inputmode="decimal" value="20"></div>
-  </div>
+  </div></details>
   <p>買取額の上限：<span class="result" id="out">―</span></p>
   <p class="small" id="msg" role="status"></p>
   <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確認してから決めてください。</p>
