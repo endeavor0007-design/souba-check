@@ -7,7 +7,7 @@
   var ENDPOINT = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701";
   var seq = 0;
   // 本体ではなく付属品・消耗品の出品によく出る言葉（楽天の除外語と、画面側の二重の確認に使う）
-  var NG = ["フィルム","ケース","カバー","イヤーパッド","イヤーパット","イヤークッション","交換用","互換","保護","シール","スキン","ステッカー","ケーブル","充電器","アダプタ","パーツ","部品","レンタル"];
+  var NG = ["フィルム","ケース","カバー","イヤーパッド","イヤーパット","イヤークッション","交換用","互換","保護","シール","スキン","ステッカー","ケーブル","充電器","アダプタ","パーツ","部品","レンタル","プロテクター","ガラス","専用","ガイド","ストラップ","スタンド","収納"];
   function yen(n){ return Math.round(n).toLocaleString("ja-JP") + "円"; }
   function el(tag, text, cls){ var e = document.createElement(tag); if(text != null) e.textContent = text; if(cls) e.className = cls; return e; }
   function show(nodes){ box.innerHTML = ""; nodes.forEach(function(n){ box.appendChild(n); }); box.hidden = false; }
