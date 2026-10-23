@@ -1496,6 +1496,7 @@ qchk=[true,true,true,true];qr='B';renderQuick();renderBatch();renderCsv();
 addEventListener('hashchange',()=>{const m=location.hash.match(/scene=(\w+)/);if(m&&SC[m[1]])setScene(m[1]);});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(renderAll,150);});
 </script>
+<script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://security-madoguchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
