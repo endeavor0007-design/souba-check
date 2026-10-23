@@ -12,6 +12,7 @@ var SITES = [
 function $(id){ return document.getElementById(id); }
 function makeLinks(){
   var raw = $("q").value.trim(), box = $("links");
+  if(window.soubaAutoPrice) window.soubaAutoPrice(raw);
   box.innerHTML = "";
   if(!raw) return;
   var q = encodeURIComponent(raw);

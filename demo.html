@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>相場チェック｜完成形のイメージ（お試し）</title>
+<title>【見本】相場チェック｜完成形のイメージ（架空のデータ）</title>
 <style>
 :root{--bg:#f3f5f8;--card:#fff;--ink:#1c2430;--sub:#5d6b7c;--line:#dde3ea;--pri:#1f5fae;--pri-ink:#fff;--ok:#1d7a4d;--warn:#b25e00;--ng:#b3261e;--band:#fff4d6;--band-ink:#6b4a00;--soft:#eaf1fb;--c1:#1f5fae;--c2:#c2410c;--c3:#7b3fa0;--c4:#0f766e;--c5:#a16207;--c6:#be185d;--c7:#4d7c0f}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1318;--card:#181e26;--ink:#e6ebf1;--sub:#9aa7b6;--line:#2b3440;--pri:#5b9bea;--pri-ink:#0b1320;--ok:#4cc38a;--warn:#e6a04a;--ng:#ff8a80;--band:#3a2f10;--band-ink:#ffdf91;--soft:#1b2736;--c1:#6aa8f5;--c2:#f08a5d;--c3:#c39be0;--c4:#4fd1c0;--c5:#e5c158;--c6:#f08cb8;--c7:#a3d65c}}
@@ -13,6 +13,8 @@
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,"Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif;padding-bottom:84px}
 .band{position:sticky;top:0;z-index:40;background:var(--band);color:var(--band-ink);font-size:13px;text-align:center;padding:6px 10px;border-bottom:1px solid var(--line);font-weight:600}
+.sampleband{background:#b3261e;color:#fff;font-size:14px;border-bottom:0}.sampleband a{color:#fff;text-decoration:underline;white-space:nowrap}
+body::after{content:"見本　SAMPLE　見本　SAMPLE";position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-24deg);font-size:min(11vw,96px);font-weight:900;color:#b3261e;opacity:.07;white-space:nowrap;pointer-events:none;z-index:30}
 header{display:flex;align-items:center;gap:10px;padding:12px 16px;max-width:1080px;margin:0 auto}
 header h1{font-size:19px;margin:0;flex:1}
 header small{color:var(--sub);font-weight:400;font-size:12px}
@@ -202,7 +204,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 </style>
 </head>
 <body>
-<div class="band">完成形のイメージ（お試し用の架空データ）・開発中　※数字・出品者はすべて架空です</div>
+<div class="band sampleband"><b>見本（サンプル）</b>です。数字・商品・出品者はすべて架空で、本当の相場は出ません　<a href="./">→ 今すぐ使える無料版（本物の検索）はこちら</a></div>
 <header><h1>相場チェック<br><small>調べる → 相場 → 買取額 → 台帳 を1か所で</small></h1><div class="hmob"><button id="hscene" data-go="s16"><b>相場チェック</b><small>場面を選ぶ</small></button><button class="themebtn" id="lgbtn2" aria-pressed="false" aria-label="文字を大きくする">文字 大</button><button class="themebtn" id="hmenu" data-go="s17">≡ メニュー</button></div><div class="hbtns" id="hbtns"><button class="themebtn" id="hmenu2" data-go="s17" style="font-weight:700">≡ メニュー</button><button class="themebtn" id="scbtn" data-go="s16" style="font-weight:700">場面を選ぶ</button><button class="themebtn pri" id="authbtn" data-go="s9" style="font-weight:700">ログイン／登録</button><button class="themebtn" data-go="s7">料金（いまは無料）</button><button class="themebtn" data-go="s8">友だちに紹介</button><button class="themebtn" id="themebtn">明るさ切替</button><button class="themebtn" id="lgbtn" aria-pressed="false">文字を大きく</button></div></header>
 <div class="wrap"><div class="infopc"><p class="offl">電波なしでも台帳と買取額の計算は使える予定（相場は前回分）。この試作では電波なしの動作は未確認です。</p>
 <p class="note" style="margin:0 0 6px;font-size:12px">ログインなしでも、早い査定と計算は使えます。メモ・履歴の保存、票、紹介はログインが必要です（要望の投稿は問い合わせフォームから）。</p></div>
@@ -673,7 +675,7 @@ button.ng{background:var(--ng);color:var(--pri-ink);border-color:var(--ng)}
 <label>明るさ</label><button id="mntheme" style="width:100%;min-height:48px">明るさ切替</button></div>
 <div class="card"><h3>システムの改修履歴（1日1行）</h3>
 <ul class="log" style="margin:0;padding-left:18px">
-<li>6.1（10/23）使い方のページを3つ追加（相場検索のやり方・買取価格の計算と早見表・仕入れ値の上限と損をしない売値）</li>
+<li>6.1〜6.2（10/23）使い方のページを3つ追加（相場検索のやり方・買取価格の計算と早見表・仕入れ値の上限と損をしない売値）／見本の画面に赤い帯と透かしを入れ、説明ページで「いま使える道具」と「見本」を分けた</li>
 <li>5.1〜5.7（10/20）説明ページから店頭の買取へ直行・見出しの言い換え・値札判定の誤判定を修正／共同開発メンバーは先着の割引特典だけと明記／せりで出品番号と上限を入れる欄・落札の取り消し／全画面に安値・平均・高値（上限は安値基準）・どの画面から買っても台帳に届く・台帳の訂正・押し間違えの戻し方／まだ作れていない機能を「検討中」に／メニュー（お知らせ・設定・改修履歴）を新設・要望の対応履歴を分けた／値札判定で品を替えたら確認チェックを外す・場面を選ぶ前のタブを5つに・台帳に届いた品を1押しで記録</li>
 <li>4.1（10/19）せりの状態ボタン・一覧にない品の案内・お試し専用の色分け</li>
 <li>3.1〜3.2（10/18）型番は完全一致のみ判定・電波なしの表示を正直に・「文字 大」・用語の注釈・この画面／言い換え・JANコード13桁・候補0件の案内・せりの上限を手数料込みに</li>

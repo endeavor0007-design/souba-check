@@ -27,6 +27,8 @@
   <input id="q" placeholder="例：WH-1000XM4 / 4548736112230">
   <div style="margin-top:10px"><button id="go" type="button">相場を調べる（検索リンクを作る）</button></div>
   <div class="links" id="links"></div>
+  <div id="autoprice" class="autoprice" hidden aria-live="polite"></div>
+  <p class="small">メルカリ・ヤフオクの売れた値段は、公式の公開の仕組み（API）がないため自動では取り出していません。ボタンで開いてご覧ください。</p>
   <p class="small">各サイトの検索結果は、あなたのブラウザで直接開きます。このページは価格を集めたり保存したりしません。</p>
 </div>
 
@@ -61,11 +63,13 @@
 </div>
 
 <div class="card">
-  <p><b>相場チェック（開発中）</b>は、古物商・せどりの方が、店頭や出張買取で「いくらまで買ってよいか」をその場で決めるための道具です。<a href="./">説明ページ</a>で、相場の検索と買取額の計算をまとめて使えます。<a href="demo.html">完成形のイメージ（お試し用の架空データ）</a>もご覧ください。</p>
+  <p><b>相場チェック（開発中）</b>は、古物商・せどりの方が、店頭や出張買取で「いくらまで買ってよいか」をその場で決めるための道具です。<a href="./">説明ページ</a>で、相場の検索と買取額の計算をまとめて使えます。<a href="demo.html">開発中の完成形の見本（架空のデータ）</a>もご覧ください。</p>
   <p class="small">メルカリ・ヤフオク・ラクマ等の名前は検索先の案内のために書いています。各社との提携・公認はありません。画面の項目名は各サイトの変更で変わることがあります。</p>
 </div>
 <p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
 </main>
+<script src="config.js"></script>
+<script src="prices.js"></script>
 <script src="tools.js"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://security-madoguchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

@@ -32,20 +32,21 @@ button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:
 .links a:hover{border-color:var(--accent)}
 .result{font-size:1.3rem;font-weight:700;color:var(--accent)}
 .small{font-size:.85rem;color:var(--sub)}
+.autoprice{margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
+.pstat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0}.pstat div{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;text-align:center}.pstat b{display:block;font-size:1.15rem}
+.plist{padding-left:1.1em;margin:4px 0}.plist li{margin:2px 0;word-break:break-all}
+.badge.ok{border-color:var(--accent);color:var(--accent)}
+.samplecard{border:2px dashed var(--warn)}
+.btn.ghost{background:transparent;color:var(--accent)}
 ul{padding-left:1.2em}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "相場チェック", "url": "https://endeavor0007-design.github.io/souba-check/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "description": "型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（価格データはこのページでは持たず、各サイトの検索を開きます）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "publisher": {"@type": "Organization", "name": "相場チェック運営事務局"}}</script>
 </head>
 <body>
 <main>
-<span class="badge">開発中・無料のお試し</span>
+<span class="badge ok">いま無料で使えます・登録不要</span>
 <h1>お客様の前で、いくらまで買ってよいかの目安を出す</h1>
-<p>型番を入れると、店頭や出張買取の「いくらで買っていいか」を、その場で決めるための道具です。メルカリ・ヤフオク・ラクマなどの売り切れ・落札の検索をまとめて開き、売れた値段を見てあなたが入れた売値から、手数料と送料を引いた買取額の上限を計算します。</p>
-
-<p><a class="btn" href="demo.html#scene=counter" style="font-size:1.1rem;padding:14px 18px">店頭の買取で試してみる（お試し用の架空データ）</a></p>
-<p>ほかの場面から：<a href="demo.html#scene=store">店で仕入れる</a>／<a href="demo.html#scene=market">古物市場のせり</a>／<a href="demo.html#scene=visit">出張買取</a>／<a href="demo.html#scene=office">家・事務所で整理</a></p>
-<p><a href="demo.html">場面を選ばずに全体を見る</a></p>
-<p class="small">開発は主にAIが担当しています。まだ開発中のため、画面や機能は変わることがあります。お試し画面の相場や要望の数字はすべて架空です（相場データの提供元とはまだ契約していません）。</p>
+<p>型番を入れると、店頭や出張買取の「いくらで買っていいか」を、その場で決めるための道具です。<b>このページの「1」と「2」は本物の道具で、いますぐ使えます。</b>メルカリ・ヤフオク・ラクマなどの売り切れ・落札の検索をまとめて開き、売れた値段を見てあなたが入れた売値から、手数料と送料を引いた買取額の上限を計算します。</p>
 
 <h2>1. 売れた値段をまとめて調べる（相場検索）</h2>
 <div class="card">
@@ -53,6 +54,8 @@ ul{padding-left:1.2em}
   <input id="q" placeholder="例：WH-1000XM4 / 4548736112230">
   <div style="margin-top:10px"><button id="go" type="button">検索リンクを作る</button></div>
   <div class="links" id="links"></div>
+  <div id="autoprice" class="autoprice" hidden aria-live="polite"></div>
+  <p class="small">メルカリ・ヤフオクの売れた値段は、公式の公開の仕組み（API）がないため自動では取り出していません。ボタンで開いてご覧ください。</p>
   <p class="small">「売れた値段」は、実際に売れた・落札された価格の検索です。「出品中の値段（参考）」は、まだ売れていない出品の価格で、相場より高く出やすいので買取額の根拠にはしないでください。各サイトの検索結果は、あなたのブラウザで直接開きます（このページは価格を集めたり保存したりしません）。</p>
 </div>
 
@@ -71,6 +74,14 @@ ul{padding-left:1.2em}
   <p class="small" id="msg" role="status"></p>
   <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確認してから決めてください。</p>
   <p class="small">例：売値18,000円・利益20%なら、3,600円を利益として残した額が上限です。計算：売値 −（売値×手数料）− 送料 −（売値×ほしい利益）。手数料の目安はメルカリ10%・ラクマ10%前後・ヤフオク8.8〜10%（各社の最新の料金をご確認ください）。</p>
+</div>
+
+<h2>開発中の完成形（見本）</h2>
+<div class="card samplecard">
+  <p><b>ここから先は見本です。</b>正式版でできるようにする画面を、<b>架空のデータ</b>で先にお見せしています。見本の数字・商品・出品者はすべて架空で、本当の相場は出ません。</p>
+  <p><a class="btn ghost" href="demo.html#scene=counter">見本を見る：店頭の買取の画面</a></p>
+  <p class="small">ほかの場面の見本：<a href="demo.html#scene=store">店で仕入れる</a>／<a href="demo.html#scene=market">古物市場のせり</a>／<a href="demo.html#scene=visit">出張買取</a>／<a href="demo.html#scene=office">家・事務所で整理</a>／<a href="demo.html">全体</a></p>
+  <p class="small">開発は主にAIが担当しています。画面や機能は変わることがあります（相場データの提供元とはまだ契約していません）。</p>
 </div>
 
 <h2>よくある質問</h2>
@@ -103,7 +114,7 @@ ul{padding-left:1.2em}
 <h2>要望を出す・投票する</h2>
 <p>「こんな機能がほしい」「ここが使いにくい」は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSfK_EgdrjXKSaXom9wMGItKNPF0rSKMBELKG2rRaCUbPbLYGQ/viewform" target="_blank" rel="noopener">問い合わせフォーム</a>の「機能の要望」「不具合・誤りの報告」から送ってください。いただいた要望とその扱い（検討中・採用・公開済み・見送りと理由）は、<a href="requests.html">要望一覧</a>に載せます。</p>
 <p><b>有料化の時期：</b>新しい不具合や要望の報告が落ち着き、製品版として問題ない品質になったと私たちが判断した時点で、有料化を検討します（時期は未定です）。報告は有料化の前後を問わず歓迎で、報告の有無で料金や特典が変わることはありません。決めたら、有料化の日の60日前までにお知らせします。</p>
-<p class="small">要望への投票の機能は検討中です。上の「完成形のイメージ」の「要望」タブで、その画面を試せます（お試し用なので、送信・保存はされません）。</p>
+<p class="small">要望への投票の機能は検討中です。上の「開発中の完成形（見本）」の「要望」タブで、その画面を見られます（見本なので、送信・保存はされません）。</p>
 
 <h2>先着30名の共同開発メンバー（登録無料・先着の割引特典）</h2>
 <div class="card">
@@ -117,15 +128,17 @@ ul{padding-left:1.2em}
   </ul>
   <p><b>メンバーにお願いすること（どれも任意です。やらなくても特典は変わりません）：</b></p>
 <ul><li>実際の仕入れ・買取で使い、相場や計算が実感とずれていたら（ずれの報告）、問い合わせフォームの「不具合・誤りの報告」から教えてください。</li><li>ほしい機能や使いにくい所を、問い合わせフォームの「機能の要望」から送ってください。</li><li>月1回ほど、3問程度・1分のアンケートをお送りすることがあります（答えなくてもかまいません）。</li><li>新しい機能ができたとき、先に試していただけるようご案内することがあります。</li></ul>
-<p><b>運営がすること：</b>いただいた要望とその扱い（検討中・採用・公開済み・見送り。理由も原則として添えます）は、お名前・メールアドレスを除いて<a href="requests.html">要望一覧</a>に載せます。ずれの報告や要望で直した点は、お試し画面のメニューの「システムの改修履歴」に載せます。</p>
+<p><b>運営がすること：</b>いただいた要望とその扱い（検討中・採用・公開済み・見送り。理由も原則として添えます）は、お名前・メールアドレスを除いて<a href="requests.html">要望一覧</a>に載せます。ずれの報告や要望で直した点は、見本の画面のメニューの「システムの改修履歴」に載せます。</p>
   <p class="small">30名に達した時点でメンバーの受付を終了します（登録順）。31人目以降は、通常の事前登録（割引なし）として受け付けます。</p>
   <p class="small">料金：正式版は月額制の予定です。金額は未定で、決まりしだい、有料化の60日前までにお知らせします。</p>
   <p>メールアドレスだけで登録できます（送信先は Google フォームです）。</p>
   <a class="btn" id="signup" href="#" rel="noopener">共同開発メンバーに事前登録する（1分）</a>
   <p class="small">登録いただいたメールアドレスは、このツールのお知らせ・先行案内・アンケートにだけ使います。<a href="privacy.html">プライバシーポリシー</a></p>
-  <p class="small">メルカリ・ヤフオク・ラクマ等の名前は検索先の案内のために書いています。各社との提携・公認はありません。古物台帳の項目は記録の補助で、法的な助言ではありません（必要な項目は警察署・専門家の案内をご確認ください）。</p>
+  <p class="small">メルカリ・ヤフオク・ラクマ・楽天市場等の名前は検索先の案内のために書いています。各社との提携・公認はありません。古物台帳の項目は記録の補助で、法的な助言ではありません（必要な項目は警察署・専門家の案内をご確認ください）。</p>
 </div>
 </main>
+<script src="config.js"></script>
+<script src="prices.js"></script>
 <script>
 // 事前登録フォーム（Google フォーム・2026-10-18 公開）
 var SIGNUP_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdkFdGsd_A0wdew6VAlqMexyC9GHXl2XsjuUPhIiahRhTiR4Q/viewform";
@@ -143,6 +156,7 @@ var SITES = [
 ];
 function makeLinks(){
   var raw = document.getElementById("q").value.trim();
+  if(window.soubaAutoPrice) window.soubaAutoPrice(raw);
   var box = document.getElementById("links");
   box.innerHTML = "";
   if(!raw) return;
