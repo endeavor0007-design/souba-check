@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>せどりの仕入れ値の上限計算｜損をしない売値も（手数料・送料込み）</title>
+<meta name="description" content="せどり・転売の仕入れ判断に。売れた値段から仕入れ値の上限を、仕入れ値からは損をしない最低の売値（損益分岐）を、メルカリ・ラクマ・ヤフオクの手数料と送料込みで計算します。無料・登録不要。">
+<link rel="canonical" href="https://endeavor0007-design.github.io/souba-check/shiire-jougen.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="相場チェック">
+<meta property="og:title" content="せどりの仕入れ値の上限計算｜損をしない売値も計算">
+<meta property="og:description" content="売れた値段から仕入れ値の上限を、仕入れ値から損をしない最低の売値を、手数料と送料込みで計算。">
+<meta property="og:url" content="https://endeavor0007-design.github.io/souba-check/shiire-jougen.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main>
+<p class="small"><a href="./">相場チェック</a> ＞ 仕入れ値の上限計算</p>
+<h1>せどりの仕入れ値の上限計算：手数料と送料込みで損をしない線を出す</h1>
+<p><span class="badge">開発中・無料・登録不要</span></p>
+<p>店頭やセールで「この値段で仕入れて大丈夫か」を、その場で確かめるための計算です。<b>売れた値段から仕入れ値の上限</b>を、<b>仕入れ値から損をしない最低の売値</b>を出せます。</p>
+
+<h2>1. 売れた値段から、仕入れ値の上限を出す</h2>
+<div class="card">
+  <label for="sell">売れそうな価格（円）</label>
+  <input id="sell" type="text" inputmode="numeric" placeholder="例：8000">
+  <div class="row">
+    <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
+    <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
+    <div><label for="margin">残したい利益（売値の何%か）</label><input id="margin" type="text" inputmode="decimal" value="20"></div>
+  </div>
+  <p>仕入れ値の上限：<span class="result" id="out">―</span></p>
+  <p class="small" id="msg" role="status"></p>
+  <p class="small">売れそうな価格は、出品中の値段ではなく売れた値段で決めます（<a href="souba-kensaku.html">相場検索のやり方</a>）。</p>
+</div>
+
+<h2>2. 仕入れ値から、損をしない最低の売値を出す</h2>
+<div class="card">
+  <label for="cost">仕入れ値（円）</label>
+  <input id="cost" type="text" inputmode="numeric" placeholder="例：3000">
+  <div class="row">
+    <div><label for="fee2">販売手数料（%）</label><input id="fee2" type="text" inputmode="decimal" value="10"></div>
+    <div><label for="ship2">送料・梱包（円）</label><input id="ship2" type="text" inputmode="numeric" value="750"></div>
+  </div>
+  <p>利益0円になる売値：<span class="result" id="out2">―</span></p>
+  <p class="small" id="msg2" role="status"></p>
+  <p class="small">この値段で売れても利益は0円です。実際の売値は、これより十分に高い必要があります。</p>
+</div>
+
+<h2>計算式</h2>
+<ul>
+  <li><b>仕入れ値の上限</b> ＝ 売値 −（売値 × 手数料）− 送料・梱包 −（売値 × 残したい利益）<br>例：8,000円で売れる品・手数料10%・送料750円・利益20%なら、上限は4,850円です。</li>
+  <li><b>損をしない最低の売値</b> ＝（仕入れ値 ＋ 送料・梱包）÷（1 − 手数料）<br>例：3,000円で仕入れ・送料750円・手数料10%なら、4,167円以上で売れれば損はしません。</li>
+</ul>
+
+<h2>見落としやすいお金</h2>
+<ul>
+  <li><b>梱包材：</b>箱・緩衝材・テープ。1件ごとは小さくても、数が増えると効きます。送料の欄に足しておくと安全です。</li>
+  <li><b>売れるまでの値下げ：</b>売れ残って値下げすると、そのぶん利益が減ります。</li>
+  <li><b>返品・トラブル：</b>動作不良や説明違いでの返品は、送料が往復でかかります。</li>
+  <li><b>仕入れの交通費・時間：</b>利益の%を決めるときに含めます。</li>
+</ul>
+
+<h2>よくある質問</h2>
+<div class="card">
+  <h3>メルカリの手数料は何%で計算すればいいですか？</h3>
+  <p>メルカリは販売価格の10%です（2026年10月時点）。ラクマ・ヤフオクは、会員の種類や条件で変わります（おおむね10%前後）。料金は変わることがあるので、各社の公式の案内で最新の料率をご確認ください。</p>
+  <h3>送料はいくらにすればいいですか？</h3>
+  <p>品の大きさと重さで決まります。初期値の750円は目安です。小さい品なら下げ、大きい品なら実際の送料と梱包材の代金を入れてください。</p>
+  <h3>入れた数字は保存されますか？</h3>
+  <p>保存も送信もしません。計算はこの画面の中だけで行います。</p>
+</div>
+
+<div class="card">
+  <p><b>相場チェック（開発中）</b>は、古物商・せどりの方が「いくらまで買ってよいか」をその場で決めるための道具です。<a href="./">説明ページ</a>で、売れた値段の検索と計算をまとめて使えます。<a href="demo.html#scene=store">店で仕入れる場面の完成形のイメージ（お試し用の架空データ）</a>もご覧ください。</p>
+  <p class="small">メルカリ・ヤフオク・ラクマ等の名前は案内のために書いています。各社との提携・公認はありません。この計算は目安です。</p>
+</div>
+<p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
+</main>
+<script src="tools.js"></script>
+<script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
+<script data-goatcounter="https://security-madoguchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

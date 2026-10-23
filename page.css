@@ -1,0 +1,25 @@
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1b;--sub:#5d5b55;--line:#dedbd2;--accent:#1f6f5c;--accent-ink:#fff;--warn:#8a5a00}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--card:#1f1f1c;--ink:#ecebe6;--sub:#a9a69d;--line:#3a3934;--accent:#5cbfa3;--accent-ink:#0d1f1a;--warn:#e0b45c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;line-height:1.7}
+main{max-width:720px;margin:0 auto;padding:24px 16px 64px}
+a{color:var(--accent)}
+h1{font-size:1.5rem;line-height:1.4;margin:.2em 0 .4em}
+h2{font-size:1.15rem;margin:2em 0 .6em}
+h3{font-size:1rem;margin:12px 0 4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
+.card h3:first-child{margin-top:0}
+label{display:block;font-size:.9rem;color:var(--sub);margin:.6em 0 .2em}
+input{width:100%;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.links a{display:block;text-align:center;padding:10px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--bg)}
+.links a:hover{border-color:var(--accent)}
+.result{font-size:1.3rem;font-weight:700;color:var(--accent)}
+.badge{display:inline-block;font-size:.8rem;border:1px solid var(--warn);color:var(--warn);border-radius:4px;padding:0 6px}
+.small{font-size:.85rem;color:var(--sub)}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+ul,ol{padding-left:1.2em}

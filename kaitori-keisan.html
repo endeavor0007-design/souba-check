@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>買取価格の計算｜売れた値段から上限を逆算（相場の何割か早見表）</title>
+<meta name="description" content="古物商・リサイクル店の買取価格の決め方。売れた値段から販売手数料・送料・残したい利益を引いて、買取額の上限をその場で計算します。相場の何割で買うかの早見表つき・無料。">
+<link rel="canonical" href="https://endeavor0007-design.github.io/souba-check/kaitori-keisan.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="相場チェック">
+<meta property="og:title" content="買取価格の計算｜売れた値段からいくらまで買ってよいかを逆算">
+<meta property="og:description" content="売れた値段から手数料・送料・利益を引いて、買取額の上限をその場で計算。相場の何割かの早見表つき。">
+<meta property="og:url" content="https://endeavor0007-design.github.io/souba-check/kaitori-keisan.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main>
+<p class="small"><a href="./">相場チェック</a> ＞ 買取価格の計算</p>
+<h1>買取価格の計算：売れた値段から「いくらまで買ってよいか」を逆算する</h1>
+<p><span class="badge">開発中・無料・登録不要</span></p>
+<p>買取価格は、<b>売れそうな価格から、売るときにかかるお金と残したい利益を引いて</b>決めます。お客様の前で迷わないように、下の欄で上限をその場で計算できます。</p>
+
+<div class="card">
+  <label for="sell">売れそうな価格（円）</label>
+  <input id="sell" type="text" inputmode="numeric" placeholder="例：18000">
+  <div class="row">
+    <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
+    <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
+    <div><label for="margin">残したい利益（売値の何%か）</label><input id="margin" type="text" inputmode="decimal" value="20"></div>
+  </div>
+  <p>買取額の上限：<span class="result" id="out">―</span></p>
+  <p class="small" id="msg" role="status"></p>
+  <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確かめてから決めてください。</p>
+</div>
+
+<h2>計算式</h2>
+<p>買取額の上限 ＝ 売れそうな価格 −（売れそうな価格 × 販売手数料）− 送料・梱包 −（売れそうな価格 × 残したい利益）</p>
+<p>例：18,000円で売れそうな品なら、手数料10%（1,800円）・送料750円・利益20%（3,600円）を引いて、<b>上限は11,850円</b>です。</p>
+
+<h2>相場の何割で買えばよいか（早見表）</h2>
+<p>手数料10%・送料750円のとき、残したい利益ごとの上限です。送料は値段にかかわらず同じだけかかるので、<b>安い品ほど「何割」は下がります</b>。</p>
+<table>
+  <thead><tr><th>売れそうな価格</th><th>利益20%</th><th>利益30%</th></tr></thead>
+  <tbody>
+    <tr><td>3,000円</td><td>1,350円（約4.5割）</td><td>1,050円（約3.5割）</td></tr>
+    <tr><td>5,000円</td><td>2,750円（約5.5割）</td><td>2,250円（約4.5割）</td></tr>
+    <tr><td>10,000円</td><td>6,250円（約6.2割）</td><td>5,250円（約5.2割）</td></tr>
+    <tr><td>20,000円</td><td>13,250円（約6.6割）</td><td>11,250円（約5.6割）</td></tr>
+    <tr><td>50,000円</td><td>34,250円（約6.8割）</td><td>29,250円（約5.8割）</td></tr>
+  </tbody>
+</table>
+<p class="small">「相場の7割」のような決め方は、高い品では近くなりますが、安い品では赤字になりやすいので、送料を引いてから考えます。</p>
+
+<h2>上限より下げて買うときの考え方</h2>
+<ul>
+  <li><b>売れるまでの時間：</b>すぐ売れない品は、値下げや在庫の手間の分だけ低めにします。</li>
+  <li><b>状態の確かめ漏れ：</b>動作・傷・付属品をその場で確かめきれないときは、その分を差し引きます。</li>
+  <li><b>相場が新しくない：</b>売れた記録が古い・件数が少ないときは控えめにします（<a href="souba-kensaku.html">相場検索のやり方</a>）。</li>
+</ul>
+
+<h2>よくある質問</h2>
+<div class="card">
+  <h3>手数料はいくつで計算すればいいですか？</h3>
+  <p>売る先の料金に合わせます。メルカリは販売価格の10%です（2026年10月時点）。ラクマ・ヤフオクは、会員の種類や条件で変わります（おおむね10%前後）。料金は変わることがあるので、各社の公式の案内で最新の料率をご確認ください。古物市場で売るなら、その市場の手数料を入れます。</p>
+  <h3>利益は何%にすればいいですか？</h3>
+  <p>お店の家賃や人件費、売れ残りの損まで含めて決めます。この計算では初期値を20%にしていますが、決まった正解はありません。</p>
+  <h3>この計算は無料ですか？</h3>
+  <p>無料で、登録もいりません。入れた数字は保存も送信もしません。</p>
+</div>
+
+<div class="card">
+  <p><b>相場チェック（開発中）</b>は、古物商・せどりの方が「いくらまで買ってよいか」をその場で決めるための道具です。<a href="./">説明ページ</a>で、売れた値段の検索とこの計算をまとめて使えます。<a href="demo.html#scene=counter">店頭の買取で使う完成形のイメージ（お試し用の架空データ）</a>もご覧ください。</p>
+  <p class="small">メルカリ・ヤフオク・ラクマ等の名前は案内のために書いています。各社との提携・公認はありません。この計算は目安で、価格の決定や法的な助言ではありません。</p>
+</div>
+<p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
+</main>
+<script src="tools.js"></script>
+<script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
+<script data-goatcounter="https://security-madoguchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

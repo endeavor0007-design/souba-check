@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中古の相場検索｜売れた値段をメルカリ・ヤフオク・ラクマでまとめて調べる</title>
+<meta name="description" content="中古品の相場は「売れた値段」で調べます。メルカリの売り切れ・ヤフオクの落札相場・ラクマの売り切れを、型番やJANを1回入れるだけでまとめて開く無料の相場検索と、相場を読み違えないための5つの注意点。">
+<link rel="canonical" href="https://endeavor0007-design.github.io/souba-check/souba-kensaku.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="相場チェック">
+<meta property="og:title" content="中古の相場検索のやり方｜売れた値段をまとめて調べる">
+<meta property="og:description" content="メルカリの売り切れ・ヤフオクの落札相場・ラクマの売り切れを、型番を1回入れるだけでまとめて開く無料の相場検索。">
+<meta property="og:url" content="https://endeavor0007-design.github.io/souba-check/souba-kensaku.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main>
+<p class="small"><a href="./">相場チェック</a> ＞ 相場検索のやり方</p>
+<h1>中古の相場検索のやり方：売れた値段をまとめて調べる</h1>
+<p><span class="badge">開発中・無料・登録不要</span></p>
+<p>中古品の相場は、出品中の値段ではなく<b>実際に売れた値段</b>で見ます。下の欄に型番・商品名・JAN（バーコードの数字）を入れると、メルカリの売り切れ・ヤフオクの落札相場・ラクマの売り切れの検索結果を、まとめて開けます。無料で、登録もいりません。</p>
+
+<div class="card">
+  <label for="q">型番・商品名・JAN</label>
+  <input id="q" placeholder="例：WH-1000XM4 / 4548736112230">
+  <div style="margin-top:10px"><button id="go" type="button">相場を調べる（検索リンクを作る）</button></div>
+  <div class="links" id="links"></div>
+  <p class="small">各サイトの検索結果は、あなたのブラウザで直接開きます。このページは価格を集めたり保存したりしません。</p>
+</div>
+
+<h2>サイトごとの「売れた値段」の見方</h2>
+<ul>
+  <li><b>メルカリ：</b>検索のあと「販売状況」で「売り切れ」を選び、「新しい順」に並べます。上のリンクは、はじめから売り切れに絞っています。</li>
+  <li><b>ヤフオク：</b>「落札相場」（終了したオークション）で調べます。落札価格に送料が含まれるかは出品ごとに違うので、送料の欄も確かめます。</li>
+  <li><b>ラクマ：</b>検索のあと「販売状況」を「売り切れ」にします。上のリンクは、はじめから売り切れに絞っています。</li>
+  <li><b>出品中の値段（楽天・Amazon・中古店など）：</b>「売りたい値段」で、まだ売れていません。相場より高く出やすいので、上限の目安にとどめます。</li>
+</ul>
+
+<h2>相場を読み違えないための5つの注意</h2>
+<ol>
+  <li><b>新しい取引だけを見る：</b>目安は直近1〜3か月です。新型の発売や季節で、値段はすぐ動きます。</li>
+  <li><b>同じ型番・同じ状態どうしで比べる：</b>未使用と使用感ありでは値段が大きく違います。型番の末尾（色・容量・年式）も確かめます。</li>
+  <li><b>付属品をそろえて比べる：</b>箱・説明書・充電器・保証書の有無で値段が変わります。</li>
+  <li><b>高い1件・安い1件にひっぱられない：</b>5〜10件を並べて、真ん中あたりの値段を「売れそうな価格」にします。迷ったら安いほうに寄せると安全です。</li>
+  <li><b>件数が少ない品は慎重に：</b>売れた件数が数件しかない品は、相場がまだ決まっていません。買取や仕入れの額を控えめにします。</li>
+</ol>
+
+<h2>相場が分かったら：いくらまで買ってよいか</h2>
+<p>売れそうな価格から、販売手数料・送料・残したい利益を引いた額が、買ってよい上限です。<a href="kaitori-keisan.html">買取価格の計算（売値から逆算）</a>で、その場で計算できます。せどりの仕入れなら<a href="shiire-jougen.html">仕入れ値の上限と損をしない売値の計算</a>も使えます。</p>
+
+<h2>よくある質問</h2>
+<div class="card">
+  <h3>相場検索にお金はかかりますか？</h3>
+  <p>かかりません。このページは各サイトの検索結果を開くだけなので、登録もいりません。</p>
+  <h3>型番が分からないときは？</h3>
+  <p>本体の裏や箱のラベル、説明書に書かれています。箱があれば、バーコードの下の数字（JAN。多くは13桁）でも調べられます。</p>
+  <h3>メルカリとヤフオクで値段が違うのはなぜ？</h3>
+  <p>買う人の層・手数料・送料の扱いが違うためです。売る先が決まっていれば、その場所の売れた値段を優先して見ます。</p>
+</div>
+
+<div class="card">
+  <p><b>相場チェック（開発中）</b>は、古物商・せどりの方が、店頭や出張買取で「いくらまで買ってよいか」をその場で決めるための道具です。<a href="./">説明ページ</a>で、相場の検索と買取額の計算をまとめて使えます。<a href="demo.html">完成形のイメージ（お試し用の架空データ）</a>もご覧ください。</p>
+  <p class="small">メルカリ・ヤフオク・ラクマ等の名前は検索先の案内のために書いています。各社との提携・公認はありません。画面の項目名は各サイトの変更で変わることがあります。</p>
+</div>
+<p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
+</main>
+<script src="tools.js"></script>
+<script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
+<script data-goatcounter="https://security-madoguchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
