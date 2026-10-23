@@ -24,7 +24,7 @@ h2{font-size:1.15rem;margin:2em 0 .6em}
 .badge{display:inline-block;font-size:.8rem;border:1px solid var(--warn);color:var(--warn);border-radius:4px;padding:0 6px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
 label{display:block;font-size:.9rem;color:var(--sub);margin:.6em 0 .2em}
-input{width:100%;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+select,input{width:100%;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none}
 .links{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
@@ -62,8 +62,11 @@ ul{padding-left:1.2em}
 <h2>2. 買取額の上限を計算する</h2>
 <div class="card">
   <div class="row">
-    <div><label for="sell">売れそうな価格（円）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
+    <div><label for="sell">相場（きれいな品の売れた値段・円）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
   </div>
+  <label for="cond">品物の状態（相場の何割で売れそうか）</label>
+  <select id="cond"><option value="70">新品・未使用に近い（相場の7割）</option><option value="40" selected>使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
+  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、割合を高めに選んでください（二重に割り引かないため）。</p>
   <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">手数料・送料・利益を変える（初期値：手数料10%・送料750円・利益40%）</summary>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
@@ -73,7 +76,7 @@ ul{padding-left:1.2em}
   <p>買取額の上限：<span class="result" id="out">―</span></p>
   <p class="small" id="msg" role="status"></p>
   <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確認してから決めてください。</p>
-  <p class="small">例：売値18,000円・利益40%なら、7,200円を利益として残した額が上限です。計算：売値 −（売値×手数料）− 送料 −（売値×ほしい利益）。手数料の目安はメルカリ10%・ラクマ10%前後・ヤフオク8.8〜10%（各社の最新の料金をご確認ください）。</p>
+  <p class="small">例：相場18,000円の品が使用感ありなら、売れる見込みは4割の7,200円。そこから手数料10%（720円）・送料750円・利益40%（2,880円）を引いて、上限は2,850円です。計算：売れる見込み（相場×状態の割合）−（売れる見込み×手数料）− 送料 −（売れる見込み×利益）。状態の割合は目安なので、品物に合わせて選んでください。手数料はメルカリが販売価格の10%（2026年10月時点）、ラクマ・ヤフオクは会員の種類や条件で変わります（おおむね10%前後・各社の公式の案内でご確認ください）。</p>
 </div>
 
 <h2>開発中の完成形（見本）</h2>
@@ -91,7 +94,7 @@ ul{padding-left:1.2em}
   <h3 style="font-size:1rem;margin:0 0 4px">出品中の価格を相場にしてはいけないのですか？</h3>
   <p style="margin:0 0 12px">出品中の価格は「売りたい値段」で、まだ売れていません。実際に売れた価格より高く出やすいので、買取額の根拠には売れた価格を使うのが安全です。</p>
   <h3 style="font-size:1rem;margin:0 0 4px">計算式を教えてください。</h3>
-  <p style="margin:0 0 12px">買取額の上限 ＝ 売れそうな価格 −（売れそうな価格 × 販売手数料）− 送料・梱包 −（売れそうな価格 × 残したい利益）。例：18,000円で売れそうなら、手数料10%・送料750円・利益40%で、上限は8,250円です。</p>
+  <p style="margin:0 0 12px">売れる見込み ＝ 相場 × 状態の割合（新品7割・使用感あり4割・ジャンク2割が目安）。買取額の上限 ＝ 売れる見込み −（売れる見込み × 販売手数料）− 送料・梱包 −（売れる見込み × 残したい利益）。例：相場18,000円・新品に近い品・手数料10%・送料750円・利益40%なら、売れる見込み12,600円で、上限は5,550円です。</p>
   <h3 style="font-size:1rem;margin:0 0 4px">お金はかかりますか？</h3>
   <p style="margin:0">「1. 売れた値段をまとめて調べる」と「2. 買取額の上限を計算する」は無料で、登録もいりません。正式版で足す機能は月額制の予定です（金額は未定）。</p>
 </div>
@@ -179,7 +182,7 @@ function num(id){
   return v === "" || isNaN(Number(v)) ? NaN : Number(v);
 }
 function calc(){
-  var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin");
+  var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin"), cond = Number(document.getElementById("cond").value);
   var out = document.getElementById("out"), msg = document.getElementById("msg");
   out.textContent = "―"; msg.textContent = "";
   if(document.getElementById("sell").value.trim() === "") return;
@@ -187,12 +190,14 @@ function calc(){
   if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
   if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
   if(ship < 0){ msg.textContent = "送料は 0円以上で入れてください。"; return; }
-  var max = sell - sell*fee/100 - ship - sell*margin/100;
+  var exp = sell*cond/100, max = exp - exp*fee/100 - ship - exp*margin/100;
   out.textContent = max > 0 ? Math.floor(max).toLocaleString("ja-JP")+" 円まで" : "利益が出ません";
+  msg.textContent = "売れる見込み " + Math.floor(exp).toLocaleString("ja-JP") + "円（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。");
 }
 document.getElementById("go").addEventListener("click", makeLinks);
 document.getElementById("q").addEventListener("keydown", function(e){ if(e.key === "Enter") makeLinks(); });
 ["sell","fee","ship","margin"].forEach(function(id){ document.getElementById(id).addEventListener("input", calc); });
+document.getElementById("cond").addEventListener("change", calc);
 var su = document.getElementById("signup");
 // URLの ?from= の値（流入元）を事前登録のリンクに引き継ぐ
 var FROM = "";

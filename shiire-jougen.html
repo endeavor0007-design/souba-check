@@ -24,8 +24,11 @@
 
 <h2>1. 売れた値段から、仕入れ値の上限を出す</h2>
 <div class="card">
-  <label for="sell">売れそうな価格（円）</label>
+  <label for="sell">相場（きれいな品の売れた値段・円）</label>
   <input id="sell" type="text" inputmode="numeric" placeholder="例：8000">
+  <label for="cond">品物の状態（相場の何割で売れそうか）</label>
+  <select id="cond"><option value="70" selected>新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
+  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、割合を高めに選んでください（二重に割り引かないため）。</p>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
@@ -51,7 +54,7 @@
 
 <h2>計算式</h2>
 <ul>
-  <li><b>仕入れ値の上限</b> ＝ 売値 −（売値 × 手数料）− 送料・梱包 −（売値 × 残したい利益）<br>例：8,000円で売れる品・手数料10%・送料750円・利益40%なら、上限は3,250円です。</li>
+  <li><b>仕入れ値の上限</b> ＝ 売れる見込み −（売れる見込み × 手数料）− 送料・梱包 −（売れる見込み × 残したい利益）。売れる見込み ＝ 相場 × 状態の割合（新品に近い7割・使用感あり4割・ジャンク2割が目安）<br>例：相場8,000円・新品に近い品（売れる見込み5,600円）・手数料10%・送料750円・利益40%なら、上限は2,050円です。</li>
   <li><b>損をしない最低の売値</b> ＝（仕入れ値 ＋ 送料・梱包）÷（1 − 手数料）<br>例：3,000円で仕入れ・送料750円・手数料10%なら、4,167円以上で売れれば損はしません。</li>
 </ul>
 

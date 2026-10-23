@@ -10,7 +10,7 @@ h3{font-size:1rem;margin:12px 0 4px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
 .card h3:first-child{margin-top:0}
 label{display:block;font-size:.9rem;color:var(--sub);margin:.6em 0 .2em}
-input{width:100%;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+select,input{width:100%;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none}
 .links{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}

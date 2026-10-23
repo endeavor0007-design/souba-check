@@ -36,7 +36,7 @@ function num(id){
 function yen(n){ return Math.floor(Math.round(n*100)/100).toLocaleString("ja-JP") + " 円"; }
 // 売値から買取（仕入れ）額の上限
 function calcMax(){
-  var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin");
+  var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin"), cond = $("cond") ? Number($("cond").value) : 100;
   var out = $("out"), msg = $("msg");
   out.textContent = "―"; msg.textContent = "";
   if($("sell").value.trim() === "") return;
@@ -44,9 +44,9 @@ function calcMax(){
   if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
   if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
   if(ship < 0){ msg.textContent = "送料は 0円以上で入れてください。"; return; }
-  var max = sell - sell*fee/100 - ship - sell*margin/100;
+  var exp = sell*cond/100, max = exp - exp*fee/100 - ship - exp*margin/100;
   out.textContent = max > 0 ? yen(max) + "まで" : "利益が出ません";
-  if(max > 0) msg.textContent = "売値の約" + Math.floor(max/sell*100) + "%です。";
+  msg.textContent = "売れる見込み " + yen(exp) + "（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。");
 }
 // 仕入れ値から、損をしない最低の売値（利益0）
 function calcMin(){
@@ -63,4 +63,5 @@ function on(id, ev, fn){ var e = $(id); if(e) e.addEventListener(ev, fn); }
 on("go", "click", makeLinks);
 on("q", "keydown", function(e){ if(e.key === "Enter") makeLinks(); });
 ["sell","fee","ship","margin"].forEach(function(id){ on(id, "input", calcMax); });
+on("cond", "change", calcMax);
 ["cost","fee2","ship2"].forEach(function(id){ on(id, "input", calcMin); });
