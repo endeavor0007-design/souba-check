@@ -6,10 +6,10 @@
 
 ## ページ
 
-- [トップ（相場検索と買取額の計算）](https://endeavor0007-design.github.io/souba-check/)
-- [買取額の計算](https://endeavor0007-design.github.io/souba-check/kaitori-keisan.html)
-- [仕入れの上限](https://endeavor0007-design.github.io/souba-check/shiire-jougen.html)
-- [相場の検索](https://endeavor0007-design.github.io/souba-check/souba-kensaku.html)
-- [ほしい機能の要望](https://endeavor0007-design.github.io/souba-check/requests.html)
+- [トップ（相場検索と買取額の計算）](https://cocreturn.com/souba-check/)
+- [買取額の計算](https://cocreturn.com/souba-check/kaitori-keisan.html)
+- [仕入れの上限](https://cocreturn.com/souba-check/shiire-jougen.html)
+- [相場の検索](https://cocreturn.com/souba-check/souba-kensaku.html)
+- [ほしい機能の要望](https://cocreturn.com/souba-check/requests.html)
 
-運営：共創還元（COCRETURN） https://endeavor0007-design.github.io/
+運営：共創還元（COCRETURN） https://cocreturn.com/
