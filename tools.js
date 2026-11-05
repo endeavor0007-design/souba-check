@@ -11,19 +11,20 @@ var SITES = [
 ];
 function $(id){ return document.getElementById(id); }
 function makeLinks(){
-  var raw = $("q").value.trim(), box = $("links");
+  var raw = $("q").value.normalize("NFKC").trim(), box = $("links");
   if(window.soubaAutoPrice) window.soubaAutoPrice(raw);
   box.innerHTML = "";
-  if(!raw) return;
+  if(!raw){ box.innerHTML = "<p class=\"small\" style=\"grid-column:1 / -1\">型番・商品名・JAN を入れてから押してください。</p>"; return; }
   var q = encodeURIComponent(raw);
   [["sold","売れた値段"],["list","出品中の値段（参考）"]].forEach(function(g){
     var h = document.createElement("p");
-    h.className = "small"; h.style.gridColumn = "1 / -1"; h.style.margin = "8px 0 0"; h.textContent = g[1];
+    h.className = "small"; h.style.fontWeight = "700"; h.style.gridColumn = "1 / -1"; h.style.margin = "8px 0 0"; h.textContent = g[1];
     box.appendChild(h);
     SITES.forEach(function(s){
       if(s[2] !== g[0]) return;
       var a = document.createElement("a");
       a.href = s[1](q); a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = s[0];
+      if(g[0] === "list") a.className = "list";
       box.appendChild(a);
     });
   });

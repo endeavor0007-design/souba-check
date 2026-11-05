@@ -13,7 +13,7 @@
 <meta property="og:description" content="売れた値段から仕入れ値の上限を、仕入れ値から損をしない最低の売値を、手数料と送料込みで計算。">
 <meta property="og:url" content="https://cocreturn.com/souba-check/shiire-jougen.html">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="page.css">
+<link rel="stylesheet" href="page.css?v=6.4">
 </head>
 <body>
 <main>
@@ -72,17 +72,25 @@
   <p>メルカリは販売価格の10%です（2026年10月時点）。ラクマ・ヤフオクは、会員の種類や条件で変わります（おおむね10%前後）。料金は変わることがあるので、各社の公式の案内で最新の料率をご確認ください。</p>
   <h3>送料はいくらにすればいいですか？</h3>
   <p>品の大きさと重さで決まります。初期値の750円は目安です。小さい品なら下げ、大きい品なら実際の送料と梱包材の代金を入れてください。</p>
+  <h3>古物市場のせりでは、いくらまで競ればよいですか？</h3>
+  <p>次の3つの順で、品ごとに「ここまでなら競る」額を出します。</p>
+  <ol>
+    <li><b>前日：</b>市場から届く出品の一覧で気になる品を選び、<a href="souba-kensaku.html">相場の検索</a>でその品の売れた値段を調べます（型番は末尾まで同じ品だけを使います。<a href="kataban-shirabe.html">型番の調べ方</a>）。</li>
+    <li><b>上の「1」で上限を出す：</b>「1」の販売手数料と送料は、買った品を<b>フリマなどで売り直すとき</b>のお金です。市場で買うときのお金は入っていないので、二重に引くことにはなりません（<a href="#sell">「1」の計算へ</a>）。</li>
+    <li><b>市場で買うときのお金を引く：</b>競ってよい額 ＝（「1」の上限 − 持ち帰りの送料）÷（1 ＋ 市場の買う側の手数料）。<br>例：下の「計算式」の例（相場8,000円・新品に近い品）で「1」の上限が2,050円・自分で持ち帰る（送料0円）・買う側の手数料が5%なら、2,050 ÷ 1.05 ≒ 1,952円なので、1,950円まで（切り捨て）です（5%は計算の例で、実際の率ではありません）。</li>
+  </ol>
+  <p>市場の手数料の率や、売る側・買う側のどちらが払うかは市場ごとに違います。参加の申し込みのときに「買う側の手数料（落札額の何%か）・落札額に消費税がかかるか・ほかに払う料金はないか」を聞くか、規約の手数料の欄で確かめてください。買う側が払わない市場なら、3は送料を引くだけです。手数料が率でなく1点いくらの額なら、「1」の上限から送料とその額を直接引きます。せりの場では、この額を超えたら降りる（それ以上は手を挙げない）だけにします。上限を超えて買うことを防ぐ助けで、利益を保証するものではありません。古物市場への参加には、古物商の許可と市場への登録・本人確認が必要なところが多く、当日では間に合わないことがあるので、前もって市場に問い合わせてください。</p>
   <h3>入れた数字は保存されますか？</h3>
   <p>保存も送信もしません。計算はこの画面の中だけで行います。</p>
 </div>
 
 <div class="card">
-  <p><b>相場チェック（開発中）</b>は、古物商・せどりの方が「いくらまで買ってよいか」をその場で決めるための道具です。<a href="./">説明ページ</a>で、売れた値段の検索と計算をまとめて使えます。<a href="demo.html#scene=store">店で仕入れる場面の開発中の完成形の見本（架空のデータ）</a>もご覧ください。</p>
+  <p><b>相場チェック</b>は、古物商・せどりの方が「いくらまで買ってよいか」をその場で決めるための道具です。いま使えるのは売れた値段の検索と計算（無料・登録不要）で、相場の自動取得などは開発中です。<a href="./">説明ページ</a>で、売れた値段の検索と計算をまとめて使えます。<a href="demo.html#scene=store">店で仕入れる場面の開発中の完成形の見本（架空のデータ）</a>もご覧ください。</p>
   <p class="small">メルカリ・ヤフオク・ラクマ等の名前は案内のために書いています。各社との提携・公認はありません。この計算は目安です。</p>
 </div>
-<p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
+<p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kataban-shirabe.html">型番の調べ方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
 </main>
-<script src="tools.js?v=6.3"></script>
+<script src="tools.js?v=6.4"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://souba-check.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

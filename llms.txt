@@ -10,6 +10,12 @@
 - [買取額の計算](https://cocreturn.com/souba-check/kaitori-keisan.html)
 - [仕入れの上限](https://cocreturn.com/souba-check/shiire-jougen.html)
 - [相場の検索](https://cocreturn.com/souba-check/souba-kensaku.html)
+- [型番の調べ方](https://cocreturn.com/souba-check/kataban-shirabe.html)
 - [ほしい機能の要望](https://cocreturn.com/souba-check/requests.html)
+
+## 調べ方の手引き
+
+- 古物商が買取の前に相場を調べる手順（売れた値段を見る・出品中の値段を根拠にしない・状態の差）と、古物市場のせりで上限を決める3つの手順は [相場の検索](https://cocreturn.com/souba-check/souba-kensaku.html) に、せりの上限から市場の手数料をさらに引く考え方は [仕入れの上限](https://cocreturn.com/souba-check/shiire-jougen.html) の「よくある質問」にある。
+- 箱やバーコードのない中古品の型番を本体のどこで見つけるか、末尾の1文字（色・容量・世代・地域）の違いで相場を読み違えない確かめ方、型番が見つからないときの調べ方は [型番の調べ方](https://cocreturn.com/souba-check/kataban-shirabe.html) にある。
 
 運営：共創還元（COCRETURN） https://cocreturn.com/
