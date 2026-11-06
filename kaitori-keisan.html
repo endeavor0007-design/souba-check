@@ -26,8 +26,8 @@
   <label for="sell">相場（きれいな品の売れた値段・円）</label>
   <input id="sell" type="text" inputmode="numeric" placeholder="例：18000">
   <label for="cond">品物の状態（相場の何割で売れそうか）</label>
-  <select id="cond"><option value="70">新品・未使用に近い（相場の7割）</option><option value="40" selected>使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
-  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、割合を高めに選んでください（二重に割り引かないため）。</p>
+  <select id="cond"><option value="100">同じ状態の品の売れた値段を入れた（10割）</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40" selected>使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
+  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、「同じ状態の品の売れた値段を入れた（10割）」を選んでください（二重に割り引かないため）。</p>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
@@ -61,7 +61,7 @@
 <ul>
   <li><b>売れるまでの時間：</b>すぐ売れない品は、値下げや在庫の手間の分だけ低めにします。</li>
   <li><b>状態の確かめ漏れ：</b>動作・傷・付属品をその場で確かめきれないときは、その分を差し引きます。</li>
-  <li><b>相場が新しくない：</b>売れた記録が古い・件数が少ないときは控えめにします（<a href="souba-kensaku.html">相場検索のやり方</a>）。</li>
+  <li><b>相場が古い：</b>売れた記録が古い・件数が少ないときは控えめにします（<a href="souba-kensaku.html">相場検索のやり方</a>）。</li>
 </ul>
 
 <h2>よくある質問</h2>
@@ -73,11 +73,11 @@
   <h3>状態の割合（7割・4割・2割）はどう決めていますか？</h3>
   <p>きれいな品の相場に対して、その状態ならどのくらいで売れそうかの目安です。品物や売る場所で変わるので、迷ったら同じ状態の品の売れた値段を調べて確かめてください。</p>
   <h3>この計算は無料ですか？</h3>
-  <p>無料で、登録もいりません。入れた数字は保存も送信もしません。</p>
+  <p>無料で、登録もいりません。入力した数字は保存も送信もしません。</p>
 </div>
 
 <div class="card">
-  <p><b>相場チェック</b>は、古物商・せどりの方が「いくらまで買ってよいか」をその場で決めるための道具です。いま使えるのは売れた値段の検索と計算（無料・登録不要）で、相場の自動取得などは開発中です。<a href="./">説明ページ</a>で、売れた値段の検索とこの計算をまとめて使えます。<a href="demo.html#scene=counter">店頭の買取で使う開発中の完成形の見本（架空のデータ）</a>もご覧ください。</p>
+  <p><b>相場チェック</b>は、古物商・せどりの方が「いくらまで買ってよいか」をその場で決めるための道具です。いま使えるのは売れた値段の検索と計算（無料・登録不要）で、相場の自動取得などは開発中です。<a href="./">説明ページ</a>で、売れた値段の検索とこの計算をまとめて使えます。<a href="demo.html#scene=counter">店頭買取での使い方の見本（開発中・架空のデータ）</a>もご覧ください。</p>
   <p class="small">メルカリ・ヤフオク・ラクマ等の名前は案内のために書いています。各社との提携・公認はありません。この計算は目安で、価格の決定や法的な助言ではありません。</p>
 </div>
 <p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kataban-shirabe.html">型番の調べ方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
