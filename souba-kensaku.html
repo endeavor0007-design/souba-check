@@ -13,7 +13,7 @@
 <meta property="og:description" content="メルカリの売り切れ・ヤフオクの落札相場・ラクマの売り切れを、型番を1回入れるだけでまとめて開く無料の相場検索。">
 <meta property="og:url" content="https://cocreturn.com/souba-check/souba-kensaku.html">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="page.css?v=6.4">
+<link rel="stylesheet" href="page.css?v=6.5">
 </head>
 <body>
 <main>
@@ -29,7 +29,7 @@
   <div class="links" id="links"></div>
   <div id="autoprice" class="autoprice" hidden aria-live="polite"></div>
   <p class="small">メルカリ・ヤフオクの売れた値段は、公式の公開の仕組み（API）がないため自動では取り出していません。ボタンで開いてご覧ください。</p>
-  <p class="small">各サイトの検索結果は、あなたのブラウザで直接開きます。ボタンを押すと、楽天市場の販売中の値段（参考）を取り寄せるために、入れた語を楽天ウェブサービスに送ります。このツールの側では、入れた語も値段も保存しません。</p>
+  <p class="small">各サイトの検索結果は、あなたのブラウザで直接開きます。ボタンを押すと、楽天市場の出品中の値段（参考・まだ売れていない値段）を取り寄せるために、入れた語を楽天ウェブサービスに送ります。このツールの側では、入れた語も値段も保存しません。調べた語は「最近調べた品」として、この端末のブラウザの中にだけ残ります（ほかの端末とは共有されません・1件ずつの×か全部消すボタンで消せます）。</p>
 </div>
 
 <h2>サイトごとの「売れた値段」の見方</h2>
@@ -91,8 +91,9 @@
 <p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kataban-shirabe.html">型番の調べ方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
 </main>
 <script src="config.js?v=6.3"></script>
-<script src="prices.js?v=6.3"></script>
+<script src="prices.js?v=6.5"></script>
 <script src="tools.js?v=6.4"></script>
+<script src="recent.js?v=6.5"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://souba-check.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

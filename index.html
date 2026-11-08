@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>中古の相場検索と買取額の計算｜相場チェック（古物商・せどり向け・無料）</title>
-<meta name="description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（売れた値段は各サイトの検索を開いて見ます。楽天市場の販売中の値段は参考として表示し、価格は保存しません）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。">
+<meta name="description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（売れた値段は各サイトの検索を開いて見ます。楽天市場の出品中の値段は参考として表示し、価格は保存しません）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。">
 <link rel="canonical" href="https://cocreturn.com/souba-check/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="相場チェック">
 <meta property="og:title" content="売れた値段の検索と買取額の計算｜相場チェック">
-<meta property="og:description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（売れた値段は各サイトの検索を開いて見ます。楽天市場の販売中の値段は参考として表示し、価格は保存しません）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。">
+<meta property="og:description" content="型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（売れた値段は各サイトの検索を開いて見ます。楽天市場の出品中の値段は参考として表示し、価格は保存しません）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。">
 <meta property="og:url" content="https://cocreturn.com/souba-check/">
 <meta name="twitter:card" content="summary">
 <style>
@@ -40,8 +40,14 @@ button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:
 .samplecard{border:2px dashed var(--warn)}
 .btn.ghost{background:transparent;color:var(--accent)}
 ul{padding-left:1.2em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:stretch;max-width:100%;border:1px solid var(--accent);border-radius:22px;background:var(--bg);overflow:hidden}
+.chip-go{font:inherit;font-size:.95rem;min-height:44px;padding:6px 6px 6px 14px;border:none;background:none;color:var(--ink);cursor:pointer;overflow-wrap:anywhere;text-align:left}
+.chip-x{font:inherit;min-width:40px;min-height:44px;border:none;border-left:1px solid var(--line);background:none;color:var(--sub);cursor:pointer}
+.chip-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip-del{font:inherit;font-size:.9rem;min-height:44px;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "相場チェック", "url": "https://cocreturn.com/souba-check/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "description": "型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（売れた値段は各サイトの検索を開いて見ます。楽天市場の販売中の値段は参考として表示し、価格は保存しません）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "publisher": {"@type": "Organization", "name": "相場チェック運営事務局"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "相場チェック", "url": "https://cocreturn.com/souba-check/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "description": "型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（売れた値段は各サイトの検索を開いて見ます。楽天市場の出品中の値段は参考として表示し、価格は保存しません）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "publisher": {"@type": "Organization", "name": "相場チェック運営事務局"}}</script>
 </head>
 <body>
 <main>
@@ -60,7 +66,7 @@ ul{padding-left:1.2em}
   <ul class="small">
     <li><b>売れた値段</b>：実際に売れた・落札された価格の検索です。相場はこちらで見ます。</li>
     <li><b>出品中の値段（参考・点線の枠）</b>：まだ売れていない出品の価格です。相場より高く出やすいので、買取額の根拠にはしないでください。下に出る楽天市場の値段も、この「出品中」です。</li>
-    <li><b>送る先と保存</b>：ボタンを押すと、楽天市場の値段を取り寄せるために、入れた語を楽天ウェブサービスに送ります。各サイトの検索結果は、あなたのブラウザで直接開きます。このツールの側では、入れた語も値段も保存しません（<a href="privacy.html">プライバシーポリシー</a>）。</li>
+    <li><b>送る先と保存</b>：ボタンを押すと、楽天市場の値段を取り寄せるために、入れた語を楽天ウェブサービスに送ります。各サイトの検索結果は、あなたのブラウザで直接開きます。このツールの側では、入れた語も値段も保存しません。調べた語は「最近調べた品」として、この端末のブラウザの中にだけ残ります（ほかの端末とは共有されません・1件ずつの×か全部消すボタンで消せます・<a href="privacy.html">プライバシーポリシー</a>）。</li>
   </ul>
 </div>
 
@@ -147,7 +153,7 @@ ul{padding-left:1.2em}
 </div>
 </main>
 <script src="config.js?v=6.3"></script>
-<script src="prices.js?v=6.3"></script>
+<script src="prices.js?v=6.5"></script>
 <script>
 // 事前登録フォーム（Google フォーム・2026-10-18 公開）
 var SIGNUP_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdkFdGsd_A0wdew6VAlqMexyC9GHXl2XsjuUPhIiahRhTiR4Q/viewform";
@@ -216,6 +222,7 @@ if(SIGNUP_URL){
 }
 else { su.addEventListener("click", function(e){ e.preventDefault(); alert("準備中です（公開前のお試し）"); }); }
 </script>
+<script src="recent.js?v=6.5"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://souba-check.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

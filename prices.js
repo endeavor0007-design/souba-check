@@ -31,7 +31,7 @@
       var items = (d.Items || []).map(function(it){ return it.Item || it; })
         .filter(function(it){ return it.itemPrice > 0 && !NG.some(function(w){ return String(it.itemName).indexOf(w) >= 0; }); });
       var head = el("p", null, "small");
-      head.appendChild(el("b", "楽天市場で販売中の値段（参考）"));
+      head.appendChild(el("b", "楽天市場で出品中の値段（参考・まだ売れていない値段）"));
       head.appendChild(document.createTextNode("：新品が中心の「売りたい値段」で、売れた値段ではありません。付属品や別の商品が混ざることがあります。"));
       if(!items.length){ show([head, el("p", "楽天市場では見つかりませんでした。型番の書き方を変えるか、上のボタンで各サイトを見てください。", "small")]); return; }
       // 高いほうから4分の1の値段の3割に満たないものは、付属品・部品とみなして外す
