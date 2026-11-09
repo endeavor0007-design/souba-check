@@ -33,6 +33,13 @@
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
     <div><label for="margin">残したい利益（売値の何%か）</label><input id="margin" type="text" inputmode="decimal" value="40"></div>
   </div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">くわしい設定（最低額・売れるまでの見込み）</summary>
+  <label for="minp">最低でも手元に残したい額（円）</label><input id="minp" type="text" inputmode="numeric" value="300">
+  <p class="small">売値の安い品で、利益の率だけだと手元に残る額が少なすぎるのを防ぐ欄です。迷ったら300。0にすると利益の率だけで計算します。</p>
+  <label>売れるまでの見込み</label>
+  <div id="waitbtns"><button type="button" class="waitbtn" data-drop="0">早い</button> <button type="button" class="waitbtn" data-drop="0" data-on="1">ふつう</button> <button type="button" class="waitbtn" data-drop="15">遅い</button></div>
+  <p class="small">「早い」「ふつう」は同じ計算です。「遅い」（1か月以上売れ残りそう）のときだけ上限を15%下げます（15%は目安で、売れる日数の保証ではありません）。</p>
+  <p class="small">儲けの保証ではなく、入れた条件での目安です。</p></details>
   <p>買取額の上限：<span class="result" id="out">―</span></p>
   <p class="small" id="msg" role="status"></p>
   <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確かめてから決めてください。</p>
@@ -82,7 +89,7 @@
 </div>
 <p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kataban-shirabe.html">型番の調べ方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
 </main>
-<script src="tools.js?v=6.4"></script>
+<script src="tools.js?v=6.6"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://souba-check.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

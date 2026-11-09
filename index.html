@@ -78,12 +78,19 @@ ul{padding-left:1.2em}
   <label for="cond">品物の状態（相場の何割で売れそうか）</label>
   <select id="cond"><option value="70">新品・未使用に近い（相場の7割）</option><option value="40" selected>使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
   <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、割合を高めに選んでください（二重に割り引かないため）。</p>
-  <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">手数料・送料・利益を変える（初期値：手数料10%・送料750円・利益40%）</summary>
+  <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">手数料・送料・利益・くわしい設定（最低額・売れるまでの見込み）を変える（初期値：手数料10%・送料750円・利益40%）</summary>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
     <div><label for="margin">残したい利益（売値の何%か）</label><input id="margin" type="text" inputmode="decimal" value="40"></div>
-  </div></details>
+  </div>
+  <p style="margin:12px 0 0;font-weight:700">くわしい設定（最低額・売れるまでの見込み）</p>
+  <label for="minp">最低でも手元に残したい額（円）</label><input id="minp" type="text" inputmode="numeric" value="300">
+  <p class="small">売値の安い品で、利益の率だけだと手元に残る額が少なすぎるのを防ぐ欄です。迷ったら300。0にすると利益の率だけで計算します。</p>
+  <label>売れるまでの見込み</label>
+  <div id="waitbtns"><button type="button" class="waitbtn" data-drop="0">早い</button> <button type="button" class="waitbtn" data-drop="0" data-on="1">ふつう</button> <button type="button" class="waitbtn" data-drop="15">遅い</button></div>
+  <p class="small">「早い」「ふつう」は同じ計算です。「遅い」（1か月以上売れ残りそう）のときだけ上限を15%下げます（15%は目安で、売れる日数の保証ではありません）。</p>
+  <p class="small">儲けの保証ではなく、入れた条件での目安です。</p></details>
   <p>買取額の上限：<span class="result" id="out">―</span></p>
   <p class="small" id="msg" role="status"></p>
   <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確認してから決めてください。</p>
@@ -195,22 +202,35 @@ function num(id){
   return v === "" || isNaN(Number(v)) ? NaN : Number(v);
 }
 function calc(){
-  var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin"), cond = Number(document.getElementById("cond").value);
+  var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin"), minp = document.getElementById("minp").value.trim() === "" ? 0 : num("minp"), cond = Number(document.getElementById("cond").value);
+  var wb = document.getElementById("waitbtns").querySelector("[data-on]"), drop = wb ? Number(wb.getAttribute("data-drop")) : 0;
   var out = document.getElementById("out"), msg = document.getElementById("msg");
   out.textContent = "―"; msg.textContent = "";
   if(document.getElementById("sell").value.trim() === "") return;
-  if([sell, fee, ship, margin].some(isNaN)){ msg.textContent = "4つの欄すべてに数字を入れてください（手数料・送料がなければ 0）。"; return; }
+  if([sell, fee, ship, margin, minp].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }
   if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
   if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
   if(ship < 0){ msg.textContent = "送料は 0円以上で入れてください。"; return; }
-  var exp = sell*cond/100, max = exp - exp*fee/100 - ship - exp*margin/100;
-  out.textContent = max > 0 ? Math.floor(max).toLocaleString("ja-JP")+" 円まで" : "利益が出ません";
-  msg.textContent = "売れる見込み " + Math.floor(exp).toLocaleString("ja-JP") + "円（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。");
+  if(minp < 0){ msg.textContent = "最低でも残したい額は 0円以上で入れてください。"; return; }
+  function Y(n){ return Math.floor(n).toLocaleString("ja-JP") + "円"; }
+  var exp = sell*cond/100, net = exp - exp*fee/100 - ship, rate = exp*margin/100, eff = minp > rate;
+  var max = (net - (eff ? minp : rate)) * (1 - drop/100), maxRate = (net - rate) * (1 - drop/100);
+  out.textContent = max > 0 ? Math.floor(max).toLocaleString("ja-JP")+" 円まで" : "利益が出ません（買わない）";
+  msg.style.whiteSpace = "pre-line";
+  msg.textContent = "売れる見込み " + Y(exp) + "（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。")
+    + (max <= 0 ? "\n" + (eff ? "最低額" + Y(minp) + "を残そうとすると、手数料と送料を引いた額（" + Y(Math.max(net,0)) + "）に足りません。" : "手数料・送料・利益を引くと、残りがありません。") : "")
+    + (eff && max > 0 ? "\n今回は最低額" + Y(minp) + "が効いて、上限は" + Y(max) + "（率だと" + Y(Math.max(maxRate,0)) + "）です。" : "")
+    + (drop > 0 && max > 0 ? "\n売れるまで遅い見込みで" + drop + "%下げました。" : "") + "\n条件：手数料" + fee + "%・送料" + Y(ship) + "・利益" + margin + "%・最低" + Y(minp) + "・見込み" + (wb ? wb.textContent.replace(/^✓ /, "") : "ふつう");
 }
 document.getElementById("go").addEventListener("click", makeLinks);
 document.getElementById("q").addEventListener("keydown", function(e){ if(e.key === "Enter") makeLinks(); });
 ["sell","fee","ship","margin"].forEach(function(id){ document.getElementById(id).addEventListener("input", calc); });
 document.getElementById("cond").addEventListener("change", calc);
+document.getElementById("minp").addEventListener("input", calc);
+(function(){ var bs = document.getElementById("waitbtns").querySelectorAll(".waitbtn");
+  function paint(){ for(var i = 0; i < bs.length; i++){ var o = bs[i].hasAttribute("data-on"); bs[i].style.background = o ? "#1f6feb" : "#fff"; bs[i].style.color = o ? "#fff" : "#333"; bs[i].style.border = o ? "2px solid #1f6feb" : "1px solid #999"; bs[i].style.fontWeight = o ? "700" : "400"; bs[i].textContent = bs[i].textContent.replace(/^✓ /, "") ; if(o) bs[i].textContent = "✓ " + bs[i].textContent; bs[i].setAttribute("aria-pressed", o ? "true" : "false"); } }
+  for(var i = 0; i < bs.length; i++) bs[i].addEventListener("click", function(){ for(var j = 0; j < bs.length; j++) bs[j].removeAttribute("data-on"); this.setAttribute("data-on", "1"); paint(); calc(); });
+  paint(); })();
 var su = document.getElementById("signup");
 // URLの ?from= の値（流入元）を事前登録のリンクに引き継ぐ
 var FROM = "";

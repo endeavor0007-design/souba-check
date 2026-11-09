@@ -38,16 +38,23 @@ function yen(n){ return Math.floor(Math.round(n*100)/100).toLocaleString("ja-JP"
 // 売値から買取（仕入れ）額の上限
 function calcMax(){
   var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin"), cond = $("cond") ? Number($("cond").value) : 100;
+  var minp = $("minp") && $("minp").value.trim() !== "" ? num("minp") : 0, wb = $("waitbtns") && $("waitbtns").querySelector("[data-on]"), drop = wb ? Number(wb.getAttribute("data-drop")) : 0;
   var out = $("out"), msg = $("msg");
   out.textContent = "―"; msg.textContent = "";
   if($("sell").value.trim() === "") return;
-  if([sell, fee, ship, margin].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }
+  if([sell, fee, ship, margin, minp].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }
   if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
   if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
   if(ship < 0){ msg.textContent = "送料は 0円以上で入れてください。"; return; }
-  var exp = sell*cond/100, max = exp - exp*fee/100 - ship - exp*margin/100;
-  out.textContent = max > 0 ? yen(max) + "まで" : "利益が出ません";
-  msg.textContent = "売れる見込み " + yen(exp) + "（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。");
+  if(minp < 0){ msg.textContent = "最低でも残したい額は 0円以上で入れてください。"; return; }
+  var exp = sell*cond/100, net = exp - exp*fee/100 - ship, rate = exp*margin/100, eff = minp > rate;
+  var max = (net - (eff ? minp : rate)) * (1 - drop/100), maxRate = (net - rate) * (1 - drop/100);
+  out.textContent = max > 0 ? yen(max) + "まで" : "利益が出ません（買わない）";
+  msg.style.whiteSpace = "pre-line";
+  msg.textContent = "売れる見込み " + yen(exp) + "（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。")
+    + (max <= 0 ? "\n" + (eff ? "最低額" + yen(minp) + "を残そうとすると、手数料と送料を引いた額（" + yen(Math.max(net,0)) + "）に足りません。" : "手数料・送料・利益を引くと、残りがありません。") : "")
+    + (eff && max > 0 ? "\n今回は最低額" + yen(minp) + "が効いて、上限は" + yen(max) + "（率だと" + yen(Math.max(maxRate,0)) + "）です。" : "")
+    + (drop > 0 && max > 0 ? "\n売れるまで遅い見込みで" + drop + "%下げました。" : "") + "\n条件：手数料" + fee + "%・送料" + yen(ship) + "・利益" + margin + "%・最低" + yen(minp) + "・見込み" + (wb ? wb.textContent.replace(/^✓ /, "") : "ふつう");
 }
 // 仕入れ値から、損をしない最低の売値（利益0）
 function calcMin(){
@@ -65,4 +72,9 @@ on("go", "click", makeLinks);
 on("q", "keydown", function(e){ if(e.key === "Enter") makeLinks(); });
 ["sell","fee","ship","margin"].forEach(function(id){ on(id, "input", calcMax); });
 on("cond", "change", calcMax);
+on("minp", "input", calcMax);
+(function(){ var w = $("waitbtns"); if(!w) return; var bs = w.querySelectorAll(".waitbtn");
+  function paint(){ for(var i = 0; i < bs.length; i++){ var o = bs[i].hasAttribute("data-on"); bs[i].style.background = o ? "#1f6feb" : "#fff"; bs[i].style.color = o ? "#fff" : "#333"; bs[i].style.border = o ? "2px solid #1f6feb" : "1px solid #999"; bs[i].style.fontWeight = o ? "700" : "400"; bs[i].textContent = bs[i].textContent.replace(/^✓ /, "") ; if(o) bs[i].textContent = "✓ " + bs[i].textContent; bs[i].setAttribute("aria-pressed", o ? "true" : "false"); } }
+  for(var i = 0; i < bs.length; i++) bs[i].addEventListener("click", function(){ for(var j = 0; j < bs.length; j++) bs[j].removeAttribute("data-on"); this.setAttribute("data-on", "1"); paint(); calcMax(); });
+  paint(); })();
 ["cost","fee2","ship2"].forEach(function(id){ on(id, "input", calcMin); });
