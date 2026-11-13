@@ -40,8 +40,10 @@ function calcMax(){
   var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin"), cond = $("cond") ? Number($("cond").value) : 100;
   var minp = $("minp") && $("minp").value.trim() !== "" ? num("minp") : 0, wb = $("waitbtns") && $("waitbtns").querySelector("[data-on]"), drop = wb ? Number(wb.getAttribute("data-drop")) : 0;
   var out = $("out"), msg = $("msg");
-  out.textContent = "―"; msg.textContent = "";
-  if($("sell").value.trim() === "") return;
+  out.textContent = "―"; msg.textContent = ""; msg.style.fontWeight = ""; msg.style.color = "";
+  var noSell = $("sell").value.trim() === "", noCond = $("cond") && $("cond").value === "";
+  if(noSell && noCond) return;
+  if(noSell || noCond){ msg.style.fontWeight = "bold"; msg.style.color = "#b45309"; msg.textContent = noSell ? "▲ 相場（売れた値段）を入れると上限が出ます。" : "▲ 品物の状態を選ぶと上限が出ます。"; return; }
   if([sell, fee, ship, margin, minp].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }
   if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
   if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
@@ -49,12 +51,22 @@ function calcMax(){
   if(minp < 0){ msg.textContent = "最低でも残したい額は 0円以上で入れてください。"; return; }
   var exp = sell*cond/100, net = exp - exp*fee/100 - ship, rate = exp*margin/100, eff = minp > rate;
   var max = (net - (eff ? minp : rate)) * (1 - drop/100), maxRate = (net - rate) * (1 - drop/100);
-  out.textContent = max > 0 ? yen(max) + "まで" : "利益が出ません（買わない）";
+  var ok = Math.floor(max) >= 1, pct = Math.floor(max/sell*100);
+  out.textContent = ok ? yen(max) + "まで" : "利益が出ません（買わない）";
   msg.style.whiteSpace = "pre-line";
-  msg.textContent = "売れる見込み " + yen(exp) + "（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。")
-    + (max <= 0 ? "\n" + (eff ? "最低額" + yen(minp) + "を残そうとすると、手数料と送料を引いた額（" + yen(Math.max(net,0)) + "）に足りません。" : "手数料・送料・利益を引くと、残りがありません。") : "")
-    + (eff && max > 0 ? "\n今回は最低額" + yen(minp) + "が効いて、上限は" + yen(max) + "（率だと" + yen(Math.max(maxRate,0)) + "）です。" : "")
-    + (drop > 0 && max > 0 ? "\n売れるまで遅い見込みで" + drop + "%下げました。" : "") + "\n条件：手数料" + fee + "%・送料" + yen(ship) + "・利益" + margin + "%・最低" + yen(minp) + "・見込み" + (wb ? wb.textContent.replace(/^✓ /, "") : "ふつう");
+  // 理由は1段（状態→売れる見込み→引く物）・最低額と遅いが効いたときだけ1行ずつ足す・条件は別の行に
+  var co = $("cond") && $("cond").selectedOptions ? $("cond").selectedOptions[0] : null, cname = co ? co.text.replace(/（.*$/, "") : "";
+  var why = cond >= 100 ? "相場どおり " + yen(exp) + " で売れる見込み。" : (cname ? cname + "なので、" : "") + "相場の" + cond/10 + "割の " + yen(exp) + " で売れる見込み。";
+  var lines = ok
+    ? [why + "手数料・送料・" + (eff ? "最低でも残したい額" : "利益") + "を引いて、上限は相場の" + (pct < 1 ? "1%未満" : "約" + pct + "%") + "。"]
+    : [why + (eff && net > 0 && net <= minp ? "最低でも残したい額 " + yen(minp) + " を残すと、手数料と送料を引いた " + yen(Math.max(net,0)) + " に足りません。" : "手数料・送料・利益を引くと、残りがありません。")];
+  if(eff && ok) lines.push("最低でも残したい額が効いています（利益の%だけで計算すると " + yen(Math.max(maxRate,0)) + "）。");
+  if(drop > 0 && ok) lines.push("売れるまで遅い見込みで " + drop + "% 下げています。");
+  msg.textContent = lines.join("\n");
+  var c = document.createElement("span");
+  c.className = "cond";
+  c.textContent = "条件：手数料" + fee + "%・送料" + yen(ship) + "・利益" + margin + "%・最低" + yen(minp) + "・見込み" + (wb ? wb.textContent.replace(/^✓ /, "") : "ふつう");
+  msg.appendChild(c);
 }
 // 仕入れ値から、損をしない最低の売値（利益0）
 function calcMin(){

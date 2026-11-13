@@ -32,6 +32,8 @@ button,.btn{display:inline-block;font-size:1rem;padding:10px 14px;border-radius:
 .links a:hover{border-color:var(--accent)}
 .links a.list{border:1px dashed var(--sub);background:transparent}
 .result{font-size:1.3rem;font-weight:700;color:var(--accent)}
+#out{font-size:1.9rem}
+.cond{display:block;font-size:.95rem;margin-top:.3rem}
 .small{font-size:.85rem;color:var(--sub)}
 .autoprice{margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
 .pstat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0}.pstat div{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;text-align:center}.pstat b{display:block;font-size:1.15rem}
@@ -72,12 +74,13 @@ ul{padding-left:1.2em}
 
 <h2>2. 買取額の上限を計算する</h2>
 <div class="card">
+  <p class="small" style="margin:0 0 6px"><b>入れるのは相場と品物の状態の2つで足ります。</b>2つがそろうと、手数料10%・送料750円・利益40%の初期値で上限が出ます（下の設定で変えられます。Yahoo!フリマで売るなら手数料は5%に）。</p>
   <div class="row">
     <div><label for="sell">相場（きれいな品の売れた値段・円）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
   </div>
   <label for="cond">品物の状態（相場の何割で売れそうか）</label>
-  <select id="cond"><option value="70">新品・未使用に近い（相場の7割）</option><option value="40" selected>使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
-  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、割合を高めに選んでください（二重に割り引かないため）。</p>
+  <select id="cond"><option value="" selected disabled>選んでください</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
+  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに中古（同じ状態の品）の売れた値段なら、割合を高めに選んでください。中古の値段にさらに4割などをかけると、上限が低く出すぎます。</p>
   <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">手数料・送料・利益・くわしい設定（最低額・売れるまでの見込み）を変える（初期値：手数料10%・送料750円・利益40%）</summary>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
@@ -122,6 +125,12 @@ ul{padding-left:1.2em}
   <li><a href="souba-kensaku.html">中古の相場検索のやり方</a>：売れた値段の見方と、相場を読み違えないための5つの注意</li>
   <li><a href="kaitori-keisan.html">買取価格の計算</a>：売れた値段から逆算・相場の何割で買うかの早見表</li>
   <li><a href="shiire-jougen.html">せどりの仕入れ値の上限計算</a>：損をしない最低の売値（損益分岐）も計算</li>
+  <li><a href="kataban-shirabe.html">型番の調べ方</a>：箱やバーコードのない中古品の型番の見つけ方</li>
+  <li><a href="furima-tedori.html">フリマ・オークションの手数料と手取り</a>：メルカリ・Yahoo!フリマ・ヤフオクの手取りの比べ方</li>
+  <li><a href="yahuoku-rakusatsu-miekata.html">ヤフオクの落札相場の見方</a>：利用料を引いた手取りの計算と注意点</li>
+  <li><a href="okuri-konpou-hiki.html">送料と梱包費の引き方</a>：買取額から送料・梱包費をどう引くか</li>
+  <li><a href="nerisage-meyasu.html">値下げの目安</a>：赤字にならない最低の売値</li>
+  <li><a href="kobutsu-daicho.html">古物台帳の書き方</a>：記載する項目と、相場の記録の残し方</li>
 </ul>
 
 <h2>正式版でできるようにすること（予定）</h2>
@@ -205,8 +214,10 @@ function calc(){
   var sell = num("sell"), fee = num("fee"), ship = num("ship"), margin = num("margin"), minp = document.getElementById("minp").value.trim() === "" ? 0 : num("minp"), cond = Number(document.getElementById("cond").value);
   var wb = document.getElementById("waitbtns").querySelector("[data-on]"), drop = wb ? Number(wb.getAttribute("data-drop")) : 0;
   var out = document.getElementById("out"), msg = document.getElementById("msg");
-  out.textContent = "―"; msg.textContent = "";
-  if(document.getElementById("sell").value.trim() === "") return;
+  out.textContent = "―"; msg.textContent = ""; msg.style.fontWeight = ""; msg.style.color = "";
+  var noSell = document.getElementById("sell").value.trim() === "", noCond = document.getElementById("cond").value === "";
+  if(noSell && noCond) return;
+  if(noSell || noCond){ msg.style.fontWeight = "bold"; msg.style.color = "#b45309"; msg.textContent = noSell ? "▲ 相場（売れた値段）を入れると上限が出ます。" : "▲ 品物の状態を選ぶと上限が出ます。"; return; }
   if([sell, fee, ship, margin, minp].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }
   if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
   if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
@@ -215,12 +226,21 @@ function calc(){
   function Y(n){ return Math.floor(n).toLocaleString("ja-JP") + "円"; }
   var exp = sell*cond/100, net = exp - exp*fee/100 - ship, rate = exp*margin/100, eff = minp > rate;
   var max = (net - (eff ? minp : rate)) * (1 - drop/100), maxRate = (net - rate) * (1 - drop/100);
-  out.textContent = max > 0 ? Math.floor(max).toLocaleString("ja-JP")+" 円まで" : "利益が出ません（買わない）";
+  var ok = Math.floor(max) >= 1, pct = Math.floor(max/sell*100);
+  out.textContent = ok ? Math.floor(max).toLocaleString("ja-JP")+" 円まで" : "利益が出ません（買わない）";
   msg.style.whiteSpace = "pre-line";
-  msg.textContent = "売れる見込み " + Y(exp) + "（相場の" + cond/10 + "割）から、手数料・送料・利益を引いた額" + (max > 0 ? "で、相場の約" + Math.floor(max/sell*100) + "%です。" : "です。")
-    + (max <= 0 ? "\n" + (eff ? "最低額" + Y(minp) + "を残そうとすると、手数料と送料を引いた額（" + Y(Math.max(net,0)) + "）に足りません。" : "手数料・送料・利益を引くと、残りがありません。") : "")
-    + (eff && max > 0 ? "\n今回は最低額" + Y(minp) + "が効いて、上限は" + Y(max) + "（率だと" + Y(Math.max(maxRate,0)) + "）です。" : "")
-    + (drop > 0 && max > 0 ? "\n売れるまで遅い見込みで" + drop + "%下げました。" : "") + "\n条件：手数料" + fee + "%・送料" + Y(ship) + "・利益" + margin + "%・最低" + Y(minp) + "・見込み" + (wb ? wb.textContent.replace(/^✓ /, "") : "ふつう");
+  var cs = document.getElementById("cond"), cname = cs.selectedOptions ? cs.selectedOptions[0].text.replace(/（.*$/, "") : "";
+  var why = cond >= 100 ? "相場どおり " + Y(exp) + " で売れる見込み。" : (cname ? cname + "なので、" : "") + "相場の" + cond/10 + "割の " + Y(exp) + " で売れる見込み。";
+  var lines = ok
+    ? [why + "手数料・送料・" + (eff ? "最低でも残したい額" : "利益") + "を引いて、上限は相場の" + (pct < 1 ? "1%未満" : "約" + pct + "%") + "。"]
+    : [why + (eff && net > 0 && net <= minp ? "最低でも残したい額 " + Y(minp) + " を残すと、手数料と送料を引いた " + Y(Math.max(net,0)) + " に足りません。" : "手数料・送料・利益を引くと、残りがありません。")];
+  if(eff && ok) lines.push("最低でも残したい額が効いています（利益の%だけで計算すると " + Y(Math.max(maxRate,0)) + "）。");
+  if(drop > 0 && ok) lines.push("売れるまで遅い見込みで " + drop + "% 下げています。");
+  msg.textContent = lines.join("\n");
+  var c = document.createElement("span");
+  c.className = "cond";
+  c.textContent = "条件：手数料" + fee + "%・送料" + Y(ship) + "・利益" + margin + "%・最低" + Y(minp) + "・見込み" + (wb ? wb.textContent.replace(/^✓ /, "") : "ふつう");
+  msg.appendChild(c);
 }
 document.getElementById("go").addEventListener("click", makeLinks);
 document.getElementById("q").addEventListener("keydown", function(e){ if(e.key === "Enter") makeLinks(); });

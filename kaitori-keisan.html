@@ -13,7 +13,7 @@
 <meta property="og:description" content="売れた値段から手数料・送料・利益を引いて、買取額の上限をその場で計算。相場の何割かの早見表つき。">
 <meta property="og:url" content="https://cocreturn.com/souba-check/kaitori-keisan.html">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="page.css?v=6.5">
+<link rel="stylesheet" href="page.css?v=6.6">
 </head>
 <body>
 <main>
@@ -23,11 +23,12 @@
 <p>買取価格は、<b>相場と品物の状態から売れる見込みを出し、売るときにかかるお金と残したい利益を引いて</b>決めます。お客様の前で迷わないように、下の欄で上限をその場で計算できます。</p>
 
 <div class="card">
+  <p class="small" style="margin:0 0 6px"><b>入れるのは相場と品物の状態の2つで足ります。</b>2つがそろうと、手数料10%・送料750円・利益40%の初期値で上限が出ます（下の設定で変えられます。Yahoo!フリマで売るなら手数料は5%に）。</p>
   <label for="sell">相場（きれいな品の売れた値段・円）</label>
   <input id="sell" type="text" inputmode="numeric" placeholder="例：18000">
   <label for="cond">品物の状態（相場の何割で売れそうか）</label>
-  <select id="cond"><option value="100">同じ状態の品の売れた値段を入れた（10割）</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40" selected>使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
-  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、「同じ状態の品の売れた値段を入れた（10割）」を選んでください（二重に割り引かないため）。</p>
+  <select id="cond"><option value="" selected disabled>選んでください</option><option value="100">同じ状態の品の売れた値段を入れた（10割）</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
+  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、「同じ状態の品の売れた値段を入れた（10割）」を選んでください。中古の値段にさらに4割などをかけると、上限が低く出すぎます。</p>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
@@ -48,6 +49,7 @@
 <h2>計算式</h2>
 <p>売れる見込み ＝ 相場 × 状態の割合（新品に近い7割・使用感あり4割・ジャンク2割が目安）</p>
 <p>買取額の上限 ＝ 売れる見込み −（売れる見込み × 販売手数料）− 送料・梱包 −（売れる見込み × 残したい利益）</p>
+<p class="small">「くわしい設定」で最低でも残したい額を入れたときは、利益の%の額がそれより小さければ、利益の代わりにその額を引きます。「売れるまで遅い」を選ぶと、上限をさらに15%下げます。</p>
 <p>例：相場18,000円の品が使用感ありなら、売れる見込みは7,200円。手数料10%（720円）・送料750円・利益40%（2,880円）を引いて、<b>上限は2,850円</b>です。新品に近い品なら、売れる見込み12,600円で上限は5,550円です。</p>
 
 <h2>相場の何割で買えばよいか（早見表）</h2>
@@ -88,8 +90,9 @@
   <p class="small">メルカリ・ヤフオク・ラクマ等の名前は案内のために書いています。各社との提携・公認はありません。この計算は目安で、価格の決定や法的な助言ではありません。</p>
 </div>
 <p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kataban-shirabe.html">型番の調べ方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
+<p class="small">手引き：<a href="furima-tedori.html">フリマの手数料と手取り</a>｜<a href="yahuoku-rakusatsu-miekata.html">ヤフオクの落札相場の見方</a>｜<a href="okuri-konpou-hiki.html">送料と梱包費の引き方</a>｜<a href="nerisage-meyasu.html">値下げの目安</a>｜<a href="kobutsu-daicho.html">古物台帳の書き方</a></p>
 </main>
-<script src="tools.js?v=6.6"></script>
+<script src="tools.js?v=6.8"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://souba-check.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

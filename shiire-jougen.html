@@ -13,7 +13,7 @@
 <meta property="og:description" content="売れた値段から仕入れ値の上限を、仕入れ値から損をしない最低の売値を、手数料と送料込みで計算。">
 <meta property="og:url" content="https://cocreturn.com/souba-check/shiire-jougen.html">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="page.css?v=6.5">
+<link rel="stylesheet" href="page.css?v=6.6">
 </head>
 <body>
 <main>
@@ -24,11 +24,12 @@
 
 <h2>1. 売れた値段から、仕入れ値の上限を出す</h2>
 <div class="card">
+  <p class="small" style="margin:0 0 6px"><b>入れるのは相場と品物の状態の2つで足ります。</b>2つがそろうと、手数料10%・送料750円・利益40%の初期値で上限が出ます（下の設定で変えられます。Yahoo!フリマで売るなら手数料は5%に）。</p>
   <label for="sell">相場（きれいな品の売れた値段・円）</label>
   <input id="sell" type="text" inputmode="numeric" placeholder="例：8000">
   <label for="cond">品物の状態（相場の何割で売れそうか）</label>
-  <select id="cond"><option value="70" selected>新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
-  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに同じ状態の品の売れた値段なら、割合を高めに選んでください（二重に割り引かないため）。</p>
+  <select id="cond"><option value="" selected disabled>選んでください</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
+  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに中古（同じ状態の品）の売れた値段なら、割合を高めに選んでください。中古の値段にさらに4割などをかけると、上限が低く出すぎます。</p>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
@@ -96,8 +97,9 @@
   <p class="small">メルカリ・ヤフオク・ラクマ等の名前は案内のために書いています。各社との提携・公認はありません。この計算は目安です。</p>
 </div>
 <p class="small"><a href="./">相場チェック</a>｜<a href="souba-kensaku.html">相場検索のやり方</a>｜<a href="kataban-shirabe.html">型番の調べ方</a>｜<a href="kaitori-keisan.html">買取価格の計算</a>｜<a href="shiire-jougen.html">仕入れ値の上限計算</a>｜<a href="privacy.html">プライバシーポリシー</a></p>
+<p class="small">手引き：<a href="furima-tedori.html">フリマの手数料と手取り</a>｜<a href="yahuoku-rakusatsu-miekata.html">ヤフオクの落札相場の見方</a>｜<a href="okuri-konpou-hiki.html">送料と梱包費の引き方</a>｜<a href="nerisage-meyasu.html">値下げの目安</a>｜<a href="kobutsu-daicho.html">古物台帳の書き方</a></p>
 </main>
-<script src="tools.js?v=6.6"></script>
+<script src="tools.js?v=6.8"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
 <script data-goatcounter="https://souba-check.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

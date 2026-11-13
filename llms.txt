@@ -18,4 +18,12 @@
 - 古物商が買取の前に相場を調べる手順（売れた値段を見る・出品中の値段を根拠にしない・状態の差）と、古物市場のせりで上限を決める3つの手順は [相場の検索](https://cocreturn.com/souba-check/souba-kensaku.html) に、せりの上限から市場の手数料をさらに引く考え方は [仕入れの上限](https://cocreturn.com/souba-check/shiire-jougen.html) の「よくある質問」にある。
 - 箱やバーコードのない中古品の型番を本体のどこで見つけるか、末尾の1文字（色・容量・世代・地域）の違いで相場を読み違えない確かめ方、型番が見つからないときの調べ方は [型番の調べ方](https://cocreturn.com/souba-check/kataban-shirabe.html) にある。
 
+## 売り方と記録の手引き（2026-11-11）
+
+- [フリマ・オークションの手数料と手取りの比べ方](https://cocreturn.com/souba-check/furima-tedori.html)：メルカリ（販売価格の10%）・Yahoo!フリマ（5%）・ヤフオク（落札システム利用料10%）の手数料を引いた手取りを同じ例で比べる。確認日と公式の出典つき
+- [ヤフオクの落札相場の見方と注意点](https://cocreturn.com/souba-check/yahuoku-rakusatsu-miekata.html)：落札相場の見方と注意点・落札価格に送料が含まれる出品と含まれない出品の比べ方・落札システム利用料10%を引いた手取りの計算
+- [買取の値付けで送料と梱包費をどう引くか](https://cocreturn.com/souba-check/okuri-konpou-hiki.html)：買取額の上限から送料・梱包費を引く順番と、大きい品（たのメル便）の手数料の考え方
+- [売れないときの値下げの目安](https://cocreturn.com/souba-check/nerisage-meyasu.html)：仕入れ値・手数料・送料から赤字にならない最低の売値を出し、どこまで値下げできるかを決める
+- [古物台帳（帳簿）に書く項目と相場の記録の残し方](https://cocreturn.com/souba-check/kobutsu-daicho.html)：古物営業法 第16条の記載事項・第18条の保存期間（3年）と、法定の項目ではない相場のメモを1点ごとの利益の振り返りに残す方法
+
 運営：共創還元（COCRETURN） https://cocreturn.com/
