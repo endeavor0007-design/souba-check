@@ -42,6 +42,7 @@ function calcMax(){
   var out = $("out"), msg = $("msg");
   out.textContent = "―"; msg.textContent = ""; msg.style.fontWeight = ""; msg.style.color = "";
   var noSell = $("sell").value.trim() === "", noCond = $("cond") && $("cond").value === "";
+  if($("n100")) $("n100").hidden = !($("cond") && $("cond").value === "100");
   if(noSell && noCond) return;
   if(noSell || noCond){ msg.style.fontWeight = "bold"; msg.style.color = "#b45309"; msg.textContent = noSell ? "▲ 相場（売れた値段）を入れると上限が出ます。" : "▲ 品物の状態を選ぶと上限が出ます。"; return; }
   if([sell, fee, ship, margin, minp].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }

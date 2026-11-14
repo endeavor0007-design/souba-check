@@ -76,11 +76,12 @@ ul{padding-left:1.2em}
 <div class="card">
   <p class="small" style="margin:0 0 6px"><b>入れるのは相場と品物の状態の2つで足ります。</b>2つがそろうと、手数料10%・送料750円・利益40%の初期値で上限が出ます（下の設定で変えられます。Yahoo!フリマで売るなら手数料は5%に）。</p>
   <div class="row">
-    <div><label for="sell">相場（きれいな品の売れた値段・円）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
+    <div><label for="sell">相場（きれいな品の売れた値段・円／中古の値段なら状態で10割）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
   </div>
   <label for="cond">品物の状態（相場の何割で売れそうか）</label>
-  <select id="cond"><option value="" selected disabled>選んでください</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option></select>
-  <p class="small">相場は、きれいな品（新品・美品）の売れた値段を入れます。割合は運営の目安で、品物や売る場所で変わります。調べた値段がすでに中古（同じ状態の品）の売れた値段なら、割合を高めに選んでください。中古の値段にさらに4割などをかけると、上限が低く出すぎます。</p>
+  <select id="cond"><option value="" selected disabled>選んでください</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option><option value="100">目の前の品と同じ状態の中古の売れた値段を入れたとき（10割）</option></select>
+  <p id="n100" class="small" hidden style="font-weight:bold;color:#b45309">▲ 10割は、相場に「目の前の品と同じ状態の中古」の売れた値段を入れたときだけ。新品・美品の値段なら、上の7〜2割から選んでください（10割だと上限が高く出すぎます）。</p>
+  <p class="small"><b>相場がきれいな品（新品・美品）の値段なら7〜2割、目の前の品と同じ状態の中古の売れた値段なら一番下の10割を選びます。</b>割合は運営の目安で、品物や売る場所で変わります。中古の値段にさらに4割などをかけると上限が低く出すぎ、新品の値段で10割を選ぶと高く出すぎます。</p>
   <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">手数料・送料・利益・くわしい設定（最低額・売れるまでの見込み）を変える（初期値：手数料10%・送料750円・利益40%）</summary>
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
@@ -216,6 +217,7 @@ function calc(){
   var out = document.getElementById("out"), msg = document.getElementById("msg");
   out.textContent = "―"; msg.textContent = ""; msg.style.fontWeight = ""; msg.style.color = "";
   var noSell = document.getElementById("sell").value.trim() === "", noCond = document.getElementById("cond").value === "";
+  document.getElementById("n100").hidden = document.getElementById("cond").value !== "100";
   if(noSell && noCond) return;
   if(noSell || noCond){ msg.style.fontWeight = "bold"; msg.style.color = "#b45309"; msg.textContent = noSell ? "▲ 相場（売れた値段）を入れると上限が出ます。" : "▲ 品物の状態を選ぶと上限が出ます。"; return; }
   if([sell, fee, ship, margin, minp].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }
