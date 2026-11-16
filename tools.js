@@ -46,14 +46,14 @@ function calcMax(){
   if(noSell && noCond) return;
   if(noSell || noCond){ msg.style.fontWeight = "bold"; msg.style.color = "#b45309"; msg.textContent = noSell ? "▲ 相場（売れた値段）を入れると上限が出ます。" : "▲ 品物の状態を選ぶと上限が出ます。"; return; }
   if([sell, fee, ship, margin, minp].some(isNaN)){ msg.textContent = "すべての欄に数字を入れてください（手数料・送料がなければ 0）。"; return; }
-  if(sell <= 0){ msg.textContent = "売れそうな価格は 1円以上で入れてください。"; return; }
+  if(sell <= 0){ msg.textContent = "相場は 1円以上で入れてください。"; return; }
   if(fee < 0 || fee >= 100 || margin < 0 || margin >= 100){ msg.textContent = "手数料と利益は 0〜99% で入れてください。"; return; }
   if(ship < 0){ msg.textContent = "送料は 0円以上で入れてください。"; return; }
   if(minp < 0){ msg.textContent = "最低でも残したい額は 0円以上で入れてください。"; return; }
   var exp = sell*cond/100, net = exp - exp*fee/100 - ship, rate = exp*margin/100, eff = minp > rate;
   var max = (net - (eff ? minp : rate)) * (1 - drop/100), maxRate = (net - rate) * (1 - drop/100);
   var ok = Math.floor(max) >= 1, pct = Math.floor(max/sell*100);
-  out.textContent = ok ? yen(max) + "まで" : "利益が出ません（買わない）";
+  out.textContent = ok ? yen(max) + "まで" : "この条件では利益が出ません（買わない）";
   msg.style.whiteSpace = "pre-line";
   // 理由は1段（状態→売れる見込み→引く物）・最低額と遅いが効いたときだけ1行ずつ足す・条件は別の行に
   var co = $("cond") && $("cond").selectedOptions ? $("cond").selectedOptions[0] : null, cname = co ? co.text.replace(/（.*$/, "") : "";
