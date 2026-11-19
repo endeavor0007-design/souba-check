@@ -48,6 +48,12 @@ ul{padding-left:1.2em}
 .chip-x{font:inherit;min-width:40px;min-height:44px;border:none;border-left:1px solid var(--line);background:none;color:var(--sub);cursor:pointer}
 .chip-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .chip-del{font:inherit;font-size:.9rem;min-height:44px;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
+input[type=radio]{width:auto}[hidden]{display:none!important}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}@media(max-width:480px){.kgrid{grid-template-columns:1fr}}
+.kb{display:block;position:relative;margin:0}.kb input{position:absolute;opacity:0;width:1px;height:1px}
+.kb span{display:flex;align-items:center;min-height:56px;padding:8px 12px;border:2px solid #9ca3af;border-radius:10px;background:#fff;font-size:1rem;cursor:pointer}
+.kb input:checked+span{border-color:#1d4ed8;background:#dbeafe;font-weight:bold}.kb input:checked+span:before{content:"\2713\00a0"}
+.kb input:focus-visible+span{outline:3px solid #f59e0b}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "相場チェック", "url": "https://cocreturn.com/souba-check/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "ja", "description": "型番・商品名・JANを1回入れるだけで、メルカリ・ヤフオク・ラクマの売り切れ・落札価格の検索をまとめて開き、販売手数料と送料を引いた買取額の上限を計算します（売れた値段は各サイトの検索を開いて見ます。楽天市場の出品中の値段は参考として表示し、価格は保存しません）。検索と計算は無料・登録不要の、古物商・せどり向けの開発中ツール。正式版の追加機能は月額制の予定。", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "publisher": {"@type": "Organization", "name": "相場チェック運営事務局"}}</script>
 </head>
@@ -68,36 +74,48 @@ ul{padding-left:1.2em}
   <ul class="small">
     <li><b>売れた値段</b>：実際に売れた・落札された価格の検索です。相場はこちらで見ます。</li>
     <li><b>出品中の値段（参考・点線の枠）</b>：まだ売れていない出品の価格です。相場より高く出やすいので、買取額の根拠にはしないでください。下に出る楽天市場の値段も、この「出品中」です。</li>
-    <li><b>送る先と保存</b>：ボタンを押すと、楽天市場の値段を取り寄せるために、入れた語を楽天ウェブサービスに送ります。各サイトの検索結果は、あなたのブラウザで直接開きます。このツールの側では、入れた語も値段も保存しません。調べた語は「最近調べた品」として、この端末のブラウザの中にだけ残ります（ほかの端末とは共有されません・1件ずつの×か全部消すボタンで消せます・<a href="privacy.html">プライバシーポリシー</a>）。</li>
+    <li><b>送る先と保存</b>：ボタンを押すと、楽天市場の値段を取り寄せるために、入れた語を楽天ウェブサービスに送ります。各サイトの検索結果は、あなたのブラウザで直接開きます。このツールの側では、入れた語も値段も保存しません。調べた語は「最近調べた品」として、この端末のブラウザの中にだけ残ります（ほかの端末とは共有されません・1件ずつの×か全部消すボタンで消せます・<a href="privacy.html">プライバシーポリシー</a>）。買取額の計算で手順1に選んだ値段の種類も、次に使うときのためにこの端末にだけ残ります（金額は残しません）。</li>
   </ul>
 </div>
 
 <h2>2. 買取額の上限を計算する</h2>
 <div class="card">
-  <p class="small" style="margin:0 0 6px"><b>入れるのは相場と品物の状態の2つで足ります。</b>2つがそろうと、手数料10%・送料750円・利益40%の初期値で上限が出ます（下の設定で変えられます。Yahoo!フリマで売るなら手数料は5%に）。</p>
-  <div class="row">
-    <div><label for="sell">相場（売れた値段・円／中古の売れ値なら状態は10割）</label><input id="sell" type="text" inputmode="numeric" placeholder="例：18000"></div>
+  <p class="small" style="margin:0 0 6px"><b>手順1で調べた値段の種類を選び、相場を入れます。</b>手数料10%・送料750円・利益40%の初期値で上限が出ます（下で変えられます。Yahoo!フリマで売るなら手数料は5%に）。割合は運営の目安で、品物や売る場所で変わります。</p>
+  <fieldset id="step1" style="border:0;padding:0;margin:0 0 8px"><legend class="small" style="padding:0"><b>手順1：調べた相場は、どちらの値段ですか。</b></legend>
+  <div class="kgrid"><label class="kb"><input type="radio" name="kind" id="kindUsed" value="used"><span>売れた中古の値段（メルカリ等の売り切れ値）</span></label>
+  <label class="kb"><input type="radio" name="kind" id="kindNew" value="new"><span>新品の定価・最安値</span></label></div>
+  <p id="prevkind" hidden style="margin:4px 0;padding:6px 8px;background:#fef3c7;border:1px solid #f59e0b;font-weight:bold">前回と同じ「<span id="prevname"></span>」を選んでいます。違うときは上のボタンを押し直してください。</p></fieldset>
+
+  <label for="sell" id="selllbl">相場（売れた値段・円）</label>
+  <input id="sell" type="text" inputmode="numeric" placeholder="例：18000">
+
+  <fieldset id="junkwrap" style="border:0;padding:0;margin:8px 0" hidden><legend class="small" style="padding:0"><b>付属品・欠品・動作は？</b><br>手元の品に欠けや不具合があるかを選びます。例：箱なし・コントローラ欠品。</legend>
+  <div class="kgrid"><label class="kb"><input type="radio" name="junkq" id="junkNo" value="no"><span>なし（そろっていて動く）</span></label>
+  <label class="kb"><input type="radio" name="junkq" id="junk" value="yes"><span>あり（欠品・不具合あり）</span></label></div></fieldset>
+
+  <div id="condwrap" hidden>
+    <label for="cond">手順2：品物の状態（新品の定価・最安値の何割で売れそうか）</label>
+    <select id="cond"><option value="" selected disabled>選んでください</option><option value="70">未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option><option value="100" disabled hidden>同じ状態の中古（10割）</option><option value="50" disabled hidden>ジャンク・欠品あり（中古相場の5割・仮）</option></select>
   </div>
-  <label for="cond">品物の状態（相場の何割で売れそうか）</label>
-  <select id="cond"><option value="" selected disabled>選んでください</option><option value="70">新品・未使用に近い（相場の7割）</option><option value="40">使用感あり（相場の4割）</option><option value="20">ジャンク・難あり（相場の2割）</option><option value="100">同じ状態の中古の売れ値をそのまま入れた（10割）</option></select>
-  <p id="n100" class="small" hidden style="font-weight:bold;color:#b45309">▲ 10割は、相場に「目の前の品と同じ状態の中古」の売れた値段を入れたときだけ。新品・美品の値段なら、上の7〜2割から選んでください（10割だと上限が高く出すぎます）。</p>
-  <p class="small"><b>相場がきれいな品（新品・美品）の値段なら7〜2割、目の前の品と同じ状態の中古の売れた値段なら一番下の10割を選びます。</b>割合は運営の目安で、品物や売る場所で変わります。中古の値段にさらに4割などをかけると上限が低く出すぎ、新品の値段で10割を選ぶと高く出すぎます。</p>
-  <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">手数料・送料・利益・くわしい設定（最低額・売れるまでの見込み）を変える（初期値：手数料10%・送料750円・利益40%）</summary>
+  <p id="usedNote" class="small" hidden>中古の売れた値段は、ジャンクでなければ割合をかけずそのまま（10割）で計算します。新品の値段を入れたなら <a href="#step1">手順1へ戻って</a>選び直してください（10割だと上限が高く出すぎます）。</p>
+
   <div class="row">
     <div><label for="fee">販売手数料（%）</label><input id="fee" type="text" inputmode="decimal" value="10"></div>
     <div><label for="ship">送料・梱包（円）</label><input id="ship" type="text" inputmode="numeric" value="750"></div>
     <div><label for="margin">残したい利益（売値の何%か）</label><input id="margin" type="text" inputmode="decimal" value="40"></div>
   </div>
-  <p style="margin:12px 0 0;font-weight:700">くわしい設定（最低額・売れるまでの見込み）</p>
-  <label for="minp">最低でも手元に残したい額（円）</label><input id="minp" type="text" inputmode="numeric" value="300">
-  <p class="small">売値の安い品で、利益の率だけだと手元に残る額が少なすぎるのを防ぐ欄です。迷ったら300。0にすると利益の率だけで計算します。</p>
-  <label>売れるまでの見込み</label>
-  <div id="waitbtns"><button type="button" class="waitbtn" data-drop="0">早い</button> <button type="button" class="waitbtn" data-drop="0" data-on="1">ふつう</button> <button type="button" class="waitbtn" data-drop="15">遅い</button></div>
-  <p class="small">「早い」「ふつう」は同じ計算です。「遅い」（1か月以上売れ残りそう）のときだけ上限を15%下げます（15%は目安で、売れる日数の保証ではありません）。</p>
-  <p class="small">儲けの保証ではなく、入れた条件での目安です。</p></details>
+  <details style="margin-top:10px"><summary style="cursor:pointer;padding:8px 0">くわしい設定</summary>
+  <label for="minp">最低でも手元に残したい額（円）＝利益の%が小さい品でも、これより下では買わない目安</label><input id="minp" type="text" inputmode="numeric" value="300">
+  <label>売れるまでの見込み（遅い＝売れるまで時間がかかる品は上限を15%下げる）</label>
+  <div id="waitbtns"><button type="button" class="waitbtn" data-drop="0" data-on="1">ふつう</button> <button type="button" class="waitbtn" data-drop="15">遅い</button></div>
+  <p class="small">15%は目安で、売れる日数の保証ではありません。儲けの保証でもありません。</p></details>
+  <p id="curkind" style="margin:12px 0 0;font-weight:bold" hidden></p>
+  <p class="small" id="cur" style="margin:4px 0 0"></p>
   <p>買取額の上限：<span class="result" id="out">―</span></p>
-  <p class="small" id="msg" role="status"></p>
-  <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確認してから決めてください。</p>
+  <p id="msg" role="status" style="font-size:1rem"></p>
+  <button type="button" id="nextbtn" style="min-height:48px;width:100%;font-size:1.05rem;margin:8px 0">次の品へ</button>
+  <a href="#step1" style="display:flex;align-items:center;justify-content:center;min-height:48px;border:2px solid #9ca3af;border-radius:10px;font-size:1rem;text-decoration:none;margin:0 0 8px">手順1へ戻る（調べた値段の種類を選び直す）</a>
+  <p class="small">結果は目安です。傷・付属品の有無・相場の古さは、ご自身で確かめてから決めてください。</p>
   <p class="small">例：相場18,000円の品が使用感ありなら、売れる見込みは4割の7,200円。そこから手数料10%（720円）・送料750円・利益40%（2,880円）を引いて、上限は2,850円です。計算：売れる見込み（相場×状態の割合）−（売れる見込み×手数料）− 送料 −（売れる見込み×利益）。状態の割合は目安なので、品物に合わせて選んでください。手数料はメルカリが販売価格の10%（2026年10月時点）、ラクマ・ヤフオクは会員の種類や条件で変わります（おおむね10%前後・各社の公式の案内でご確認ください）。</p>
 </div>
 
@@ -187,6 +205,99 @@ if(SIGNUP_URL){
   su.href = href; su.target = "_blank";
 }
 else { su.addEventListener("click", function(e){ e.preventDefault(); alert("準備中です（公開前のお試し）"); }); }
+</script>
+<script>
+(function(){
+  var m=document.getElementById("msg");
+  var c=document.getElementById("cond"), wrap=document.getElementById("condwrap"), un=document.getElementById("usedNote");
+  // iOS Safari は option の hidden/disabled が効かないので、10割の option は DOM から出し入れする
+  var o100=c.querySelector('option[value="100"]');
+  o100.disabled=false; o100.removeAttribute("hidden"); c.removeChild(o100);
+  var o50=c.querySelector('option[value="50"]'), jw=document.getElementById("junkwrap"), jk=document.getElementById("junk"), cur=document.getElementById("cur");
+  o50.disabled=false; o50.removeAttribute("hidden"); c.removeChild(o50);
+  var sl=document.getElementById("selllbl");
+  var restored="";
+  function showCur(){
+    var kk=document.querySelector('input[name=kind]:checked');
+    sl.textContent=!kk?"相場（売れた値段・円）":(kk.value==="used"?"相場（実際に売れた中古の値段・円）":"相場（新品の定価・最安値・円）");
+    var k=document.querySelector('input[name=kind]:checked'), t;
+    if(!k){ cur.textContent=""; document.getElementById("curkind").hidden=true; return; }
+    else if(k.value==="used") t="実際に売れた中古の値段・"+(jk.checked?"ジャンク・欠品あり（中古相場の5割・仮の目安）":"ジャンク・欠品なし（10割）");
+    else{ var co=c.selectedOptions&&c.selectedOptions[0]; t="新品の定価・最安値・"+(c.value&&co?co.text.replace(/（.*$/,""):"状態は未選択"); }
+    cur.textContent="この状態で調べた："+t;
+    var ck=document.getElementById("curkind"), nm=k.value==="used"?"売れた中古の値段":"新品の定価・最安値";
+    ck.textContent=(restored===k.value?"前回のまま：":"今の選択：")+nm; ck.hidden=false;
+  }
+  var lastNew=""; // 新品側で選んでいた割合を覚える
+  function render(fire){
+    var k=document.querySelector('input[name=kind]:checked');
+    var kind=k?k.value:"";
+    // 新品側の選択を覚える（自動復元された値も含む）
+    if(kind!=="used" && c.value && c.value!=="100" && c.value!=="50") lastNew=c.value;
+    if(kind==="used"){
+      var want=jk.checked?o50:o100, other=jk.checked?o100:o50;
+      if(other.parentNode) c.removeChild(other);
+      if(!want.parentNode) c.appendChild(want);
+      var jsel=document.querySelector('input[name=junkq]:checked');
+      if(!jsel){ if(o50.parentNode) c.removeChild(o50); if(o100.parentNode) c.removeChild(o100); c.value=""; wrap.hidden=true; un.hidden=true; jw.hidden=false; }
+      else{ c.value=want.value; wrap.hidden=true; un.hidden=jk.checked; jw.hidden=false; }
+    }else{
+      if(o100.parentNode) c.removeChild(o100);
+      if(o50.parentNode) c.removeChild(o50);
+      jw.hidden=true;
+      c.value=lastNew; if(c.value!==lastNew) c.value="";
+      wrap.hidden=(kind!=="new"); un.hidden=true;
+    }
+    if(fire!==false) c.dispatchEvent(new Event("change"));
+    showCur(); junkGuide();
+  }
+  function junkGuide(){
+    var k=document.querySelector('input[name=kind]:checked');
+    if(k&&k.value==="used"&&!document.querySelector('input[name=junkq]:checked')){
+      document.getElementById("out").textContent="―";
+      m.style.fontWeight="bold"; m.style.color="#b45309"; m.textContent="▲ 付属品・欠品・動作を選んでください。";
+    }
+  }
+  c.addEventListener("change",function(){ if(c.value && c.value!=="100" && c.value!=="50") lastNew=c.value; showCur(); });
+  var s=document.getElementById("sell");
+  function chk(){
+    if(document.querySelector('input[name=kind]:checked')) return;
+    if(s.value.trim()===""){ m.textContent=""; return; }
+    m.style.fontWeight="bold"; m.style.color="#b45309"; m.textContent="▲ 手順1で、どちらの値段か選んでください。";
+  }
+  ["sell","fee","ship","margin","minp"].forEach(function(id){ document.getElementById(id).addEventListener("input",function(){chk();junkGuide();}); });
+  // 未選択のまま相場を入れ終えたら手順1へ移す（入力中は動かさない）
+  s.addEventListener("change",function(){ if(!document.querySelector('input[name=kind]:checked') && s.value.trim()!==""){ document.getElementById("step1").scrollIntoView({behavior:"smooth",block:"center"}); } });
+  document.getElementById("kindUsed").addEventListener("change",function(){render()});
+  document.getElementById("junkNo").addEventListener("change",function(){render()});
+  jk.addEventListener("change",function(){render()});
+  document.getElementById("kindNew").addEventListener("change",function(){render()});
+  // 戻る（bfcache・フォーム値の自動復元）対策：今のフォーム値から表示を組み直す
+  window.addEventListener("pageshow",function(e){ render(); chk(); });
+  // 前回の1段目の選択を覚える（localStorage が使えなくても今どおり動く）
+  var KEY="souba2step_kind", pk=document.getElementById("prevkind");
+  function save(v){ try{ localStorage.setItem(KEY,v); }catch(e){} pk.hidden=true; restored=""; showCur(); }
+  document.getElementById("kindUsed").addEventListener("click",function(){save("used")});
+  document.getElementById("kindNew").addEventListener("click",function(){save("new")});
+  try{
+    var sv=localStorage.getItem(KEY);
+    if((sv==="used"||sv==="new") && !document.querySelector('input[name=kind]:checked')){
+      document.getElementById(sv==="used"?"kindUsed":"kindNew").checked=true; pk.hidden=false; restored=sv;
+      document.getElementById("prevname").textContent=(sv==="used"?"売れた中古の値段":"新品の定価・最安値");
+    }
+  }catch(e){}
+  document.getElementById("nextbtn").addEventListener("click",function(){
+    s.value=""; var jr=document.querySelectorAll('input[name=junkq]'); for(var i=0;i<jr.length;i++) jr[i].checked=false;
+    // 新品側の状態と「遅い」を次の品に持ち越さない
+    lastNew=""; c.value="";
+    var wf=document.querySelector('#waitbtns .waitbtn[data-drop="0"]'); if(wf && !wf.hasAttribute("data-on")) wf.click();
+    // 1段目は覚えたままにするが、毎回黄色の確認文を出して選び直しを促す
+    var kk=document.querySelector('input[name=kind]:checked');
+    if(kk){ restored=kk.value; document.getElementById("prevname").textContent=(kk.value==="used"?"売れた中古の値段":"新品の定価・最安値"); pk.hidden=false; }
+    render(); chk(); junkGuide(); s.scrollIntoView({behavior:"smooth",block:"center"}); s.focus();
+  });
+  render();
+})();
 </script>
 <script src="recent.js?v=6.5"></script>
 <script>if(location.hash==='#toggle-goatcounter'){try{if(localStorage.getItem('skipgc')==='t'){localStorage.removeItem('skipgc');alert('この端末の訪問を、また数えるようにしました')}else{localStorage.setItem('skipgc','t');alert('この端末の訪問は、今後数えません')}}catch(e){alert('この端末では設定できませんでした')}}</script>
